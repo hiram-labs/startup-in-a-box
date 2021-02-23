@@ -1,0 +1,28 @@
+{
+  "name": "da_package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "docker-compose up",
+    "main": "docker-compose up mysql_db service_002_strapi service_003_ionic",
+    "microsite": "docker-compose up service_001_gatsby",
+    "strapi": "docker-compose up service_002_strapi",
+    "ionic": "docker-compose up service_003_ionic",
+    "db": "docker-compose up mysql_db adminer",
+    "stop": "docker-compose stop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiram-labs/da_package.git"
+  },
+  "author": "Owusu K <adjeibohyen@hotmail.co.uk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiram-labs/da_package/issues"
+  },
+  "homepage": "https://github.com/hiram-labs/da_package#readme"
+}

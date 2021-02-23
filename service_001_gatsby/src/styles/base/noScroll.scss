@@ -1,0 +1,22 @@
+// ---- hides scrollbar globally ----
+
+// if scrollbar is needed in a particular module call
+// [component root here]::-webkit-scrollbar {display: block;}
+//  hover::-webkit-scrollbar-thumb {
+//      visibility: visible;
+//  }
+// inside that modules scss file
+::-webkit-scrollbar {
+  display: none;
+  width: 7.5px;
+  height: 7.5px;
+}
+::-webkit-scrollbar-thumb {
+  visibility: hidden;
+  width: 7.5px;
+  border-radius: 7.5px;
+  background-color: rgba($color-blue, 0.5);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

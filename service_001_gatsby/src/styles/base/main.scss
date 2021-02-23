@@ -1,0 +1,91 @@
+html {
+  box-sizing: border-box;
+  touch-action: pan-x pan-y; // this is enough for preventing pinch-zoom on android
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-font-smoothing: antialiased !important;
+  text-rendering: optimizelegibility !important;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  touch-action: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+}
+
+body {
+  background: $color-white;
+  color: $color-dark-night;
+  font-family: $font-default;
+  font-style: normal;
+  font-weight: 400;
+  // overflow-x: hidden;
+  // overflow-y: hidden;
+  overscroll-behavior: none;
+
+  &:global(.scroll-locked) {
+    overflow: hidden;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+button,
+div,
+a,
+span {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  white-space: pre-line;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color $transition-normal $transition-ease;
+
+  &:hover,
+  &:focus {
+    color: $color-violet;
+  }
+}
+
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.17em;
+}
+h4 {
+  font-size: 1em;
+}
+h5 {
+  font-size: 0.83em;
+}
+h6 {
+  font-size: 0.75em;
+}

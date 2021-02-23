@@ -1,0 +1,39 @@
+$font-default: "SpaceGrotesk", sans-serif;
+
+$color-alabaster: #eef2f2;
+$color-black: #2b2b2b;
+$color-gunmetal: #252d3b;
+$color-dark-night: #1a212a;
+$color-gray: #4f5763;
+$color-dark-gray: #3a3a3a;
+$color-dove: #666;
+$color-dusty: #9ca3a3;
+$color-gallery: #eee;
+$color-silver: #bdbdbd;
+$color-white: #fff;
+
+$color-orange: #fe4e00;
+$color-yellow: #ffbd00;
+$color-blue: #3349ff;
+$color-violet: #584cda;
+
+$transition-normal: 350ms;
+$transition-slow: 500ms;
+$transition-snail: 1750ms;
+
+$transition-ease: ease-in-out;
+
+$min-view-height: 500px;
+$size-100: 100px;
+
+$normal-spacing: 20px;
+$double-spacing: 40px;
+
+// z-index notes
+// navbar 100
+// navbar blur 95
+// view navigator 90
+// down arrow 100
+// steps text 10
+// view bottom fade 20
+// cookie blur 95

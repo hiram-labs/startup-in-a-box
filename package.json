@@ -7,9 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "cross-env START_SERVICES=production node index.js",
-    "frontend": "cross-env START_SERVICES=frontend_development node index.js",
-    "microsite": "cross-env START_SERVICES=gatsby node index.js",
+    "start": "docker-compose up",
+    "main": "docker-compose up mysql_db service_002_strapi service_003_ionic",
+    "microsite": "docker-compose up service_001_gatsby",
+    "strapi": "docker-compose up service_002_strapi",
+    "ionic": "docker-compose up service_003_ionic",
+    "db": "docker-compose up mysql_db adminer",
     "stop": "docker-compose stop"
   },
   "repository": {
@@ -21,8 +24,5 @@
   "bugs": {
     "url": "https://github.com/hiram-labs/da_package/issues"
   },
-  "homepage": "https://github.com/hiram-labs/da_package#readme",
-  "devDependencies": {
-    "cross-env": "^7.0.3"
-  }
+  "homepage": "https://github.com/hiram-labs/da_package#readme"
 }

@@ -7,13 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "docker-compose up",
-    "main": "docker-compose up mysql_db service_002_strapi service_003_ionic",
-    "microsite": "docker-compose up service_001_gatsby",
-    "strapi": "docker-compose up service_002_strapi",
-    "ionic": "docker-compose up service_003_ionic",
-    "db": "docker-compose up mysql_db adminer",
-    "stop": "docker-compose stop"
+    "start": "pm2 start ecosystem.config.js && pm2 logs",
+    "stop": "pm2 stop ecosystem.config.js"
   },
   "repository": {
     "type": "git",

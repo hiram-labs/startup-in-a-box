@@ -1,0 +1,22 @@
+ARG node_env
+
+FROM node:12.18.3 AS build
+
+# Setting working directory. All the path will be relative to WORKDIR
+WORKDIR /usr/src/service_003_ionic
+
+# Set NODE_ENV to the value from host
+ENV NODE_ENV=$node_env
+
+# Copying source files
+COPY . ./
+
+# Installing dependencies
+RUN npm ci
+
+# Building app
+RUN npm run build
+
+# Serve static with nginx
+FROM nginx
+COPY --from=build ./usr/src/service_003_ionic/build /usr/share/nginx/html

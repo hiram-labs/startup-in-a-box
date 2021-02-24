@@ -1,0 +1,16 @@
+{
+  "name": "service_000_mysql",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "sync-db": "node ./scripts/sync-db.js"
+  },
+  "author": "Owusu K <adjeibohyen@hotmail.co.uk>",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "mysql": "^2.18.1",
+    "mysqldump": "^3.2.0"
+  }
+}

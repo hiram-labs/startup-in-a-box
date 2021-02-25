@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const { spawn } = require("child_process");
 const path = require("path");
 
@@ -13,6 +11,5 @@ const mysqlContainer = spawn(
 );
 
 mysqlContainer.on("close", (code) => {
-  console.log(process.env);
   console.log("Development server exited with code", code);
 });

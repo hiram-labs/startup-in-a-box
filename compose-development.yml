@@ -22,6 +22,7 @@ services:
     command: sh -c "yarn && yarn develop"
     ports:
       - "1337:1337"
+      - "8001:8000"
     volumes:
       - ./service_002_strapi:/usr/source/service_002_strapi
     environment:

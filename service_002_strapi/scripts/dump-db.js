@@ -1,7 +1,7 @@
 const mysqldump = require("mysqldump");
 const path = require("path");
 
-const backupPath = path.join(__dirname, "../service_002_strapi/init.sql");
+const backupPath = path.join(__dirname, "../init.sql");
 mysqldump({
   connection: {
     host: process.env.DATABASE_HOST,

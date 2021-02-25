@@ -4,25 +4,31 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop",
+    "develop": "strapi develop && yarn sync-db",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "dump-db": "node ./scripts/dump-db.js",
+    "sync-db": "node ./scripts/sync-db.js",
+    "init-db": "node ./scripts/init-db.js"
   },
   "devDependencies": {},
   "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
     "knex": "<0.20.0",
     "mysql": "latest",
+    "mysqldump": "^3.2.0",
     "strapi": "3.5.0",
     "strapi-admin": "3.5.0",
-    "strapi-utils": "3.5.0",
-    "strapi-plugin-content-type-builder": "3.5.0",
-    "strapi-plugin-content-manager": "3.5.0",
-    "strapi-plugin-users-permissions": "3.5.0",
-    "strapi-plugin-email": "3.5.0",
-    "strapi-plugin-upload": "3.5.0",
     "strapi-connector-bookshelf": "3.5.0",
-    "strapi-plugin-graphql": "^3.3.4"
+    "strapi-plugin-content-manager": "3.5.0",
+    "strapi-plugin-content-type-builder": "3.5.0",
+    "strapi-plugin-email": "3.5.0",
+    "strapi-plugin-graphql": "^3.3.4",
+    "strapi-plugin-upload": "3.5.0",
+    "strapi-plugin-users-permissions": "3.5.0",
+    "strapi-utils": "3.5.0"
   },
   "author": {
     "name": "A Strapi developer"

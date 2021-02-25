@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "handler": "commit-db.index",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -11,4 +11,4 @@ mysqldump({
     database: process.env.DATABASE_NAME,
   },
   dumpToFile: backupPath,
-});
+}).catch((error) => console.warn(error.sqlMessage || error));

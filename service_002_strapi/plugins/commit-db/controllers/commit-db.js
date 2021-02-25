@@ -1,7 +1,5 @@
 "use strict";
 
-const services = require("../services/commit-db");
-
 /**
  * commit-db.js controller
  *
@@ -16,9 +14,8 @@ module.exports = {
    */
 
   index: async (ctx) => {
-    services.dumpDBToFile();
     ctx.send({
-      message: "ok",
+      message: "Succesfully updated db dump file.",
     });
   },
 };

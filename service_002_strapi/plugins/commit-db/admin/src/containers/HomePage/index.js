@@ -13,16 +13,22 @@ const handleCommitDB = () => {
   strapi.lockApp();
   axios
     .get(`${strapi.backendURL}/${pluginId}`)
-    .then(() =>
+    .then(({ data }) =>
       strapi.notification.toggle({
         type: "success",
-        message: { id: "app.notification.success", defaultMessage: "Done!" },
+        message: {
+          id: "app.notification.success",
+          defaultMessage: data.message || "Done!",
+        },
       })
     )
-    .catch(() =>
+    .catch(({ response }) =>
       strapi.notification.toggle({
         type: "warning",
-        message: { id: "app.notification.warning", defaultMessage: "Error!" },
+        message: {
+          id: "app.notification.warning",
+          defaultMessage: response.data.message || "Error!",
+        },
       })
     )
     .then(() => strapi.unlockApp());
@@ -30,15 +36,26 @@ const handleCommitDB = () => {
 
 const HomePage = () => {
   return (
-    <div className="d-flex justify-content-center align-items-center">
-      <div className="my-5">
-        <button
-          type="button"
-          className="p-2 btn btn-outline-primary"
-          onClick={handleCommitDB}
-        >
-          Update DB
-        </button>
+    <div className="p-5">
+      <div className="card text-center" style={{ width: "400px" }}>
+        <div className="card-body">
+          <p
+            className="card-title"
+            style={{ fontSize: "1.25em", fontWeight: "bold" }}
+          >
+            Update dump file
+          </p>
+          <p className="card-text">
+            Populate the init.sql file at the root of project with changes.
+          </p>
+          <button
+            type="button"
+            className="p-2 btn btn-outline-primary"
+            onClick={handleCommitDB}
+          >
+            Update DB
+          </button>
+        </div>
       </div>
     </div>
   );

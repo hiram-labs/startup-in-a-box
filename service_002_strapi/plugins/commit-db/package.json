@@ -5,18 +5,18 @@
   "strapi": {
     "name": "Database",
     "icon": "database",
-    "description": "Description of commit-db plugin."
+    "description": "Manage containerised mysql db"
   },
   "dependencies": {},
   "author": {
-    "name": "A Strapi developer",
-    "email": "",
+    "name": "Owusu K",
+    "email": "adjeibohyen@hotmail.co.uk",
     "url": ""
   },
   "maintainers": [
     {
-      "name": "A Strapi developer",
-      "email": "",
+      "name": "Owusu K",
+      "email": "adjeibohyen@hotmail.co.uk",
       "url": ""
     }
   ],

@@ -4,18 +4,21 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop && yarn sync-db",
+    "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "dump-db": "node ./scripts/dump-db.js",
-    "sync-db": "node ./scripts/sync-db.js",
-    "init-db": "node ./scripts/init-db.js"
+    "dump-db": "node -r dotenv/config  ./scripts/dump-db.js",
+    "sync-db": "node -r dotenv/config ./scripts/sync-db.js",
+    "init-db": "cross-env INITIAL_SETUP=true node -r dotenv/config ./scripts/init-db.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "knex": "<0.20.0",
     "mysql": "latest",
     "mysqldump": "^3.2.0",

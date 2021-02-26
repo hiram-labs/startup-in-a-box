@@ -10,7 +10,7 @@
     "strapi": "strapi",
     "dump-db": "node -r dotenv/config  ./scripts/dump-db.js",
     "sync-db": "node -r dotenv/config ./scripts/sync-db.js",
-    "init-db": "cross-env INITIAL_SETUP=true node -r dotenv/config ./scripts/init-db.js"
+    "setup-strapi": "node -r dotenv/config ./scripts/setup-strapi.js"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

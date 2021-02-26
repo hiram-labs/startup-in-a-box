@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "another_tests",
+  "info": {
+    "name": "anotherTest"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

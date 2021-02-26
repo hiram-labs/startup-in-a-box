@@ -1,5 +1,73 @@
 "use strict";
 
+const pluginId = require("../../admin/src/pluginId");
+const { killProcess } = require("../../utils");
+
+const params = {
+  username: process.env.CMS_ADMIN_USER || "admin",
+  password: process.env.CMS_ADMIN_PASSWORD || "admin",
+  email: process.env.CMS_ADMIN_EMAIL || "your.email@company.com",
+  blocked: false,
+  isActive: true,
+};
+
+const isExistingAdmin = async () => {
+  return await strapi.query("user", "admin").findOne();
+};
+
+const isSuperAdminRoleAvailable = async () => {
+  return await strapi
+    .query("role", "admin")
+    .findOne({ code: "strapi-super-admin" });
+};
+
+const isPublicRoleAvailable = async () => {
+  return await strapi
+    .query("role", "users-permissions")
+    .findOne({ type: "public" });
+};
+
+const createEncryptedPassword = async () => {
+  params.password = await strapi.admin.services.auth.hashPassword(
+    params.password
+  );
+};
+
+const createSuperAdminRole = async () => {
+  params.roles = await strapi.query("role", "admin").create({
+    name: "Super Admin",
+    code: "strapi-super-admin",
+    description:
+      "Super Admins can access and manage all features and settings.",
+  });
+};
+
+const createAdminAccount = async () => {
+  await strapi.query("user", "admin").create({
+    ...params,
+  });
+};
+
+const logAdminCredentials = async () => {
+  strapi.log.info("Admin account was successfully created.");
+  strapi.log.info(`Email: ${params.email}`);
+  strapi.log.info(`Password: ${params.password}`);
+  return true;
+};
+
+const enablePublicPermissionsFor = async (pluginId) => {
+  const role = await isPublicRoleAvailable();
+  role.permissions.forEach((permission) => {
+    if (permission.type === pluginId) {
+      let newPermission = permission;
+      newPermission.enabled = process.env.NODE_ENV === "development";
+      strapi
+        .query("permission", "users-permissions")
+        .update({ id: newPermission.id }, newPermission);
+    }
+  });
+};
+
 /**
  * An asynchronous bootstrap function that runs before
  * your application gets started.
@@ -10,48 +78,23 @@
  * See more details here: https://strapi.io/documentation/developer-docs/latest/concepts/configurations.html#bootstrap
  */
 
-const params = {
-  username: process.env.CMS_ADMIN_USER || "admin",
-  password: process.env.CMS_ADMIN_PASSWORD || "admin",
-  email: process.env.CMS_ADMIN_EMAIL || "your.email@company.com",
-  blocked: false,
-  isActive: true,
-};
-
 module.exports = async () => {
-  console.log("started");
-  if (process.env.INITIAL_SETUP) {
-    console.log("inside");
-    // Create admin account
-    const admins = await strapi.query("user", "admin").find({ _limit: 1 });
-    if (admins.length) return;
+  // create admin account
+  process.env.INITIAL_SETUP &&
+    (await isExistingAdmin()) &&
+    killProcess("**there is an admin account setup already**");
 
-    const superAdminRole = await strapi.admin.services.role.getSuperAdmin();
-    const encryptedPassword = await strapi.admin.services.auth.hashPassword(
-      params.password
-    );
+  process.env.INITIAL_SETUP &&
+    !(await isSuperAdminRoleAvailable()) &&
+    (await createSuperAdminRole());
 
-    params.roles = [superAdminRole.id];
-    params.password = encryptedPassword;
+  process.env.INITIAL_SETUP && (await createEncryptedPassword());
 
-    await strapi.query("user", "admin").create({
-      ...params,
-    });
-    console.info("Admin account created:", admin);
+  process.env.INITIAL_SETUP && (await createAdminAccount());
 
-    // set db dump enpoint permissions to public
-    const authenticated = await strapi
-      .query("role", "users-permissions")
-      .findOne({ type: "public" });
+  process.env.INITIAL_SETUP && (await logAdminCredentials()) && killProcess();
 
-    authenticated.permissions.forEach((permission) => {
-      if (permission.type === "commit-db") {
-        let newPermission = permission;
-        newPermission.enabled = true;
-        strapi
-          .query("permission", "users-permissions")
-          .update({ id: newPermission.id }, newPermission);
-      }
-    });
-  }
+  // enable public permissions for plugin
+  (await isPublicRoleAvailable()) &&
+    (await enablePublicPermissionsFor(pluginId));
 };

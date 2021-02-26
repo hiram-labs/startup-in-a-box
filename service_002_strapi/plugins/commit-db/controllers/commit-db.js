@@ -15,7 +15,7 @@ module.exports = {
 
   index: async (ctx) => {
     ctx.send({
-      message: "Succesfully updated db dump file.",
+      message: "ok",
     });
   },
 };

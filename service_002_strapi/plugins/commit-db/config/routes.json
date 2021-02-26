@@ -5,7 +5,7 @@
       "path": "/",
       "handler": "commit-db.index",
       "config": {
-        "policies": ["isAuthenticated"]
+        "policies": ["inDevelopement"]
       }
     }
   ]

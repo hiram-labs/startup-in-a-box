@@ -3,6 +3,7 @@ const util = require("util");
 const path = require("path");
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
+const { killProcess } = require("../plugins/commit-db/utils");
 
 const password = process.env.CMS_ADMIN_PASSWORD;
 const connectionConfig = {
@@ -16,10 +17,11 @@ const connectionConfig = {
 const connection = mysql.createConnection(connectionConfig);
 const query = util.promisify(connection.query).bind(connection);
 const statements = fs
-  .readFileSync(path.join(__dirname, "../init.sql"))
+  .readFileSync(path.join(__dirname, "../../service_000_mysql/backup/init.sql"))
   .toString();
 
 (async () => {
+  let isExistingAdmin = false;
   const encryptedPassword = await bcrypt.hash(password, 10);
 
   console.log("starting sync-db connection to db...");
@@ -65,14 +67,24 @@ const statements = fs
     throw error;
   });
 
-  console.log("Updating admin password");
-  await query(
-    `UPDATE strapi_administrator SET password='${
-      encryptedPassword || password
-    }' WHERE username='root'`
-  ).catch((error) => {
-    throw error;
-  });
+  await query("select * from strapi_administrator")
+    .then(() => {
+      isExistingAdmin = true;
+      console.log("Updating admin password");
+    })
+    .catch(() => {
+      console.log("Initial setup! No admin account found");
+    });
+
+  isExistingAdmin &&
+    (await query(
+      `UPDATE strapi_administrator SET password='${
+        encryptedPassword || password
+      }' WHERE username='root'`
+    ).catch((error) => {
+      throw error;
+    }));
 
   connection.end(() => console.log("sync-db connection to db closed."));
+  killProcess("**Sync-db process completed**");
 })();

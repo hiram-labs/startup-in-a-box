@@ -1,7 +1,11 @@
 const mysqldump = require("mysqldump");
 const path = require("path");
 
-const backupPath = path.join(__dirname, "../init.sql");
+const backupPath = path.join(
+  __dirname,
+  "../../service_000_mysql/backup/init.sql"
+);
+
 mysqldump({
   connection: {
     host: process.env.DATABASE_HOST,
@@ -11,4 +15,6 @@ mysqldump({
     database: process.env.DATABASE_NAME,
   },
   dumpToFile: backupPath,
-}).catch((error) => console.warn(error.sqlMessage || error));
+})
+  .then(() => console.log("#Successfully dumped db to file!"))
+  .catch((error) => console.error(error.code || error));

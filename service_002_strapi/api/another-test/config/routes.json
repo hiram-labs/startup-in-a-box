@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/another-tests",
+      "handler": "another-test.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/another-tests/count",
+      "handler": "another-test.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/another-tests/:id",
+      "handler": "another-test.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/another-tests",
+      "handler": "another-test.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/another-tests/:id",
+      "handler": "another-test.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/another-tests/:id",
+      "handler": "another-test.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

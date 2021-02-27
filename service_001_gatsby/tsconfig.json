@@ -26,7 +26,16 @@
 
     /* Module Resolution Options */
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    /* Import aliasing */
+    "baseUrl": "./src",
+    "paths": {
+      "@images/*": ["images/*"],
+      "@components/*": ["components/*"],
+      "@containers/*": ["containers/*"],
+      "@markdown/*": ["markdown/*"]
+    }
   },
 
   "skipLibCheck": true,

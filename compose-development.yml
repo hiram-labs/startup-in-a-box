@@ -34,6 +34,8 @@ services:
       - DATABASE_NAME=mysql_db
       - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=root
+      - CMS_ADMIN_USER=da_package
+      - CMS_ADMIN_EMAIL=admin@dapackage.com
       - CMS_ADMIN_PASSWORD=Root_admin_123
       - JWT_SECRET=6302e01a-6044-4239-a32f-8a4728cd622a
     depends_on:

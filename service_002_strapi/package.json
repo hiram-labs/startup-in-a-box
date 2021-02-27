@@ -10,7 +10,8 @@
     "strapi": "strapi",
     "dump-db": "node -r dotenv/config  ./scripts/dump-db.js",
     "sync-db": "node -r dotenv/config ./scripts/sync-db.js",
-    "setup-strapi": "node -r dotenv/config ./scripts/setup-strapi.js"
+    "setup-strapi": "node -r dotenv/config ./scripts/setup-strapi.js",
+    "preinstall": "npx only-allow yarn"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

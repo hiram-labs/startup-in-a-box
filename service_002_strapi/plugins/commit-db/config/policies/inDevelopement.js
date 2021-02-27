@@ -3,7 +3,7 @@
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 
-module.exports = async (ctx, next) => {
+module.exports = async (ctx) => {
   const { stdout, stderr } = await exec("yarn dump-db");
   if (stderr) {
     ctx.unauthorized(stderr);

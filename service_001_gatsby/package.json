@@ -19,7 +19,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "serve": "gatsby serve",
     "start": "npm run develop",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "preinstall": "npx only-allow yarn"
   },
   "dependencies": {
     "@types/animejs": "^3.1.2",

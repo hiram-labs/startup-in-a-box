@@ -1,6 +1,4 @@
 node_modules
 .*-key.json
 .DS_Store
-
-#general notes
-notes.txt
+.vscode

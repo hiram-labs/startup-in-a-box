@@ -1,7 +1,12 @@
 require("dotenv").config()
 
 module.exports = {
-  // siteMetaData has been moved to `src/data/meta/index.json`
+  siteMetadata: {
+    title: "Startup In A Box",
+    image: "/images/logos/base_full.png",
+    description: "",
+    author: "Owusu K <adjeibohyen@hotmail.co.uk>",
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -62,7 +67,7 @@ module.exports = {
         background_color: `#eef2f2`,
         theme_color: `#eef2f2`,
         display: `minimal-ui`,
-        icon: `src/images/logos/siab_full.png`, // This path is relative to the root of the site.
+        icon: `src/images/logos/base_full.png`,
       },
     },
     `gatsby-transformer-json`,

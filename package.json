@@ -1,16 +1,16 @@
 {
   "name": "startup_in_a_box",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Production and Deployment ready boilerplate.",
   "directories": {
-    "doc": "docs"
+    "doc": "./project_docs"
   },
   "scripts": {
     "start": "pm2 start ecosystem.config.js && pm2 logs",
     "stop": "pm2 stop ecosystem.config.js && pm2 flush",
-    "start-container": "docker-compose -f compose-database.yml -f compose-development.yml up",
-    "stop-container": "docker-compose -f compose-database.yml -f compose-development.yml stop",
+    "start-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml up",
+    "stop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml stop",
+    "setup-project": "node ./index.js",
     "preinstall": "npx only-allow yarn"
   },
   "repository": {
@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/hiram-labs/startup_in_a_box/issues"
   },
-  "homepage": "https://github.com/hiram-labs/startup_in_a_box#readme"
+  "homepage": "https://github.com/hiram-labs/startup_in_a_box#readme",
+  "dependencies": {
+    "boxen": "^5.0.0",
+    "inquirer": "^8.0.0"
+  }
 }

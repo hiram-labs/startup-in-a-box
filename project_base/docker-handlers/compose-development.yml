@@ -3,20 +3,20 @@ version: "3.7"
 services:
   service_001_gatsby:
     build:
-      context: ./service_001_gatsby
+      context: ../../service_001_gatsby
       dockerfile: Dockerfile-development
     container_name: service_001_gatsby
     command: sh -c "yarn && yarn develop -H 0.0.0.0"
     ports:
       - "8000:8000"
     volumes:
-      - ./service_001_gatsby:/usr/src/service_001_gatsby
+      - ../../service_001_gatsby:/usr/src/service_001_gatsby
     environment:
       - NODE_ENV=development
 
   service_002_strapi:
     build:
-      context: ./service_002_strapi
+      context: ../../service_002_strapi
       dockerfile: Dockerfile-development
     container_name: service_002_strapi
     command: sh -c "yarn && yarn develop"
@@ -24,7 +24,7 @@ services:
       - "1337:1337"
       - "8001:8000"
     volumes:
-      - ./service_002_strapi:/usr/source/service_002_strapi
+      - ../../service_002_strapi:/usr/source/service_002_strapi
     environment:
       - NODE_ENV=development
       - HOST=0.0.0.0
@@ -43,16 +43,13 @@ services:
 
   service_003_ionic:
     build:
-      context: ./service_003_ionic
+      context: ../../service_003_ionic
       dockerfile: Dockerfile-development
     container_name: service_003_ionic
     command: sh -c "npm install && npm start"
     ports:
       - "3000:3000"
     volumes:
-      - ./service_003_ionic:/usr/src/service_003_ionic
+      - ../../service_003_ionic:/usr/src/service_003_ionic
     environment:
       - NODE_ENV=development
-
-volumes:
-  mysql_db:

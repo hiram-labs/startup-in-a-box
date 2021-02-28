@@ -1,4 +1,5 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
+  // ---EXAMPLE USE CASE---
   // const { createPage } = actions
   // const newsTemplate = require.resolve(`./src/templates/NewsTemplate.tsx`)
   // const newsResult = await graphql(`

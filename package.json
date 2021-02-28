@@ -1,5 +1,5 @@
 {
-  "name": "da_package",
+  "name": "startup_in_a_box",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hiram-labs/da_package.git"
+    "url": "git+https://github.com/hiram-labs/startup_in_a_box.git"
   },
   "author": "Owusu K <adjeibohyen@hotmail.co.uk>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hiram-labs/da_package/issues"
+    "url": "https://github.com/hiram-labs/startup_in_a_box/issues"
   },
-  "homepage": "https://github.com/hiram-labs/da_package#readme"
+  "homepage": "https://github.com/hiram-labs/startup_in_a_box#readme"
 }

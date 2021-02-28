@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const mysqldump = require("mysqldump");
 const path = require("path");
 

@@ -8,9 +8,10 @@
   },
   "scripts": {
     "start": "pm2 start ecosystem.config.js && pm2 logs",
-    "stop": "pm2 stop ecosystem.config.js && pm2 kill && pm2 flush",
+    "stop": "pm2 stop ecosystem.config.js && pm2 flush",
     "start-container": "docker-compose -f compose-database.yml -f compose-development.yml up",
-    "stop-container": "docker-compose -f compose-database.yml -f compose-development.yml stop"
+    "stop-container": "docker-compose -f compose-database.yml -f compose-development.yml stop",
+    "preinstall": "npx only-allow yarn"
   },
   "repository": {
     "type": "git",

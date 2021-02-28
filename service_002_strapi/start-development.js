@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const { spawn } = require("child_process");
 
 const installDependencies = spawn("yarn", ["install"], {

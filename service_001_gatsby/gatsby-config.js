@@ -8,7 +8,7 @@ module.exports = {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: `G-PCD0RF34NT`,
+          trackingId: `_trackingId`,
           cookieName: `gatsby-gdpr-google-analytics`,
           anonymize: true,
           allowAdFeatures: false,
@@ -56,13 +56,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `da package`,
-        short_name: `dp`,
+        name: `Startup In A Box`,
+        short_name: `siab`,
         start_url: `/`,
         background_color: `#eef2f2`,
         theme_color: `#eef2f2`,
         display: `minimal-ui`,
-        icon: `src/images/logos/dp_compact.png`, // This path is relative to the root of the site.
+        icon: `src/images/logos/siab_full.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-transformer-json`,

@@ -1,8 +1,8 @@
 {
   "name": "service_003_ionic",
   "version": "1.0.0",
-  "description": "A cool startup company!",
-  "author": "Jo Blog <jo.blog@email.com>",
+  "description": "<companyDescription>",
+  "author": "<maintainerName>",
   "license": "MIT",
   "private": true,
   "scripts": {

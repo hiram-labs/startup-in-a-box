@@ -2,10 +2,10 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `hello world`,
+    title: `<companyName>`,
     image: `/images/logos/base_full.png`,
-    description: `A cool startup company!`,
-    author: `Jo Blog <jo.blog@email.com>`,
+    description: `<companyDescription>`,
+    author: `<maintainerName>`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -13,7 +13,7 @@ module.exports = {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: `G-xxxxxx`,
+          trackingId: `<gtagID>`,
           cookieName: `gatsby-gdpr-google-analytics`,
           anonymize: true,
           allowAdFeatures: false,
@@ -61,8 +61,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `hello world`,
-        short_name: `hell`,
+        name: `<companyName>`,
+        short_name: `<companyNameShort>`,
         start_url: `/`,
         background_color: `#eef2f2`,
         theme_color: `#eef2f2`,

@@ -16,7 +16,18 @@ const resetGatsby = async () => {
   });
 };
 
-const resetStrapi = async () => {};
+const resetStrapi = async () => {
+  const targetFiles = ["package.json"];
+  targetFiles.forEach((file) => {
+    fs.copyFile(
+      path.join(__dirname, `../data/strapi/_${file}`),
+      path.join(root, `./service_002_strapi/${file}`),
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  });
+};
 
 const resetIonic = async () => {
   const targetFiles = ["package.json"];

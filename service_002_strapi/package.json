@@ -8,7 +8,7 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "develop": "yarn sync-db && strapi develop",
+    "develop": "strapi develop",
     "dump-db": "node -r dotenv/config  ./scripts/dump-db.js",
     "sync-db": "node -r dotenv/config ./scripts/sync-db.js",
     "setup-strapi": "node -r dotenv/config ./scripts/setup-strapi.js",

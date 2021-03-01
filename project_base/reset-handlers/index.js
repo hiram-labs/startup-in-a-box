@@ -42,19 +42,35 @@ const resetIonic = async () => {
   });
 };
 
+const resetMysql = async () => {
+  const targetFiles = ["init.sql"];
+  targetFiles.forEach((file) => {
+    fs.copyFile(
+      path.join(__dirname, `../data/mysql/_${file}`),
+      path.join(root, `./service_000_mysql/backup/${file}`),
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  });
+};
+
 module.exports = async (service) => {
   const isResetGatsby = service === "gatsby";
   const isResetStrapi = service === "strapi";
   const isResetIonic = service === "ionic";
+  const isResetMysql = service === "mysql";
 
   if (service) {
     isResetGatsby && (await resetGatsby());
     isResetStrapi && (await resetStrapi());
     isResetIonic && (await resetIonic());
+    isResetMysql && (await resetMysql());
     return;
   }
 
   await resetGatsby();
   await resetStrapi();
   await resetIonic();
+  await resetMysql();
 };

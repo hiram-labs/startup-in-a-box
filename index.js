@@ -37,6 +37,4 @@ const dockerComposeFile = path.join(
 
   console.log(boxen(setupConfig.introMessage, boxenConfig));
   await setup();
-
-  // exec(`docker-compose -f ${dockerComposeFile} stop`);
 })();

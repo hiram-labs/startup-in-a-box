@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 
 const root = process.cwd();
 
@@ -34,7 +34,7 @@ module.exports = function (answers) {
 
   const packagePath = path.join(root, `./service_002_strapi`);
   exec(
-    `cd ${packagePath} && yarn setup-strapi && yarn dump-db`,
+    `cd ${packagePath} && yarn setup-strapi && yarn dump-db && docker stop mysql_db`,
     (error, stdout, stderr) => {
       if (error) {
         throw error;

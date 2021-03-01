@@ -14,7 +14,7 @@ module.exports = function (answers) {
     gtagID,
   } = answers;
 
-  const targetFiles = ["gatsby-config.js", "package.json"];
+  const targetFiles = ["package.json"];
 
   targetFiles.forEach((file) => {
     const configFile = fs

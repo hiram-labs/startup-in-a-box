@@ -19,10 +19,10 @@ const resetGatsby = async () => {
 const resetStrapi = async () => {};
 
 const resetIonic = async () => {
-  const targetFiles = ["gatsby-config.js", "package.json"];
+  const targetFiles = ["package.json"];
   targetFiles.forEach((file) => {
     fs.copyFile(
-      path.join(__dirname, `../data/gatsby/_${file}`),
+      path.join(__dirname, `../data/ionic/_${file}`),
       path.join(root, `./service_003_ionic/${file}`),
       (err) => {
         if (err) throw err;

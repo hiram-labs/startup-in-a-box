@@ -1,11 +1,16 @@
 "use strict";
 
-const inquirer = require("inquirer");
+const path = require("path");
 const util = require("util");
-const exec = util.promisify(require("child_process").exec);
+
+const inquirer = require("inquirer");
 const boxen = require("boxen");
+
 const setup = require("./project_base/setup-handlers//inquirer");
 const reset = require("./project_base/reset-handlers");
+
+const exec = util.promisify(require("child_process").exec);
+const root = process.cwd();
 
 const {
   setupConfig,
@@ -36,18 +41,20 @@ module.exports = async () => {
   }
 
   console.log(boxen(setupConfig.introMessage, boxenConfig));
-  const { stdout, stderr } = await exec(`node ${initDBScriptPath}`);
-  if (stderr) {
+  const { stdout: initDBStdout, stderr: initDBStderr } = await exec(
+    `node ${initDBScriptPath}`
+  );
+  if (initDBStderr) {
     throw stderr;
   }
-  console.log(`stdout: ${stdout}`);
+  console.log(`stdout: ${initDBStdout}`);
   await setup();
 
-  const { stdout, stderr } = await exec(
+  const { stdout: killDBStdout, stderr: killDBStderr } = await exec(
     `docker-compose -f ${composeDBpath} stop`
   );
-  if (stderr) {
+  if (killDBStderr) {
     throw stderr;
   }
-  console.log(`stdout: ${stdout}`);
+  console.log(`stdout: ${killDBStdout}`);
 };

@@ -39,7 +39,6 @@ const composeDBpath = path.join(
     await reset(service);
     return;
   }
-
   console.log(boxen(setupConfig.introMessage, boxenConfig));
   const { stdout: initDBStdout, stderr: initDBStderr } = await exec(
     `node ${initDBScriptPath}`
@@ -49,7 +48,6 @@ const composeDBpath = path.join(
   }
   console.log(`stdout: ${initDBStdout}`);
   await setup();
-
   const { stdout: killDBStdout, stderr: killDBStderr } = await exec(
     `docker-compose -f ${composeDBpath} stop`
   );

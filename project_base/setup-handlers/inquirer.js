@@ -65,8 +65,6 @@ module.exports = async () => {
       setupGatsby(answers);
       setupStrapi(answers);
       setupIonic(answers);
-
-      console.log("\nSetup complete\n");
     })
     .catch((error) => {
       if (error.isTtyError) {

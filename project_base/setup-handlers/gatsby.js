@@ -1,3 +1,5 @@
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 
@@ -16,7 +18,7 @@ module.exports = function (answers) {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(root, `./service_001_gatsby/${file}`))
+      .readFileSync(path.join(root, `./service_001_gatsby/_${file}`))
       .toString();
 
     const customisedConfigFile = configFile

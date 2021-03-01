@@ -1,3 +1,5 @@
+"use strict";
+
 const inquirer = require("inquirer");
 const boxen = require("boxen");
 const setup = require("./project_base/setup-handlers//inquirer");

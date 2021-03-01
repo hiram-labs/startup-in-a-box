@@ -7,7 +7,7 @@ const resetGatsby = async () => {
   const targetFiles = ["gatsby-config.js", "package.json"];
   targetFiles.forEach((file) => {
     fs.copyFile(
-      path.join(__dirname, `../data/backup-${file}`),
+      path.join(__dirname, `../data/gatsby/_${file}`),
       path.join(root, `./service_001_gatsby/${file}`),
       (err) => {
         if (err) throw err;
@@ -18,7 +18,18 @@ const resetGatsby = async () => {
 
 const resetStrapi = async () => {};
 
-const resetIonic = async () => {};
+const resetIonic = async () => {
+  const targetFiles = ["gatsby-config.js", "package.json"];
+  targetFiles.forEach((file) => {
+    fs.copyFile(
+      path.join(__dirname, `../data/gatsby/_${file}`),
+      path.join(root, `./service_003_ionic/${file}`),
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  });
+};
 
 module.exports = async (service) => {
   const isResetGatsby = service === "gatsby";

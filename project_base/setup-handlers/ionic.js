@@ -18,7 +18,7 @@ module.exports = function (answers) {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(root, `./service_003_ionic/_${file}`))
+      .readFileSync(path.join(__dirname, `../data/ionic/_${file}`))
       .toString();
 
     const customisedConfigFile = configFile

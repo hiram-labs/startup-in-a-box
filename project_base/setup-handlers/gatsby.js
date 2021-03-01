@@ -18,7 +18,7 @@ module.exports = function (answers) {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(root, `./service_001_gatsby/_${file}`))
+      .readFileSync(path.join(path.join(__dirname, `../data/gatsby/_${file}`)))
       .toString();
 
     const customisedConfigFile = configFile

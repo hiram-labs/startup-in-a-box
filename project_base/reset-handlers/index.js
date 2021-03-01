@@ -36,13 +36,14 @@ module.exports = async (service) => {
   const isResetStrapi = service === "strapi";
   const isResetIonic = service === "ionic";
 
-  isResetGatsby && (await resetGatsby());
-  isResetStrapi && (await resetStrapi());
-  isResetIonic && (await resetIonic());
-
-  if (!service) {
-    await resetGatsby();
-    await resetStrapi();
-    await resetIonic();
+  if (service) {
+    isResetGatsby && (await resetGatsby());
+    isResetStrapi && (await resetStrapi());
+    isResetIonic && (await resetIonic());
+    return;
   }
+
+  await resetGatsby();
+  await resetStrapi();
+  await resetIonic();
 };

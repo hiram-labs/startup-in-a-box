@@ -33,11 +33,14 @@ module.exports = function (answers) {
   });
 
   const packagePath = path.join(root, `./service_002_strapi`);
-  exec(`cd ${packagePath} && yarn setup-strapi`, (error, stdout, stderr) => {
-    if (error) {
-      throw error;
+  exec(
+    `cd ${packagePath} && yarn setup-strapi && yarn dump-db`,
+    (error, stdout, stderr) => {
+      if (error) {
+        throw error;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.log(`stderr: ${stderr}`);
     }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  });
+  );
 };

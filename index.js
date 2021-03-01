@@ -1,15 +1,13 @@
 "use strict";
 
 const path = require("path");
-const util = require("util");
-const { execFile } = require("child_process");
+const { spawn, exec } = require("child_process");
 
 const boxen = require("boxen");
 
 const setup = require("./project_base/setup-handlers//inquirer");
 const reset = require("./project_base/reset-handlers");
 
-const promiseExecFile = util.promisify(execFile);
 const root = process.cwd();
 
 const {
@@ -35,10 +33,10 @@ const dockerComposeFile = path.join(
     return;
   }
 
-  await promiseExecFile(`docker-compose -f ${dockerComposeFile} up`);
+  spawn("docker-compose", ["-f", dockerComposeFile, "up", "-d", "mysql_db"]);
 
   console.log(boxen(setupConfig.introMessage, boxenConfig));
   await setup();
 
-  await promiseExecFile(`docker-compose -f ${dockerComposeFile} stop`);
+  // exec(`docker-compose -f ${dockerComposeFile} stop`);
 })();

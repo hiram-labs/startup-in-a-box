@@ -33,7 +33,7 @@ const composeDBpath = path.join(
   `./project_base/docker-handlers/compose-database.yml`
 );
 
-module.exports = async () => {
+(async () => {
   if (flagged) {
     console.log(boxen(resetConfig.introMessage, boxenConfig));
     await reset(service);
@@ -57,4 +57,4 @@ module.exports = async () => {
     throw stderr;
   }
   console.log(`stdout: ${killDBStdout}`);
-};
+})();

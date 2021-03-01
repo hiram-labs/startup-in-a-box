@@ -11,7 +11,6 @@ module.exports = function (answers) {
     maintainerName,
     companyDescription,
     maintainerEmail,
-    gtagID,
   } = answers;
 
   const targetFiles = ["package.json"];

@@ -10,12 +10,12 @@ const {
   resetConfig,
 } = require("./project_base/data/inquirer-config");
 const [, , resetFlag, service] = process.argv;
-resetFlag = resetFlag === "-r";
+const flagged = resetFlag === "-r";
 
 console.log(
-  boxen(resetFlag ? resetConfig.introMessage : setupConfig.introMessage, {
+  boxen(flagged ? resetConfig.introMessage : setupConfig.introMessage, {
     padding: 1,
   })
 );
 
-resetFlag ? reset(service) : setup();
+flagged ? reset(service) : setup();

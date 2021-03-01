@@ -63,6 +63,8 @@ module.exports = async () => {
       console.log("\nSetting up...\n");
 
       setupGatsby(answers);
+      setupStrapi(answers);
+      setupIonic(answers);
 
       console.log("\nSetup complete\n");
     })

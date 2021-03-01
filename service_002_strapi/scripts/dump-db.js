@@ -17,4 +17,4 @@ mysqldump({
   dumpToFile: backupPath,
 })
   .then(() => console.log("#Successfully dumped db to file!"))
-  .catch((error) => console.error(error.code || error));
+  .catch((error) => console.error(`error.code || error`));

@@ -20,7 +20,7 @@ const SEO = ({
   const { data } = useStaticQuery(
     graphql`
       query {
-        data: metaJson {
+        data: site {
           siteMetadata {
             author
             description

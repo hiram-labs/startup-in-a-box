@@ -2,14 +2,14 @@
 
 const path = require("path");
 const util = require("util");
+const { exec: execImport, spawn } = require("child_process");
 
-const inquirer = require("inquirer");
 const boxen = require("boxen");
 
 const setup = require("./project_base/setup-handlers//inquirer");
 const reset = require("./project_base/reset-handlers");
 
-const exec = util.promisify(require("child_process").exec);
+const exec = util.promisify(execImport);
 const root = process.cwd();
 
 const {
@@ -23,12 +23,7 @@ const boxenConfig = {
   padding: 1,
 };
 
-const initDBScriptPath = path.join(
-  root,
-  `./service_000_mysql/start-development.js`
-);
-
-const composeDBpath = path.join(
+const dockerComposeFile = path.join(
   root,
   `./project_base/docker-handlers/compose-database.yml`
 );
@@ -39,20 +34,26 @@ const composeDBpath = path.join(
     await reset(service);
     return;
   }
+
+  const mysqlContainer = spawn(
+    "docker-compose",
+    ["-f", dockerComposeFile, "up"],
+    {
+      stdio: [process.stdin, process.stdout, process.stderr],
+    }
+  );
+  mysqlContainer.on("close", (code) => {
+    console.log("DB server exited with code", code);
+  });
+
   console.log(boxen(setupConfig.introMessage, boxenConfig));
-  const { stdout: initDBStdout, stderr: initDBStderr } = await exec(
-    `node ${initDBScriptPath}`
-  );
-  if (initDBStderr) {
-    throw stderr;
-  }
-  console.log(`stdout: ${initDBStdout}`);
   await setup();
-  const { stdout: killDBStdout, stderr: killDBStderr } = await exec(
-    `docker-compose -f ${composeDBpath} stop`
+
+  const { stdout, stderr } = await exec(
+    `docker-compose -f ${dockerComposeFile} stop`
   );
-  if (killDBStderr) {
+  if (stderr) {
     throw stderr;
   }
-  console.log(`stdout: ${killDBStdout}`);
+  console.log(`stdout: ${stdout}`);
 })();

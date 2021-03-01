@@ -6,11 +6,12 @@
     "doc": "./project_docs"
   },
   "scripts": {
+    "setup-project": "node ./index.js",
+    "reset-project": "node ./index.js -r",
     "start": "pm2 start ecosystem.config.js && pm2 logs",
     "stop": "pm2 stop ecosystem.config.js && pm2 flush",
     "start-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml up",
     "stop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml stop",
-    "setup-project": "node ./index.js",
     "preinstall": "npx only-allow yarn"
   },
   "repository": {

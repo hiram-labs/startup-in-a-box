@@ -1,49 +1,18 @@
 const inquirer = require("inquirer");
 const boxen = require("boxen");
-const setupGatsby = require("./project_base/setup-handlers/gatsby");
-const { isRequired } = require("./project_base/utils");
+const setup = require("./project_base/setup-handlers//inquirer");
+const reset = require("./project_base/reset-handlers");
+
 const {
   setupConfig,
-  organisation,
-  strapiConfig,
-} = require("./project_base/data");
+  resetConfig,
+} = require("./project_base/data/inquirer-config");
+const [, , resetFlag, service] = process.argv;
 
-console.log(boxen(setupConfig.introMessage, { padding: 1 }));
-inquirer
-  .prompt([
-    {
-      type: "input",
-      name: organisation.companyName.field,
-      message: organisation.companyName.prompt,
-      default: organisation.companyName.placeholder,
-      validate: isRequired,
-    },
-    {
-      type: "input",
-      name: organisation.maintainerName.field,
-      message: organisation.maintainerName.prompt,
-      default: organisation.maintainerName.placeholder,
-      validate: isRequired,
-    },
-    {
-      type: "input",
-      name: organisation.maintainerEmail.field,
-      message: organisation.maintainerEmail.prompt,
-      default: organisation.maintainerEmail.placeholder,
-      validate: isRequired,
-    },
-  ])
-  .then((answers) => {
-    console.log("\nSetting up...\n");
-
-    setupGatsby(answers);
-
-    console.log("\nSetup complete\n");
+console.log(
+  boxen(resetFlag ? resetConfig.introMessage : setupConfig.introMessage, {
+    padding: 1,
   })
-  .catch((error) => {
-    if (error.isTtyError) {
-      console.error("An error ocurred with your TTY environment");
-    } else {
-      console.error("Something went wrong");
-    }
-  });
+);
+
+resetFlag ? reset(service) : setup();

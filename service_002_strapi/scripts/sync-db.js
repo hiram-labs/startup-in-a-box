@@ -12,6 +12,9 @@ const connectionConfig = {
   user: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
+  multipleStatements: true,
+  acquireTimeout: 30000,
+  connectTimeout: 30000,
 };
 
 const connection = mysql.createConnection(connectionConfig);

@@ -2,8 +2,8 @@
   "name": "service-002-strapi",
   "private": true,
   "version": "1.0.0",
-  "description": "<companyDescription>",
-  "author": "<maintainerName>",
+  "description": "A cool startup company!",
+  "author": "Jo Blog <jo.blog@email.com>",
   "scripts": {
     "start": "strapi start",
     "build": "strapi build",

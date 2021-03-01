@@ -2,14 +2,14 @@
 
 const path = require("path");
 const util = require("util");
-const { exec: execImport, spawn } = require("child_process");
+const { execFile } = require("child_process");
 
 const boxen = require("boxen");
 
 const setup = require("./project_base/setup-handlers//inquirer");
 const reset = require("./project_base/reset-handlers");
 
-const exec = util.promisify(execImport);
+const promiseExecFile = util.promisify(execFile);
 const root = process.cwd();
 
 const {
@@ -35,25 +35,10 @@ const dockerComposeFile = path.join(
     return;
   }
 
-  const mysqlContainer = spawn(
-    "docker-compose",
-    ["-f", dockerComposeFile, "up"],
-    {
-      stdio: [process.stdin, process.stdout, process.stderr],
-    }
-  );
-  mysqlContainer.on("close", (code) => {
-    console.log("DB server exited with code", code);
-  });
+  await promiseExecFile(`docker-compose -f ${dockerComposeFile} up`);
 
   console.log(boxen(setupConfig.introMessage, boxenConfig));
   await setup();
 
-  const { stdout, stderr } = await exec(
-    `docker-compose -f ${dockerComposeFile} stop`
-  );
-  if (stderr) {
-    throw stderr;
-  }
-  console.log(`stdout: ${stdout}`);
+  await promiseExecFile(`docker-compose -f ${dockerComposeFile} stop`);
 })();

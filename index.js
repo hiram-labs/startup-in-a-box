@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const { spawn, exec } = require("child_process");
+const { spawn } = require("child_process");
 
 const boxen = require("boxen");
 
@@ -13,7 +13,7 @@ const root = process.cwd();
 const {
   setupConfig,
   resetConfig,
-} = require("./project_base/data/inquirer-config");
+} = require("./project_base/data/base/inquirer-config");
 const [, , resetFlag, service] = process.argv;
 const flagged = resetFlag === "-r";
 

@@ -11,18 +11,21 @@ module.exports = {
       cwd: "./service_001_gatsby",
       script: "start-development.js",
       watch: false,
+      env: { service: gatsby },
     },
     {
       name: "service_002_strapi",
       cwd: "./service_002_strapi",
       script: "start-development.js",
       watch: false,
+      env: { service: strapi },
     },
     {
       name: "service_003_ionic",
       cwd: "./service_003_ionic",
       script: "start-development.js",
       watch: false,
+      env: { service: ionic },
     },
   ],
 };

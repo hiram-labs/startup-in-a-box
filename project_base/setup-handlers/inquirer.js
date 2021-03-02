@@ -2,6 +2,7 @@
 
 const inquirer = require("inquirer");
 
+const setupBase = require("../setup-handlers/base");
 const setupGatsby = require("../setup-handlers/gatsby");
 const setupStrapi = require("../setup-handlers/strapi");
 const setupIonic = require("../setup-handlers/ionic");
@@ -62,6 +63,7 @@ module.exports = async () => {
     .then((answers) => {
       console.log("\nSetting up...\n");
 
+      setupBase(answers);
       setupGatsby(answers);
       setupStrapi(answers);
       setupIonic(answers);

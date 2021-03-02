@@ -31,7 +31,7 @@
   "analytics": {
     "gtagEnable": {
       "field": "gtagEnable",
-      "prompt": "Enable Google analytics (y/N)"
+      "prompt": "Enable Google analytics [y/N]"
     },
     "gtagID": {
       "field": "gtagID",

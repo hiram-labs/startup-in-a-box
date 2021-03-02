@@ -62,8 +62,6 @@ module.exports = async () => {
       },
     ])
     .then((answers) => {
-      console.log("\nSetting up...\n");
-
       setupBase(answers);
       setupEnv(answers);
       setupGatsby(answers);

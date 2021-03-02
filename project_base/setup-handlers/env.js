@@ -1,6 +1,8 @@
 "use strict";
+const fs = require("fs");
+const path = require("path");
 
-const root = process.cwd;
+const root = process.cwd();
 
 const targetFiles = [
   "./service_001_gatsby/.env",
@@ -8,7 +10,7 @@ const targetFiles = [
   "./service_003_ionic/.env",
 ];
 const sourceFiles = [
-  `../env/gastby/dev.env`,
+  `../env/gatsby/dev.env`,
   `../env/strapi/dev.env`,
   `../env/ionic/dev.env`,
 ];

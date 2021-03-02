@@ -6,12 +6,12 @@ const setupGatsby = require("../setup-handlers/gatsby");
 const setupStrapi = require("../setup-handlers/strapi");
 const setupIonic = require("../setup-handlers/ionic");
 
-const { isRequired, oneOff, isYes } = require("../utils");
+const { isRequired, oneOff } = require("../utils");
 const {
   organisation,
   analytics,
   strapiConfig,
-} = require("../data/inquirer-config");
+} = require("../data/base/inquirer-config");
 
 module.exports = async () => {
   inquirer

@@ -6,7 +6,11 @@ function _void() {
 }
 
 function startSetup(callBack = _void) {
-  const setup = spawn("cross-env", ["INITIAL_SETUP=true", "yarn", "develop"]);
+  const setup = spawn("cross-env", [
+    "INITIAL_SETUP=true",
+    "yarn",
+    "initial-run",
+  ]);
 
   let trigger = false;
 

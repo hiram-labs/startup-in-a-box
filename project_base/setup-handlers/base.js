@@ -8,13 +8,22 @@ const root = process.cwd();
 module.exports = function (answers) {
   const gatsbyEnv = fs
     .readFileSync(path.join(__dirname, `../env/gatsby/dev.env`))
-    .toString();
+    .toString()
+    .concat('"')
+    .replace(/=/g, ':"')
+    .replace(/\n/g, '",\n');
   const strapiEnv = fs
     .readFileSync(path.join(__dirname, `../env/strapi/dev.env`))
-    .toString();
+    .toString()
+    .concat('"')
+    .replace(/=/g, ':"')
+    .replace(/\n/g, '",\n');
   const ionicEnv = fs
     .readFileSync(path.join(__dirname, `../env/ionic/dev.env`))
-    .toString();
+    .toString()
+    .concat('"')
+    .replace(/=/g, ':"')
+    .replace(/\n/g, '",\n');
 
   const targetFiles = ["ecosystem.config.js"];
 
@@ -26,7 +35,7 @@ module.exports = function (answers) {
     const customisedConfigFile = configFile
       .replace(/{ service: gatsby }/g, `{${gatsbyEnv}}`)
       .replace(/{ service: strapi }/g, `{${strapiEnv}}`)
-      .replace(/{ service: ionic }/g, `{${ionicEnv}`);
+      .replace(/{ service: ionic }/g, `{${ionicEnv}}`);
 
     fs.writeFileSync(path.join(root, `./${file}`), customisedConfigFile);
   });

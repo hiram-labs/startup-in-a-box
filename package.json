@@ -6,7 +6,7 @@
     "doc": "./project_docs"
   },
   "scripts": {
-    "setup-project": "node ./index.js",
+    "setup-project": "yarn && node ./index.js",
     "reset-project": "node ./index.js -r",
     "develop-local": "pm2 start ecosystem.config.js && pm2 logs",
     "stop-local": "pm2 stop ecosystem.config.js && pm2 flush",

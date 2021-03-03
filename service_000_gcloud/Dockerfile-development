@@ -1,0 +1,7 @@
+FROM google/cloud-sdk:alpine
+
+# Add packages to 'world' and install
+RUN apk --update add openjdk7-jre
+
+# Installing additional components
+RUN gcloud components install app-engine-java kubectl

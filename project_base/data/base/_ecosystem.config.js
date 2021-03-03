@@ -1,6 +1,12 @@
 module.exports = {
   apps: [
     {
+      name: "service_000_gcloud",
+      cwd: "./service_000_gcloud",
+      script: "start-development.js",
+      watch: false,
+    },
+    {
       name: "service_000_mysql",
       cwd: "./service_000_mysql",
       script: "start-development.js",

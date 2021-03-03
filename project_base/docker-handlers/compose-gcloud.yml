@@ -2,5 +2,7 @@ version: "3.7"
 
 services:
   gcloud:
-    image: google/cloud-sdk:latest
+    build:
+      context: ../../service_000_gcloud
+      dockerfile: Dockerfile-development
     container_name: gcloud

@@ -1,7 +1,5 @@
 {
   "name": "service_000_mysql",
   "version": "1.0.0",
-  "description": "",
-  "author": "Owusu K <adjeibohyen@hotmail.co.uk>",
-  "license": "ISC"
+  "license": "MIT"
 }

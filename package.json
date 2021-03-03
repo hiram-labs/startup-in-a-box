@@ -6,6 +6,7 @@
     "doc": "./project_docs"
   },
   "scripts": {
+    "gcp": "docker-compose -f ./project_base/docker-handlers/compose-gcloud.yml up",
     "setup-project": "yarn && node ./project_base/scripts/setup.js",
     "reset-project": "node ./project_base/scripts/reset.js",
     "develop-local": "pm2 start ecosystem.config.js && pm2 logs",

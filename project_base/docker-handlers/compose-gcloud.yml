@@ -1,0 +1,6 @@
+version: "3.7"
+
+services:
+  gcloud:
+    image: google/cloud-sdk:latest
+    container_name: gcloud

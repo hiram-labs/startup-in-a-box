@@ -6,9 +6,22 @@ const dockerComposeFile = path.join(
   "../project_base/docker-handlers/compose-gcloud.yml"
 );
 
+const localVolume = path.join(__dirname, "../service_000_gcloud");
+
 const gcloudContainer = spawn(
   "docker-compose",
-  ["-f", dockerComposeFile, "run", "gcloud", "sh"],
+  [
+    `-f`,
+    dockerComposeFile,
+    `run`,
+    `--rm`,
+    `--name`,
+    `gcloud`,
+    `--volume`,
+    `${localVolume}:/usr/src/service_000_gcloud`,
+    `gcloud`,
+    `sh`,
+  ],
   {
     stdio: [process.stdin, process.stdout, process.stderr],
   }
@@ -17,5 +30,3 @@ const gcloudContainer = spawn(
 gcloudContainer.on("close", (code) => {
   console.log("Development server exited with code", code);
 });
-
-// "start-gcloud": "docker-compose -f ./project_base/docker-handlers/compose-gcloud.yml run gcloud sh",

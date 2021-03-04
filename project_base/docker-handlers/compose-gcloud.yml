@@ -6,5 +6,3 @@ services:
       context: ../../service_000_gcloud
       dockerfile: Dockerfile-development
     container_name: gcloud
-    volumes:
-      - ../../service_000_gcloud:/usr/source/service_000_gcloud

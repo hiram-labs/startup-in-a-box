@@ -80,13 +80,14 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 ### Add GKE cluster
 
-**_Add a 2 node basic cluster to project_**
+**_Setups an e2-small machine type cluster_**
 
 - Cd to shell folder _ref scripts section above_
-- Add an argument to command below to specify cluster name, defaults to `production-unit`
+- Add an argument at `position 1` to command below to specify cluster name, defaults to `general`
+- Add an argument at `position 2` to command below to specify number of nodes, defaults to `1`
 
 ```
-./cluster.sh <optional cluster name>
+./cluster.sh <optional cluster name> <optional number of nodes>
 ```
 
 ---
@@ -96,7 +97,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 **_Set the cluster kubectl command talks to_**
 
 - Cd to shell folder _ref scripts section above_
-- Add an argument to command below to specify cluster name to connect to, defaults to `production-unit` if available.
+- Add an argument to command below to specify cluster name to connect to, defaults to `general` if available.
 
 ```
 ./connect.sh <optional cluster name>

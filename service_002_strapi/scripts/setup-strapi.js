@@ -1,24 +1,24 @@
 const { spawn } = require("child_process");
 
-const setup = spawn("cross-env", ["INITIAL_SETUP=true", "yarn", "develop"]);
+const syncDB_ = spawn("yarn", ["sync-db"]);
 
-setup.stdout.on("data", (data) => {
+syncDB_.stdout.on("data", (data) => {
   console.log(`stdout: ${data}`);
 });
 
-setup.stderr.on("data", (data) => {
+syncDB_.stderr.on("data", (data) => {
   console.log(`stderr: ${data}`);
 });
 
-setup.on("exit", (code) => {
+syncDB_.on("close", (code) => {
   if (code === 0) {
-    const syncDB = spawn("yarn", ["sync-db"]);
+    const setup = spawn("cross-env", ["INITIAL_SETUP=true", "yarn", "develop"]);
 
-    syncDB.stdout.on("data", (data) => {
+    setup.stdout.on("data", (data) => {
       console.log(`stdout: ${data}`);
     });
 
-    syncDB.stderr.on("data", (data) => {
+    setup.stderr.on("data", (data) => {
       console.log(`stderr: ${data}`);
     });
   }

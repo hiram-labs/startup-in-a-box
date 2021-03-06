@@ -2,7 +2,8 @@
 
 const fs = require("fs");
 const path = require("path");
-const { exec, spawn } = require("child_process");
+const ora = require("ora");
+const { exec } = require("child_process");
 
 const root = process.cwd();
 
@@ -33,6 +34,7 @@ module.exports = function (answers) {
   });
 
   const packagePath = path.join(root, `./service_002_strapi`);
+  const spinner = ora("Setting up ...").start();
   exec(
     `cd ${packagePath} && yarn setup-strapi && yarn dump-db && docker stop mysql_db`,
     (error, stdout, stderr) => {
@@ -40,7 +42,9 @@ module.exports = function (answers) {
         throw error;
       }
       console.log(`stdout: ${stdout}`);
-      console.log(`stderr: ${stderr}`);
+      // console.log(`stderr: ${stderr}`);
+      spinner.text = "Cleaning up...";
+      setTimeout(() => spinner.stop(), 5000);
     }
   );
 };

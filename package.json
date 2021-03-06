@@ -6,11 +6,12 @@
     "doc": "./project_docs"
   },
   "scripts": {
-    "setup-project": "node ./index.js",
-    "reset-project": "node ./index.js -r",
-    "start": "pm2 start ecosystem.config.js && pm2 logs",
-    "stop": "pm2 stop ecosystem.config.js && pm2 flush",
-    "start-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml up",
+    "start-gcloud": "node ./service_000_gcloud/start-development.js",
+    "setup-project": "yarn && node ./project_base/scripts/setup.js",
+    "reset-project": "node ./project_base/scripts/reset.js",
+    "develop-local": "pm2 start ecosystem.config.js && pm2 logs",
+    "stop-local": "pm2 stop ecosystem.config.js && pm2 flush",
+    "develop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml up",
     "stop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml stop",
     "preinstall": "npx only-allow yarn"
   },
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/hiram-labs/startup_in_a_box#readme",
   "dependencies": {
     "boxen": "^5.0.0",
-    "inquirer": "^8.0.0"
+    "inquirer": "^8.0.0",
+    "ora": "^5.3.0"
   }
 }

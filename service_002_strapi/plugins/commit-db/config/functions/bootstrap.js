@@ -1,7 +1,6 @@
 "use strict";
 
 const pluginId = require("../../admin/src/pluginId");
-const { killProcess } = require("../../utils");
 
 const params = {
   username: process.env.CMS_ADMIN_USER || "admin",
@@ -80,9 +79,7 @@ const enablePublicPermissionsFor = async (pluginId) => {
 
 module.exports = async () => {
   // create admin account
-  process.env.INITIAL_SETUP &&
-    (await isExistingAdmin()) &&
-    killProcess("**there is an admin account setup already**");
+  process.env.INITIAL_SETUP && (await isExistingAdmin()) && process.exit(0);
 
   process.env.INITIAL_SETUP &&
     !(await isSuperAdminRoleAvailable()) &&
@@ -92,7 +89,7 @@ module.exports = async () => {
 
   process.env.INITIAL_SETUP && (await createAdminAccount());
 
-  process.env.INITIAL_SETUP && (await logAdminCredentials()) && killProcess();
+  process.env.INITIAL_SETUP && (await logAdminCredentials()) && process.exit(0);
 
   // enable public permissions for plugin
   (await isPublicRoleAvailable()) &&

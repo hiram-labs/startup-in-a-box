@@ -2,8 +2,8 @@
   "name": "service-002-strapi",
   "private": true,
   "version": "1.0.0",
-  "description": "<companyDescription>",
-  "author": "<maintainerName>",
+  "description": "A cool startup company!",
+  "author": "Jo Blog <jo.blog@email.com>",
   "scripts": {
     "start": "strapi start",
     "build": "strapi build",
@@ -11,7 +11,7 @@
     "develop": "strapi develop",
     "dump-db": "node -r dotenv/config  ./scripts/dump-db.js",
     "sync-db": "node -r dotenv/config ./scripts/sync-db.js",
-    "setup-strapi": "node -r dotenv/config ./scripts/setup-strapi.js",
+    "setup-strapi": "yarn && node -r dotenv/config ./scripts/setup-strapi.js",
     "preinstall": "npx only-allow yarn"
   },
   "devDependencies": {

@@ -1,57 +1,25 @@
 const { spawn } = require("child_process");
-const { startNextProcess } = require("../plugins/commit-db/utils");
 
-function _void() {
-  return;
-}
+const syncDB_ = spawn("yarn", ["sync-db"]);
 
-function startSetup(callBack = _void) {
-  const setup = spawn("cross-env", ["INITIAL_SETUP=true", "yarn", "develop"]);
+syncDB_.stdout.on("data", (data) => {
+  console.log(`stdout: ${data}`);
+});
 
-  let trigger = false;
+syncDB_.stderr.on("data", (data) => {
+  console.log(`stderr: ${data}`);
+});
 
-  setup.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
+syncDB_.on("close", (code) => {
+  if (code === 0) {
+    const setup = spawn("cross-env", ["INITIAL_SETUP=true", "yarn", "develop"]);
 
-    if (data.includes(startNextProcess)) {
-      trigger = true;
-    }
-  });
+    setup.stdout.on("data", (data) => {
+      console.log(`stdout: ${data}`);
+    });
 
-  setup.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
-
-  setup.on("exit", () => {
-    trigger && callBack();
-  });
-}
-
-function startSyncDB(callBack = _void) {
-  const syncDB = spawn("yarn", ["sync-db"]);
-
-  let trigger = false;
-
-  syncDB.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-
-    if (data.includes(startNextProcess)) {
-      trigger = true;
-    }
-  });
-
-  syncDB.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
-
-  syncDB.on("exit", () => {
-    trigger && callBack();
-  });
-}
-
-function init() {
-  startSyncDB(startSetup);
-  // startSetup(startSyncDB); //use in dev to flush db
-}
-
-init();
+    setup.stderr.on("data", (data) => {
+      console.log(`stderr: ${data}`);
+    });
+  }
+});

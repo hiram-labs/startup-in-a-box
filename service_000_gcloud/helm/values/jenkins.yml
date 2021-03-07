@@ -1,2 +1,4 @@
 controller:
   serviceType: LoadBalancer
+  additionalPlugins:
+    - matrix-auth:2.6.4

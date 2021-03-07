@@ -1,4 +1,5 @@
 # Startup In A Box
 
-still in development :(
-contribution welcomed adjeibohyen@hotmail.co.uk
+still in early development :(
+contribution welcomed
+adjeibohyen@hotmail.co.uk

@@ -27,6 +27,7 @@ click navigation menu > IAM & Admin > service account
 ```
 
 - At the top _(using suggested name: robot-01)_
+- Once created download a key file for this account
 
 ```
 click create service account
@@ -42,16 +43,16 @@ click create service account
 
 ### Scripts
 
-**_Predefined scripts are used to automate task_**
+**_Predefined scripts are used to automate tasks_**
 
-- Cd to the shell script folder by ls to know current folder list by default all .sh scripts can be found here _./service_000_gcloud/scripts/shell_
+- Cd to the _shell scripts_ folder. Use `ls` to know current folder list by default all .sh scripts can be found here `./service_000_gcloud/scripts/shell`
 
 ```
 ls
 cd <path>/scripts
 ```
 
-- Give execution rights to all .sh once inside that directory
+- Give execution rights to all .sh by running below command once inside `scripts/shell` directory
 
 ```
 find . -type f -iname "*.sh" -exec chmod +x {} \;
@@ -67,22 +68,22 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 ### Initialise Session
 
-**_A fresh sesion is always created when yarn `start-gcloud` is called_**
+**_A fresh session is always created on each `yarn start-gcloud`_**
 
-- Cd to shell folder _ref scripts section above_
-- if your project name is different from `project_id` inside the json key file downloaded, add your project name as argument to command below.
+- `cd` to shell folder _Hint: ref scripts section above_.
+- if your project name is different from `project_id` inside the json key file downloaded earlier from GCP website, add your project name as argument to command below.
 
 ```
-./init.sh <optional project key>
+./init.sh <optional project name>
 ```
 
 ---
 
 ### Add GKE cluster
 
-**_Setups an e2-small machine type cluster_**
+**_Setup an e2-small machine type cluster_**
 
-- Cd to shell folder _ref scripts section above_
+- `cd` to shell folder _Hint: ref scripts section above_.
 - Add an argument at `position 1` to command below to specify cluster name, defaults to `general`
 - Add an argument at `position 2` to command below to specify number of nodes, defaults to `1`
 
@@ -101,4 +102,14 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 ```
 ./connect.sh <optional cluster name>
+```
+
+### Create Jenkins Service
+
+**_Setup Jenkins for the project_**
+
+- Cd to shell folder _ref scripts section above_
+
+```
+./init.sh && ./jenkins.sh
 ```

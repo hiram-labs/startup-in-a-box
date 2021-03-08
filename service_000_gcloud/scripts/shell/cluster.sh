@@ -4,7 +4,7 @@
 # RESET_COLOR='\033[0m' 
 
 CLUSTER_NAME=general
-NUM_NODES=1
+NUM_NODES=2
 
 # NAME_EXISTS=$(gcloud container clusters list --filter="name:generals")
 

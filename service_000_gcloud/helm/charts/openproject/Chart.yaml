@@ -1,0 +1,8 @@
+name: openproject
+description: OpenProject is the leading open source project management software.
+version: 0.0.1
+apiVersion: v1
+keywords:
+  - openproject
+sources:
+home:

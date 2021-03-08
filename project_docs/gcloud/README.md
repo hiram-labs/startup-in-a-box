@@ -85,7 +85,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 - `cd` to shell folder _Hint: ref scripts section above_.
 - Add an argument at `position 1` to command below to specify cluster name, defaults to `general`
-- Add an argument at `position 2` to command below to specify number of nodes, defaults to `1`
+- Add an argument at `position 2` to command below to specify number of nodes, defaults to `2`
 
 ```
 ./cluster.sh <optional cluster name> <optional number of nodes>
@@ -109,7 +109,8 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 **_Setup Jenkins for the project_**
 
 - Cd to shell folder _ref scripts section above_
+- If the session is not authenticate run `./init.sh first` otherwise run code below.
 
 ```
-./init.sh && ./jenkins.sh
+./jenkins.sh
 ```

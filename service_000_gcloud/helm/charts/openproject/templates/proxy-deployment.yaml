@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: proxy
+  name: proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: proxy
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/frontend: "true"
+        io.kompose.service: proxy
+    spec:
+      containers:
+        - args:
+            - ./docker/prod/proxy
+          env:
+            - name: APP_HOST
+              value: web
+            - name: OPENPROJECT_RAILS__RELATIVE__URL__ROOT
+          image: openproject/community:11
+          name: proxy
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

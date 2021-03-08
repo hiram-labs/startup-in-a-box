@@ -1,0 +1,10 @@
+service:
+  http:
+    type: LoadBalancer
+  ssh:
+    type: LoadBalancer
+gitea:
+  admin:
+    username: "root"
+    password: "p4ssw0rd"
+    email: "root@gitea.com"

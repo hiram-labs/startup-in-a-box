@@ -61,7 +61,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 - then run required script NB some scripts require arguments
 
 ```
-./<script-name>.sh <add arg if required>
+. <script-name>.sh <add arg if required>
 ```
 
 ---
@@ -74,7 +74,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 - if your project name is different from `project_id` inside the json key file downloaded earlier from GCP website, add your project name as argument to command below.
 
 ```
-./init.sh <optional project name>
+. init.sh <optional project name>
 ```
 
 ---
@@ -88,7 +88,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 - Add an argument at `position 2` to command below to specify number of nodes, defaults to `2`
 
 ```
-./cluster.sh <optional cluster name> <optional number of nodes>
+. cluster.sh <optional cluster name> <optional number of nodes>
 ```
 
 ---
@@ -101,7 +101,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 - Add an argument to command below to specify cluster name to connect to, defaults to `general` if available.
 
 ```
-./connect.sh <optional cluster name>
+. connect.sh <optional cluster name>
 ```
 
 ### Create Jenkins Service
@@ -109,8 +109,19 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 **_Setup Jenkins for the project_**
 
 - Cd to shell folder _ref scripts section above_
-- If the session is not authenticate run `./init.sh first` otherwise run code below.
+- If the session is not authenticate run `. init.sh first` otherwise run code below.
 
 ```
-./jenkins.sh
+. jenkins.sh
+```
+
+### Create Gitea Service
+
+**_Setup Gitea for the project_**
+
+- Cd to shell folder _ref scripts section above_
+- If the session is not authenticate run `. init.sh first` otherwise run code below.
+
+```
+. gitea.sh
 ```

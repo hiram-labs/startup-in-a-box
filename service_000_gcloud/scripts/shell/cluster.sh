@@ -3,10 +3,10 @@
 # RED='\033[0;31m'
 # RESET_COLOR='\033[0m' 
 
-CLUSTER_NAME=general
+CLUSTER_NAME=default
 NUM_NODES=2
 
-# NAME_EXISTS=$(gcloud container clusters list --filter="name:generals")
+# NAME_EXISTS=$(gcloud container clusters list --filter="name:default")
 
 # if [ -z "$NAME_EXISTS" ]
 #     then

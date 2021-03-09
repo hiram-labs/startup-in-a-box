@@ -3,7 +3,7 @@
 BLUE='\033[1;34m'
 RESET_COLOR='\033[0m' 
 
-. ./connect.sh management
+. connect.sh management
 
 helm repo update
 helm install openproject ../../helm/charts/openproject/

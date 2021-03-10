@@ -1,7 +1,5 @@
 node_modules
-.*-key.json
-.*-key.yml
-.*-key.yaml
 .DS_Store
 .vscode
 .env*
+service_000_gcloud/secrets/gcloud-key.json

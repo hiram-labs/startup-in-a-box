@@ -2,7 +2,13 @@
 
 FILE="../../secrets/gcloud-key.json"
 
-PROJECT_ID=$(cat $FILE | jq -r '.project_id')
+readonly PROJECT_ID=$(cat $FILE | jq -r '.project_id')
+readonly PROJECT_REGION=europe-west2
+readonly PROJECT_ZONE=europe-west2-b 
+
+export PROJECT_ID
+export PROJECT_REGION
+export PROJECT_ZONE
 
 gcloud auth activate-service-account  --key-file=$FILE 
 
@@ -15,8 +21,8 @@ if [ "$#" -eq  "0" ]
 fi
 
 gcloud config set disable_prompts true
-gcloud config set compute/region europe-west2
-gcloud config set compute/zone europe-west2-b
+gcloud config set compute/region $PROJECT_REGION
+gcloud config set compute/zone $PROJECT_ZONE
 
 gcloud services enable compute.googleapis.com
 gcloud services enable container.googleapis.com

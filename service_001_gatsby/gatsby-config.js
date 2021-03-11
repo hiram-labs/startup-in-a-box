@@ -25,10 +25,11 @@ module.exports = {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          "@images": "src/images",
-          "@components": "src/components",
-          "@containers": "src/containers",
-          "@markdown": "src/markdown",
+          images: "src/images",
+          components: "src/components",
+          containers: "src/containers",
+          markdown: "src/markdown",
+          storybook: "../service_000_storybook/src",
         },
         extensions: [`js`, `jsx`, `ts`, `tsx`],
       },

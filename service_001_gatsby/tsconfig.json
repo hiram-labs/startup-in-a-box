@@ -31,10 +31,10 @@
     /* Import aliasing */
     "baseUrl": "./src",
     "paths": {
-      "@images/*": ["images/*"],
-      "@components/*": ["components/*"],
-      "@containers/*": ["containers/*"],
-      "@markdown/*": ["markdown/*"]
+      "images/*": ["images/*"],
+      "components/*": ["components/*"],
+      "containers/*": ["containers/*"],
+      "markdown/*": ["markdown/*"]
     }
   },
 

@@ -74,5 +74,10 @@
     "gatsby-plugin-scss-typescript": "^4.0.13",
     "prettier": "2.2.1",
     "typescript": "4.1.3"
+  },
+  "customMeta": {
+    "gtagID": "<gtagID>",
+    "companyName": "<companyName>",
+    "companyNameShort": "<companyNameShort>"
   }
 }

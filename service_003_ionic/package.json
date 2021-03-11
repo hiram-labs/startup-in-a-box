@@ -65,5 +65,10 @@
     "@capacitor/cli": "2.4.6",
     "@types/styled-components": "^5.1.7",
     "prettier": "2.2.1"
+  },
+  "customMeta": {
+    "gtagID": "G-xxxxxx",
+    "companyName": "My Startup",
+    "companyNameShort": "mys"
   }
 }

@@ -5,11 +5,13 @@ const path = require("path");
 const root = process.cwd();
 
 const targetFiles = [
+  "./service_000_storybook/.env",
   "./service_001_gatsby/.env",
   "./service_002_strapi/.env",
   "./service_003_ionic/.env",
 ];
 const sourceFiles = [
+  `../env/storybook/dev.env`,
   `../env/gatsby/dev.env`,
   `../env/strapi/dev.env`,
   `../env/ionic/dev.env`,

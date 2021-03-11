@@ -3,8 +3,21 @@ const path = require("path");
 
 const root = process.cwd();
 
+const resetStorybook = async () => {
+  const targetFiles = ["package.json"];
+  targetFiles.forEach((file) => {
+    fs.copyFile(
+      path.join(__dirname, `../data/storybook/_${file}`),
+      path.join(root, `./service_000_storybook/${file}`),
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  });
+};
+
 const resetGatsby = async () => {
-  const targetFiles = ["gatsby-config.js", "package.json"];
+  const targetFiles = ["package.json"];
   targetFiles.forEach((file) => {
     fs.copyFile(
       path.join(__dirname, `../data/gatsby/_${file}`),
@@ -56,12 +69,14 @@ const resetMysql = async () => {
 };
 
 module.exports = async (service) => {
+  const isResetStorybook = service === "storybook";
   const isResetGatsby = service === "gatsby";
   const isResetStrapi = service === "strapi";
   const isResetIonic = service === "ionic";
   const isResetMysql = service === "mysql";
 
   if (service) {
+    isResetStorybook && (await resetStorybook());
     isResetGatsby && (await resetGatsby());
     isResetStrapi && (await resetStrapi());
     isResetIonic && (await resetIonic());
@@ -69,6 +84,7 @@ module.exports = async (service) => {
     return;
   }
 
+  await resetStorybook();
   await resetGatsby();
   await resetStrapi();
   await resetIonic();

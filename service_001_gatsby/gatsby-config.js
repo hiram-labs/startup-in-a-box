@@ -1,5 +1,5 @@
 require("dotenv").config()
-import { customMeta, description, author } from "./package.json"
+const { customMeta, description, author } = require("./package.json")
 
 module.exports = {
   siteMetadata: {

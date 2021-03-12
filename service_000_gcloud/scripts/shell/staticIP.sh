@@ -1,7 +1,7 @@
 #! /bin/sh
 
-BLUE='\033[1;34m'
-RESET_COLOR='\033[0m' 
+# set -x
+set -euo pipefail
 
 JENKINS_IP=$(gcloud compute addresses describe jenkins-ip --format="value(address)")
 GITEAHTTP_IP=$(gcloud compute addresses describe giteahttp-ip --format="value(address)")

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -c
+    kompose.cmd: kompose -f docker-compose.yml convert -c
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
   labels:
@@ -17,11 +17,10 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -c
+        kompose.cmd: kompose -f docker-compose.yml convert -c
         kompose.version: 1.22.0 (955b78124)
       creationTimestamp: null
       labels:
-        io.kompose.network/frontend: "true"
         io.kompose.service: proxy
     spec:
       containers:
@@ -29,7 +28,7 @@ spec:
             - ./docker/prod/proxy
           env:
             - name: APP_HOST
-              value: web
+              value: web:3000
             - name: OPENPROJECT_RAILS__RELATIVE__URL__ROOT
           image: openproject/community:11
           name: proxy

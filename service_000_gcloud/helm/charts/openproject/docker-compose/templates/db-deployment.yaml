@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -c
+    kompose.cmd: kompose -f docker-compose.yml convert -c
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
   labels:
@@ -18,11 +18,10 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -c
+        kompose.cmd: kompose -f docker-compose.yml convert -c
         kompose.version: 1.22.0 (955b78124)
       creationTimestamp: null
       labels:
-        io.kompose.network/backend: "true"
         io.kompose.service: db
     spec:
       containers:
@@ -33,6 +32,8 @@ spec:
               value: p4ssw0rd
           image: postgres:10
           name: db
+          ports:
+            - containerPort: 5432
           resources: {}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data

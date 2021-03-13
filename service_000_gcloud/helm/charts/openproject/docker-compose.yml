@@ -1,9 +1,5 @@
 version: "3.7"
 
-networks:
-  frontend:
-  backend:
-
 volumes:
   pgdata:
   opdata:
@@ -19,7 +15,7 @@ x-op-app: &app
     RAILS_CACHE_STORE: "memcache"
     OPENPROJECT_CACHE__MEMCACHE__SERVER: "cache:11211"
     OPENPROJECT_RAILS__RELATIVE__URL__ROOT: "${OPENPROJECT_RAILS__RELATIVE__URL__ROOT:-}"
-    DATABASE_URL: "postgres://postgres:p4ssw0rd@db/openproject"
+    DATABASE_URL: "postgres://postgres:p4ssw0rd@db:5432/openproject"
     USE_PUMA: "true"
     # set to true to enable the email receiving feature. See ./docker/cron for more options
     IMAP_ENABLED: "${IMAP_ENABLED:-false}"
@@ -36,14 +32,14 @@ services:
     environment:
       POSTGRES_PASSWORD: p4ssw0rd
       POSTGRES_DB: openproject
-    networks:
-      - backend
+    ports:
+      - "${PORT:-5432}:5432"
 
   cache:
     image: memcached
     <<: *restart_policy
-    networks:
-      - backend
+    ports:
+      - "${PORT:-11211}:11211"
 
   proxy:
     <<: *image
@@ -52,19 +48,16 @@ services:
     ports:
       - "${PORT:-8080}:80"
     environment:
-      APP_HOST: web
+      APP_HOST: "web:3000"
       OPENPROJECT_RAILS__RELATIVE__URL__ROOT: "${OPENPROJECT_RAILS__RELATIVE__URL__ROOT:-}"
     depends_on:
       - web
-    networks:
-      - frontend
 
   web:
     <<: *app
     command: "./docker/prod/web"
-    networks:
-      - frontend
-      - backend
+    ports:
+      - "${PORT:-3000}:3000"
     depends_on:
       - db
       - cache
@@ -73,8 +66,6 @@ services:
   worker:
     <<: *app
     command: "./docker/prod/worker"
-    networks:
-      - backend
     depends_on:
       - db
       - cache
@@ -83,8 +74,6 @@ services:
   cron:
     <<: *app
     command: "./docker/prod/cron"
-    networks:
-      - backend
     depends_on:
       - db
       - cache
@@ -94,5 +83,3 @@ services:
     <<: *app
     command: "./docker/prod/seeder"
     restart: on-failure
-    networks:
-      - backend

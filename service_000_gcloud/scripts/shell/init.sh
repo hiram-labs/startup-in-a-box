@@ -1,9 +1,10 @@
 #! /bin/sh
 
 # set -x
-set -euo pipefail
+# set -euo pipefail
 
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 RESET_COLOR='\033[0m' 
 SECRET_KEY_PATH="../../secrets/gcloud-key.json"
 PROJECT_ID=$(cat $SECRET_KEY_PATH | jq -r '.project_id')
@@ -11,6 +12,7 @@ PROJECT_REGION=europe-west2
 PROJECT_ZONE=europe-west2-b 
 
 export RED
+export BLUE
 export RESET_COLOR
 export SECRET_KEY_PATH
 export PROJECT_ID

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -c
+    kompose.cmd: kompose -f docker-compose.yml convert -c
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
   labels:
@@ -18,12 +18,10 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -c
+        kompose.cmd: kompose -f docker-compose.yml convert -c
         kompose.version: 1.22.0 (955b78124)
       creationTimestamp: null
       labels:
-        io.kompose.network/backend: "true"
-        io.kompose.network/frontend: "true"
         io.kompose.service: web
     spec:
       containers:
@@ -31,7 +29,7 @@ spec:
             - ./docker/prod/web
           env:
             - name: DATABASE_URL
-              value: postgres://postgres:p4ssw0rd@db/openproject
+              value: postgres://postgres:p4ssw0rd@db:5432/openproject
             - name: IMAP_ENABLED
               value: "false"
             - name: OPENPROJECT_CACHE__MEMCACHE__SERVER
@@ -43,6 +41,8 @@ spec:
               value: "true"
           image: openproject/community:11
           name: web
+          ports:
+            - containerPort: 3000
           resources: {}
           volumeMounts:
             - mountPath: /var/openproject/assets

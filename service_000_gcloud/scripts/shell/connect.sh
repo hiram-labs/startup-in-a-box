@@ -1,7 +1,9 @@
 #! /bin/sh
 
 # set -x
-set -euo pipefail
+# set -euo pipefail
+
+. staticIP.sh
 
 CLUSTER_NAME=default
 

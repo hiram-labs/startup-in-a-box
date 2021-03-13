@@ -1,12 +1,14 @@
 #! /bin/sh
 
-BLUE='\033[1;34m'
-RESET_COLOR='\033[0m' 
+# set -x
+# set -euo pipefail
 
 . connect.sh management
 
 helm repo update
-helm install openproject ../../helm/charts/openproject/
+helm install \
+    --create-namespace \
+    openproject ../../helm/charts/openproject/docker-compose
 
 echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
 sleep 3m 

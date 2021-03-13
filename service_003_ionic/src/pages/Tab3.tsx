@@ -1,1 +1,1 @@
-export { default } from "../containers/tab3";
+export { default } from "../containers/tab3"

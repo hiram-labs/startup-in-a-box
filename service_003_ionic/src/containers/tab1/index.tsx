@@ -4,8 +4,9 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-} from "@ionic/react";
-import ExploreContainer from "../../components/ExploreContainer";
+} from "@ionic/react"
+import ExploreContainer from "../../components/explore"
+
 const Tab1: React.FC = () => {
   return (
     <IonPage>
@@ -23,7 +24,7 @@ const Tab1: React.FC = () => {
         <ExploreContainer name="Tab 1 page" />
       </IonContent>
     </IonPage>
-  );
-};
+  )
+}
 
-export default Tab1;
+export default Tab1

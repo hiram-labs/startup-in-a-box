@@ -7,6 +7,13 @@ module.exports = {
       watch: false,
     },
     {
+      name: "service_000_storybook",
+      cwd: "./service_000_storybook",
+      script: "start-development.js",
+      watch: false,
+      env: { service: storybook },
+    },
+    {
       name: "service_001_gatsby",
       cwd: "./service_001_gatsby",
       script: "start-development.js",

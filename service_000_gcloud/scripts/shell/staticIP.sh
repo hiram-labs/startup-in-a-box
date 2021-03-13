@@ -1,11 +1,11 @@
 #! /bin/sh
 
-BLUE='\033[1;34m'
-RESET_COLOR='\033[0m' 
+# set -x
+# set -euo pipefail
 
 JENKINS_IP=$(gcloud compute addresses describe jenkins-ip --format="value(address)")
-GITEAHTTP_IP=$(gcloud compute addresses describe giteahttp-ip --format="value(address)")
-GITEASSH_IP=$(gcloud compute addresses describe giteassh-ip --format="value(address)")
+GITEA_HTTP_IP=$(gcloud compute addresses describe giteahttp-ip --format="value(address)")
+GITEA_SSH_IP=$(gcloud compute addresses describe giteassh-ip --format="value(address)")
 
 if [[ -z "$JENKINS_IP" ]]
     then
@@ -13,20 +13,20 @@ if [[ -z "$JENKINS_IP" ]]
         && JENKINS_IP=$(gcloud compute addresses describe jenkins-ip --format="value(address)")
 fi
 
-if [[ -z "$GITEAHTTP_IP" ]]
+if [[ -z "$GITEA_HTTP_IP" ]]
     then
         gcloud compute addresses create giteahttp-ip \
-        && GITEAHTTP_IP=$(gcloud compute addresses describe giteahttp-ip --format="value(address)")
+        && GITEA_HTTP_IP=$(gcloud compute addresses describe giteahttp-ip --format="value(address)")
 fi
 
-if [[ -z "$GITEASSH_IP" ]]
+if [[ -z "$GITEA_SSH_IP" ]]
     then
         gcloud compute addresses create giteassh-ip \
-        && GITEASSH_IP=$(gcloud compute addresses describe giteassh-ip --format="value(address)")
+        && GITEA_SSH_IP=$(gcloud compute addresses describe giteassh-ip --format="value(address)")
 fi
 
 export JENKINS_IP
-export GITEAHTTP_IP
-export GITEASSH_IP
+export GITEA_HTTP_IP
+export GITEA_SSH_IP
 
 gcloud compute addresses list

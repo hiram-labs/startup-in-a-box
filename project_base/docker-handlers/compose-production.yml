@@ -14,6 +14,17 @@ services:
     volumes:
       - mysql_db:/var/lib/mysql_db
 
+  service_000_storybook:
+    build:
+      context: ./service_000_storybook
+      dockerfile: Dockerfile-production
+    container_name: service_000_storybook
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - ../env/storybook/prod.env
+
   service_001_gatsby:
     build:
       context: ./service_001_gatsby
@@ -32,7 +43,7 @@ services:
     container_name: service_002_strapi
     restart: unless-stopped
     ports:
-      - "1337:1337"
+      - "8080:1337"
     env_file:
       - ../env/strapi/prod.env
     depends_on:
@@ -45,7 +56,7 @@ services:
     container_name: service_003_ionic
     restart: unless-stopped
     ports:
-      - "8081:80"
+      - "8080:80"
     env_file:
       - ../env/ionic/prod.env
 

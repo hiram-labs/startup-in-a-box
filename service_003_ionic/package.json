@@ -12,10 +12,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -65,5 +72,10 @@
     "@capacitor/cli": "2.4.6",
     "@types/styled-components": "^5.1.7",
     "prettier": "2.2.1"
+  },
+  "customMeta": {
+    "gtagID": "G-xxxxxx",
+    "companyName": "My Startup",
+    "companyNameShort": "mys"
   }
 }

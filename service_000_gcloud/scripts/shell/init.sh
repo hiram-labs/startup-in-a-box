@@ -1,17 +1,25 @@
 #! /bin/sh
 
-FILE="../../secrets/gcloud-key.json"
+# set -x
+# set -euo pipefail
 
-readonly PROJECT_ID=$(cat $FILE | jq -r '.project_id')
-readonly PROJECT_REGION=europe-west2
-readonly PROJECT_ZONE=europe-west2-b 
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+RESET_COLOR='\033[0m' 
+SECRET_KEY_PATH="../../secrets/gcloud-key.json"
+PROJECT_ID=$(cat $SECRET_KEY_PATH | jq -r '.project_id')
+PROJECT_REGION=europe-west2
+PROJECT_ZONE=europe-west2-b 
 
+export RED
+export BLUE
+export RESET_COLOR
+export SECRET_KEY_PATH
 export PROJECT_ID
 export PROJECT_REGION
 export PROJECT_ZONE
 
-gcloud auth activate-service-account  --key-file=$FILE 
-
+gcloud auth activate-service-account  --key-file=$SECRET_KEY_PATH 
 
 if [ "$#" -eq  "0" ]
     then

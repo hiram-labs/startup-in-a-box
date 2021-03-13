@@ -1,5 +1,5 @@
-// path aliasing is import in setting the path to the image when using this mixin to help webpack resolve such
-// eg $uri = ~@images/[a_directory_inside_images_in_src]/[an_image_file].[the_extention]
+// path aliasing is important in setting the path to the image when using this mixin to help webpack resolve such
+// eg $uri = ~images/[a_directory_inside_images_in_src]/[an_image_file].[the_extention]
 @mixin icon($uri, $w: 100%, $h: 100%) {
   position: relative;
   &::before {

@@ -13,6 +13,7 @@ module.exports = function (answers) {
     maintainerName,
     companyDescription,
     maintainerEmail,
+    gtagID,
   } = answers;
 
   const targetFiles = ["package.json"];
@@ -23,9 +24,14 @@ module.exports = function (answers) {
       .toString();
 
     const customisedConfigFile = configFile
+      .replace(/<gtagID>/g, gtagID || `<gtagID>`)
       .replace(/<companyName>/g, companyName)
       .replace(/<companyDescription>/g, companyDescription)
-      .replace(/<maintainerName>/g, `${maintainerName} <${maintainerEmail}>`);
+      .replace(/<maintainerName>/g, `${maintainerName} <${maintainerEmail}>`)
+      .replace(
+        /<companyNameShort>/g,
+        companyName.slice(0, 4).toLowerCase().replace(" ", "")
+      );
 
     fs.writeFileSync(
       path.join(root, `./service_002_strapi/${file}`),

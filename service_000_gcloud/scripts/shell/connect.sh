@@ -1,6 +1,11 @@
 #! /bin/sh
 
-CLUSTER_NAME=general
+# set -x
+# set -euo pipefail
+
+. staticIP.sh
+
+CLUSTER_NAME=default
 
 if [ "$#" -eq  "1" ]
     then

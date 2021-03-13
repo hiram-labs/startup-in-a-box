@@ -1,11 +1,12 @@
 require("dotenv").config()
+const { customMeta, description, author } = require("./package.json")
 
 module.exports = {
   siteMetadata: {
-    title: `My Startup`,
+    title: customMeta.companyName,
     image: `/images/logos/base_full.png`,
-    description: `A cool startup company!`,
-    author: `Jo Blog <jo.blog@email.com>`,
+    description: description,
+    author: author,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -13,7 +14,7 @@ module.exports = {
       resolve: `gatsby-plugin-gdpr-cookies`,
       options: {
         googleAnalytics: {
-          trackingId: `G-xxxxxx`,
+          trackingId: customMeta.gtagID,
           cookieName: `gatsby-gdpr-google-analytics`,
           anonymize: true,
           allowAdFeatures: false,
@@ -25,10 +26,10 @@ module.exports = {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          "@images": "src/images",
-          "@components": "src/components",
-          "@containers": "src/containers",
-          "@markdown": "src/markdown",
+          images: "src/images",
+          components: "src/components",
+          containers: "src/containers",
+          markdown: "src/markdown",
         },
         extensions: [`js`, `jsx`, `ts`, `tsx`],
       },
@@ -61,8 +62,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `My Startup`,
-        short_name: `mys`,
+        name: customMeta.companyName,
+        short_name: customMeta.companyNameShort,
         start_url: `/`,
         background_color: `#eef2f2`,
         theme_color: `#eef2f2`,

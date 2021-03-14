@@ -18,6 +18,6 @@ fi
 
 gcloud container clusters create $CLUSTER_NAME \
     --enable-network-policy \
-    # --disk-size=32 \
-    # --machine-type=e2-small \
-    # --num-nodes=$NUM_NODES
+    --disk-size=32 \
+    --machine-type=e2-small \
+    --num-nodes=$NUM_NODES

@@ -38,3 +38,6 @@ gcloud services enable container.googleapis.com
 gcloud services enable cloudresourcemanager.googleapis.com
 
 gcloud config configurations list
+
+# get and set static IP address for services to the current process environment
+. staticIP.sh

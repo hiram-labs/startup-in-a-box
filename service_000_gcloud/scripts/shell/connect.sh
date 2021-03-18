@@ -12,7 +12,8 @@ if [ "$#" -eq  "1" ]
         REST=$2
 fi
 
-gcloud container clusters get-credentials $CLUSTER_NAME $REST\
+gcloud container clusters get-credentials $CLUSTER_NAME $REST \
+    || . cluster.sh $CLUSTER_NAME \
     && kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value account)

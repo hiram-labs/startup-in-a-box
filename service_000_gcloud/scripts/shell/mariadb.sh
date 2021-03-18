@@ -8,6 +8,7 @@
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm install erpnext-mariadb \
+    -f ../../helm/values/mariadb.yml \
     --create-namespace \
     --namespace erpnext \
     bitnami/mariadb

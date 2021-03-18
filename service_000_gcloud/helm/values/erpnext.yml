@@ -2,10 +2,15 @@ service:
   type: LoadBalancer
 mariadbHost: "erpnext-mariadb.erpnext.svc.cluster.local"
 persistence:
-  worker:
-    storageClass: "standard"
-  logs:
-    storageClass: "standard"
+  # worker:
+  #   storageClass: "nfs"
+  # logs:
+  #   storageClass: "nfs"
+  storageClass: "nfs"
+redis:
+  extraEnv:
+    - name: REDIS_PASSWORD
+      value: "super_secret_password"
 ############################
 
 # # Default values for erpnext.

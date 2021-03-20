@@ -1,12 +1,15 @@
-service:
-  type: LoadBalancer
+# service:
+# using caddy as ingress proxy
+# type: LoadBalancer
 mariadbHost: "erpnext-mariadb.erpnext.svc.cluster.local"
 persistence:
-  # worker:
-  #   storageClass: "nfs"
-  # logs:
-  #   storageClass: "nfs"
-  storageClass: "nfs"
+  worker:
+    storageClass: "nfs"
+  logs:
+    size: 1Gi
+    storageClass: "nfs"
+  # version 2.1.2
+  # storageClass: "nfs"
 redis:
   extraEnv:
     - name: REDIS_PASSWORD

@@ -9,6 +9,7 @@ helm repo add jenkins https://charts.jenkins.io
 helm repo update 
 helm install jenkins \
     -f ../../helm/values/jenkins.yml \
+    --atomic \
     --set controller.loadBalancerIP=$JENKINS_IP \
     --create-namespace \
     --namespace jenkins \

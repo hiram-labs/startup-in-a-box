@@ -3,15 +3,24 @@
 # set -x
 # set -euo pipefail
 
+if [[ "$1" =  "uninstall" ]]
+    then
+        helm uninstall erpnext -n erpnext 
+        kubectl delete -n erpnext -f ../../helm/secrets/erpnext.yml 
+        echo -e ${RED}erpnext uninstall${RESET_COLOR}
+
+fi
+
 . connect.sh management
-# . nfs.sh
-# . mariadb.sh
+. nfs.sh
+. mariadb.sh
 
 helm repo add frappe https://helm.erpnext.com
 helm repo update
 helm install erpnext \
     -f ../../helm/values/erpnext.yml \
-    --version 2.1.2 \
+    --atomic \
+    --version 2.1.3 \
     --create-namespace \
     --namespace erpnext \
     frappe/erpnext

@@ -7,13 +7,21 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
 RUN curl -L https://github.com/kubernetes/kompose/releases/download/v1.22.0/kompose-linux-amd64 -o kompose \
     && chmod +x kompose \
     && mv ./kompose /usr/local/bin/kompose
+RUN set -x; cd "$(mktemp -d)" \
+    && OS="$(uname | tr '[:upper:]' '[:lower:]')" \
+    && ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" \
+    && curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" \
+    && tar zxvf krew.tar.gz \
+    && KREW=./krew-"${OS}_${ARCH}" \
+    && "$KREW" install krew
 
 # Installing additional components
 RUN gcloud components install app-engine-java kubectl beta
 
-# Add Java compiler
+# Set environments
 ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk
 ENV PATH=$JAVA_HOME/bin:$PATH
+ENV PATH=$HOME/.krew/bin:$PATH
 
 # Setting working directory. All the path will be relative to WORKDIR
 WORKDIR /usr/src/service_000_gcloud

@@ -3,12 +3,12 @@
 # set -x
 # set -euo pipefail
 
-. connect.sh codebase 
+. $SCRIPTS/gcloud/connect.sh codebase 
 
 helm repo add jenkins https://charts.jenkins.io 
 helm repo update 
 helm install jenkins \
-    -f ../../helm/values/jenkins.yml \
+    -f $HELM_VALUES/jenkins.yml \
     --atomic \
     --set controller.loadBalancerIP=$JENKINS_IP \
     --create-namespace \

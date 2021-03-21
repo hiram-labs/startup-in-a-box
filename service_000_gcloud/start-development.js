@@ -7,6 +7,7 @@ const dockerComposeFile = path.join(
 );
 
 const localVolume = path.join(__dirname, "../service_000_gcloud");
+const entryVolume = path.join(__dirname, "../service_000_gcloud/main");
 
 const gcloudContainer = spawn(
   "docker-compose",

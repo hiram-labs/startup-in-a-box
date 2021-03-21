@@ -3,12 +3,12 @@
 # set -x
 # set -euo pipefail
 
-. connect.sh codebase
+. $SCRIPTS/gcloud/connect.sh codebase
 
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
 helm install gitea \
-    -f ../../helm/values/gitea.yml \
+    -f $HELM_VALUES/gitea.yml \
     --atomic \
     --set service.http.loadBalancerIP=$GITEA_HTTP_IP \
     --set service.ssh.loadBalancerIP=$GITEA_SSH_IP \

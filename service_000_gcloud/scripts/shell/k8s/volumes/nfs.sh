@@ -8,7 +8,7 @@
 helm repo add kvaps https://kvaps.github.io/charts
 helm repo update
 helm install nfs-server \
-    -f ../../helm/values/nfs.yml \
+    -f $HELM_VALUES/nfs.yml \
     --atomic \
     --version 1.2.1 \
     --create-namespace \

@@ -10,7 +10,7 @@ if [[ $# -eq 0 ]]
         return 1
 fi
 
-if [[ $1 = 'controllers' ]] && [[ $2 = 'nginx' ]]
+if [[ $1 = 'controller' ]] && [[ $2 = 'nginx' ]]
     then
         shift
         shift
@@ -26,7 +26,7 @@ if [[ $1 = 'db' ]] && [[ $2 = 'mariadb' ]]
         return 1
 fi
 
-if [[ $1 = 'services' ]] && [[ $2 = 'erpnext' ]]
+if [[ $1 = 'service' ]] && [[ $2 = 'erpnext' ]]
     then
         shift
         shift
@@ -34,7 +34,7 @@ if [[ $1 = 'services' ]] && [[ $2 = 'erpnext' ]]
         return 1
 fi
 
-if [[ $1 = 'services' ]] && [[ $2 = 'gitea' ]]
+if [[ $1 = 'service' ]] && [[ $2 = 'gitea' ]]
     then
         shift
         shift
@@ -42,7 +42,7 @@ if [[ $1 = 'services' ]] && [[ $2 = 'gitea' ]]
         return 1
 fi
 
-if [[ $1 = 'services' ]] && [[ $2 = 'jenkins' ]]
+if [[ $1 = 'service' ]] && [[ $2 = 'jenkins' ]]
     then
         shift
         shift
@@ -50,7 +50,7 @@ if [[ $1 = 'services' ]] && [[ $2 = 'jenkins' ]]
         return 1
 fi
 
-if [[ $1 = 'volumes' ]]&& [[ $2 = 'jenkins' ]]
+if [[ $1 = 'volume' ]] && [[ $2 = 'jenkins' ]]
     then
         shift
         shift

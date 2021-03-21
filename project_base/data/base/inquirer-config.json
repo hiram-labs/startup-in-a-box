@@ -1,9 +1,9 @@
 {
   "setupConfig": {
-    "introMessage": "Welcome to Startup In A Box.\n\n   Please provide values as required to setup your new project.\n   Thanks for using this boilerplate.\n\n   Brought to you by:\n   Owusu K <adjeibohyen@hotmail.co.uk>"
+    "introMessage": "Welcome to Chalk.\n\n   Please provide values as required to setup your new project.\n   Thanks for using this boilerplate.\n\n   Brought to you by:\n   Owusu K <adjeibohyen@hotmail.co.uk>"
   },
   "resetConfig": {
-    "introMessage": "Thanks for choosing Startup In A Box.\n\n  Brought to you by:\n   Owusu K <adjeibohyen@hotmail.co.uk>",
+    "introMessage": "Thanks for choosing Chalk.\n\n  Brought to you by:\n   Owusu K <adjeibohyen@hotmail.co.uk>",
     "confirmReset": {
       "field": "confirmReset",
       "prompt": "This action will reset to factory see docs. [y/N]"

@@ -1,6 +1,3 @@
-# service:
-# using caddy as ingress proxy
-# type: LoadBalancer
 mariadbHost: "erpnext-mariadb.erpnext.svc.cluster.local"
 persistence:
   worker:

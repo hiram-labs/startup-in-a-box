@@ -3,7 +3,14 @@
 # set -x
 # set -euo pipefail
 
-. connect.sh management
+eval LAST_ARG=\"\${$#}\" 
+
+if [[ "$LAST_ARG" =  "uninstall" ]]
+    then
+        helm uninstall erpnext -n erpnext 
+        echo -e ${RED}erpnext uninstall${RESET_COLOR}
+        return 1
+fi
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
@@ -17,4 +24,4 @@ helm install erpnext-mariadb \
 echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
 sleep 3m 
 
-kubectl get svc
+kubectl get svc -n erpnext

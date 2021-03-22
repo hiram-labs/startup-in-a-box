@@ -18,11 +18,19 @@ if [[ $1 = 'controller' ]] && [[ $2 = 'nginx' ]]
         return 1
 fi
 
-if [[ $1 = 'db' ]] && [[ $2 = 'mariadb' ]]
+if [[ $1 = 'db' ]] && [[ $2 = 'erpnext-db' ]]
     then
         shift
         shift
-        . $SCRIPTS/k8s/db/mariadb.sh "$@"
+        . $SCRIPTS/k8s/db/erpnext-db.sh "$@"
+        return 1
+fi
+
+if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/erpnext-ingress.sh "$@"
         return 1
 fi
 

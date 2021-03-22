@@ -34,9 +34,9 @@ if [[ $1 = 'connect' ]]
         return 1
 fi
 
-# provision staticIP
-if [[ $1 = 'staticIP' ]]
+# provision static-ip
+if [[ $1 = 'static-ip' ]]
     then
-        . $SCRIPTS/gcloud/staticIP.sh "$@"
+        . $SCRIPTS/gcloud/static-ip.sh "$@"
         return 1
 fi

@@ -1,0 +1,8 @@
+global:
+  storageClass: "nfs"
+auth:
+  database: "my_database"
+  rootPassword: "super_secret_password"
+  replicationPassword: "super_secret_password"
+  username: "my_user"
+  password: "super_secret_password"

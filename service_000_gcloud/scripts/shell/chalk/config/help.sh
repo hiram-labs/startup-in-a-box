@@ -4,7 +4,7 @@
 # set -euo pipefail
 
 # TODO:
-# on initial login global vars and functions not available
+# write help docs for chalk
 
 prompt_intro_msg
 

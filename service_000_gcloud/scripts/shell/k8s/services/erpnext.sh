@@ -18,13 +18,11 @@ helm repo update
 helm install erpnext \
     -f $HELM_VALUES/erpnext.yml \
     --atomic \
-    --version 2.1.5 \
+    --version 2.1.7 \
     --create-namespace \
     --namespace erpnext \
-    frappe/erpnext
-
-echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
-sleep 3m
-
-kubectl create -n erpnext -f $HELM_SECRETS/erpnext.yml
-kubectl get svc -n erpnext
+    frappe/erpnext \
+    && echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" \
+    && sleep 3m \
+    && kubectl get svc -n erpnext
+    && kubectl create -n erpnext -f $HELM_SECRETS/erpnext.yml \

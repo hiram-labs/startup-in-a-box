@@ -34,6 +34,14 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
         return 1
 fi
 
+if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-worker' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/erpnext-worker.sh "$@"
+        return 1
+fi
+
 if [[ $1 = 'service' ]] && [[ $2 = 'erpnext' ]]
     then
         shift
@@ -66,6 +74,7 @@ if [[ $1 = 'volume' ]] && [[ $2 = 'jenkins' ]]
         return 1
 fi
 
+# catch invalid arguments errors
 if [[ -n $1 ]]
     then
         . $SCRIPTS/chalk/config/errors.sh "$@"

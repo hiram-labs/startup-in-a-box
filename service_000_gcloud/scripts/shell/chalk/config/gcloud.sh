@@ -40,3 +40,10 @@ if [[ $1 = 'static-ip' ]]
         . $SCRIPTS/gcloud/static-ip.sh "$@"
         return 1
 fi
+
+# catch invalid arguments errors
+if [[ -n $1 ]]
+    then
+        . $SCRIPTS/chalk/config/errors.sh "$@"
+        return 1
+fi

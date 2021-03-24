@@ -5,7 +5,7 @@
 
 eval LAST_ARG=\"\${$#}\"
 
-cat <<EOF > $SCRIPTS/k8s/resources/erpnext-ingress-resource.yaml
+cat <<EOF > $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -26,13 +26,13 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yaml
-        rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yaml
+        kubectl delete -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
+        rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
         return 1
 fi
 
-kubectl apply -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yaml
-rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yaml
+kubectl apply -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
+rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
 kubectl get ingress erpnext-ingress -n erpnext
 
 # # This section is only required if TLS is to be enabled for the Ingress

@@ -8,7 +8,7 @@ eval LAST_ARG=\"\${$#}\"
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         helm uninstall erpnext -n erpnext 
-        kubectl delete -n erpnext -f $HELM_SECRETS/erpnext.yml 
+        kubectl delete -n erpnext -f $HELM_SECRETS/erpnext-db.yml 
         echo -e ${RED}erpnext uninstall${RESET_COLOR}
         return 1
 fi
@@ -24,5 +24,5 @@ helm install erpnext \
     frappe/erpnext \
     && echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" \
     && sleep 3m \
-    && kubectl get svc -n erpnext
-    && kubectl create -n erpnext -f $HELM_SECRETS/erpnext.yml \
+    && kubectl get svc -n erpnext \
+    && kubectl create -n erpnext -f $HELM_SECRETS/erpnext-db.yml

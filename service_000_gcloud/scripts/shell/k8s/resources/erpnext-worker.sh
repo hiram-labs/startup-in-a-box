@@ -10,7 +10,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: erpnext
-  name: erpnext-site
+  name: erpnext-worker
 spec:
   backoffLimit: 1
   template:
@@ -18,7 +18,7 @@ spec:
       securityContext:
         supplementalGroups: [1000]
       containers:
-        - name: create-site
+        - name: erpnext-site-worker
           image: frappe/erpnext-worker:latest
           args: ["new"]
           imagePullPolicy: IfNotPresent

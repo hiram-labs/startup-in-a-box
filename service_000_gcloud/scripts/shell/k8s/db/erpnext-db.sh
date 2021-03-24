@@ -7,7 +7,7 @@ eval LAST_ARG=\"\${$#}\"
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        helm uninstall erpnext -n erpnext 
+        helm uninstall erpnext-mariadb -n erpnext 
         echo -e ${RED}erpnext uninstall${RESET_COLOR}
         return 1
 fi
@@ -23,5 +23,4 @@ helm install erpnext-mariadb \
 
 echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
 sleep 3m 
-
 kubectl get svc -n erpnext

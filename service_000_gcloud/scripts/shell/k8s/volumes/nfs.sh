@@ -3,7 +3,12 @@
 # set -x
 # set -euo pipefail
 
-. connect.sh management
+if [[ "$1" =  "uninstall" ]]
+    then
+        helm uninstall nfs -n nfs 
+        echo -e ${RED}nfs uninstall${RESET_COLOR}
+        return 1
+fi
 
 helm repo add kvaps https://kvaps.github.io/charts
 helm repo update
@@ -17,3 +22,5 @@ helm install nfs-server \
 
 echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
 sleep 3m 
+
+kubectl get pvc -n nfs

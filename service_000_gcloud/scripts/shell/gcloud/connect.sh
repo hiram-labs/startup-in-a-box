@@ -14,7 +14,6 @@ if [[ -n "$1" ]]
 fi
 
 gcloud container clusters get-credentials $CLUSTER_NAME $REST \
-    || . $SCRIPTS/gcloud/cluster.sh $CLUSTER_NAME \
     && kubectl create clusterrolebinding cluster-admin-binding \
     --clusterrole=cluster-admin \
     --user=$(gcloud config get-value account)

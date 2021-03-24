@@ -3,7 +3,14 @@
 # set -x
 # set -euo pipefail
 
-. $SCRIPTS/gcloud/connect.sh codebase
+eval LAST_ARG=\"\${$#}\"
+
+if [[ "$LAST_ARG" =  "uninstall" ]]
+    then
+        helm uninstall gitea -n gitea 
+        echo -e ${RED}gitea uninstall${RESET_COLOR}
+        return 1
+fi
 
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update

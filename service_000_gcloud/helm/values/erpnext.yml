@@ -1,6 +1,3 @@
-# service:
-# using caddy as ingress proxy
-# type: LoadBalancer
 mariadbHost: "erpnext-mariadb.erpnext.svc.cluster.local"
 persistence:
   worker:
@@ -8,12 +5,10 @@ persistence:
   logs:
     size: 1Gi
     storageClass: "nfs"
-  # version 2.1.2
-  # storageClass: "nfs"
 redis:
   extraEnv:
-    - name: REDIS_PASSWORD
-      value: "super_secret_password"
+    - name: ALLOW_EMPTY_PASSWORD
+      value: "yes"
 ############################
 
 # # Default values for erpnext.
@@ -24,17 +19,17 @@ redis:
 
 # nginxImage:
 #   repository: frappe/erpnext-nginx
-#   tag: v12.18.0
+#   tag: v12.19.0
 #   pullPolicy: IfNotPresent
 
 # pythonImage:
 #   repository: frappe/erpnext-worker
-#   tag: v12.18.0
+#   tag: v12.19.0
 #   pullPolicy: IfNotPresent
 
 # socketIOImage:
 #   repository: frappe/frappe-socketio
-#   tag: v12.15.0
+#   tag: v12.16.2
 #   pullPolicy: IfNotPresent
 
 # redis:

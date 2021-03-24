@@ -1,22 +1,27 @@
 # #! /bin/sh
 
-# # set -x
-# # set -euo pipefail
+# set -x
+# set -euo pipefail
 
-# . connect.sh management
+eval LAST_ARG=\"\${$#}\"
 
-# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-# helm repo update
-# helm install nginx \
-#     -f $HELM_VALUES/nginx.yml \
-#     --atomic \
-#     --create-namespace \
-#     --namespace nginx \
-#     ingress-nginx/ingress-nginx
+if [[ "$LAST_ARG" =  "uninstall" ]]
+    then
+        helm uninstall nginx -n nginx 
+        echo -e ${RED}nginx uninstall${RESET_COLOR}
+        return 1
+fi
 
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install nginx \
+    -f $HELM_VALUES/nginx.yml \
+    --atomic \
+    --create-namespace \
+    --namespace nginx \
+    ingress-nginx/ingress-nginx
 
+echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
+sleep 3m
 
-# echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
-# sleep 3m
-
-echo nginx
+kubectl get svc -n nginx

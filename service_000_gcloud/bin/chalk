@@ -17,6 +17,9 @@ if [[ -z $CHALK_STATUS ]]
 
         printf "$LIB_RESOURCES" >> $PROFILE_FILE
         sleep 10
+
+        chalk "$@"
+        return 1 
 fi
 
 if [[ -z $1 ]] || [[ $1 = "help" ]]
@@ -34,11 +37,12 @@ if [[ -z $1 ]] || [[ $1 = "help" ]]
                 return 1
         fi
 
-        # handle install commands
-        if [[ $1 = "install" ]]
+        # handle install / uninstall of services and resources
+        if [[ $1 = "install" ]] || [[ $1 = "uninstall" ]]
             then 
+                SETUP_ACTION=$1
                 shift
-                . $SCRIPTS/chalk/config/install.sh "$@"
+                . $SCRIPTS/chalk/config/setup.sh "$@" $SETUP_ACTION
                 return 1
         fi
 

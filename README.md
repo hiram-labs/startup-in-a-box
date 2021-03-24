@@ -1,8 +1,8 @@
 # Chalk
 
-## Provides an end to end technology start up infrastructure and enterprise solution.
+Provides an end to end technology start up infrastructure and enterprise solution.
 
-## Its a complete Start Up In A Box
+_Its a complete Start Up In A Box_
 
 still in early development :D
 contribution welcomed

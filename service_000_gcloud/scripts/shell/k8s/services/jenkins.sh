@@ -3,21 +3,21 @@
 # set -x
 # set -euo pipefail
 
-eval LAST_ARG=\"\${$#}\"
+eval LAST_ARG=\"\$\{$#\}\"
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         helm uninstall jenkins -n jenkins 
-        echo -e ${RED}jenkins uninstall${RESET_COLOR}
+        echo -e "${RED}"jenkins uninstall"${RESET_COLOR}"
         return 1
 fi
 
 helm repo add jenkins https://charts.jenkins.io 
 helm repo update 
 helm install jenkins \
-    -f $HELM_VALUES/jenkins.yml \
+    -f "$HELM_VALUES"/jenkins.yml \
     --atomic \
-    --set controller.loadBalancerIP=$JENKINS_IP \
+    --set controller.loadBalancerIP="$JENKINS_IP" \
     --create-namespace \
     --namespace jenkins \
     jenkins/jenkins 

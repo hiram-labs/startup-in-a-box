@@ -80,15 +80,11 @@ const enablePublicPermissionsFor = async (pluginId) => {
 module.exports = async () => {
   // create admin account
   process.env.INITIAL_SETUP && (await isExistingAdmin()) && process.exit(0);
-
   process.env.INITIAL_SETUP &&
     !(await isSuperAdminRoleAvailable()) &&
     (await createSuperAdminRole());
-
   process.env.INITIAL_SETUP && (await createEncryptedPassword());
-
   process.env.INITIAL_SETUP && (await createAdminAccount());
-
   process.env.INITIAL_SETUP && (await logAdminCredentials()) && process.exit(0);
 
   // enable public permissions for plugin

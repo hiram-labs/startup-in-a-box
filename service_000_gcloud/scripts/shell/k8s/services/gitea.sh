@@ -3,24 +3,24 @@
 # set -x
 # set -euo pipefail
 
-eval LAST_ARG=\"\${$#}\"
+eval LAST_ARG=\"\$\{$#\}\"
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         helm uninstall gitea -n gitea 
-        echo -e ${RED}gitea uninstall${RESET_COLOR}
+        echo -e "${RED}"gitea uninstall"${RESET_COLOR}"
         return 1
 fi
 
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
 helm install gitea \
-    -f $HELM_VALUES/gitea.yml \
+    -f "$HELM_VALUES"/gitea.yml \
     --atomic \
-    --set service.http.loadBalancerIP=$GITEA_HTTP_IP \
-    --set service.ssh.loadBalancerIP=$GITEA_SSH_IP \
-    --set gitea.config.server.DOMAIN=$GITEA_HTTP_IP \
-    --set gitea.config.server.SSH_DOMAIN=$GITEA_SSH_IP \
+    --set service.http.loadBalancerIP="$GITEA_HTTP_I"P \
+    --set service.ssh.loadBalancerIP="$GITEA_SSH_IP" \
+    --set gitea.config.server.DOMAIN="$GITEA_HTTP_IP" \
+    --set gitea.config.server.SSH_DOMAIN="$GITEA_SSH_IP" \
     --set gitea.config.server.ROOT_URL="http://$GITEA_HTTP_IP:3000" \
     --create-namespace \
     --namespace gitea \

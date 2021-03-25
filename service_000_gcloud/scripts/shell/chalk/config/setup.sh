@@ -26,6 +26,22 @@ if [[ $1 = 'db' ]] && [[ $2 = 'erpnext-db' ]]
         return 1
 fi
 
+if [[ $1 = 'resource' ]] && [[ $2 = 'cert-issue' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/cert-issue.sh "$@"
+        return 1
+fi
+
+if [[ $1 = 'resource' ]] && [[ $2 = 'cert-manager' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/cert-manager.sh "$@"
+        return 1
+fi
+
 if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
     then
         shift

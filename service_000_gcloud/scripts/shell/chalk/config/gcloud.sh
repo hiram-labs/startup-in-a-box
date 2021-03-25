@@ -37,6 +37,7 @@ fi
 # provision static-ip
 if [[ $1 = 'static-ip' ]]
     then
+        shift
         . $SCRIPTS/gcloud/static-ip.sh "$@"
         return 1
 fi

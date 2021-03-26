@@ -1,11 +1,11 @@
-# #! /bin/sh
+#! /bin/sh
 
 # set -x
 # set -euo pipefail
 
-eval LAST_ARG=\"\${$#}\"
+eval LAST_ARG=\"\$\{$#\}\"
 
-cat <<EOF > $SCRIPTS/k8s/resources/erpnext-worker-resource.yml
+cat <<EOF > "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -49,11 +49,16 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f $SCRIPTS/k8s/resources/erpnext-worker-resource.yml
-        rm $SCRIPTS/k8s/resources/erpnext-worker-resource.yml
+        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
         return 1
 fi
 
-kubectl create -f $SCRIPTS/k8s/resources/erpnext-worker-resource.yml
-rm $SCRIPTS/k8s/resources/erpnext-worker-resource.yml
-kubectl get ingress erpnext-worker -n erpnext
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl create -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && progress_indicator short \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && kubectl get ingress erpnext-worker -n erpnext
+        return 1
+fi

@@ -3,32 +3,47 @@
 # set -x
 # set -euo pipefail
 
-function parse_gcloud_init_args () {
-GCLOUD_INIT_REST=""
-while [[ $# -gt 0 ]]
-    do
-    key="$1"
+# handles flags
+parse_general_flags () {
+    while [[ $# -gt 0 ]]
+        do
+        key="$1"
 
-    case $key in
-        -pn|--projectName)
-        PROJECT_ID="$2"
-        shift
-        shift
-        ;;
-        -r|--region)
-        PROJECT_REGION="$2"
-        shift
-        shift
-        ;;
-        -z|--zone)
-        PROJECT_ZONE="$2"
-        shift
-        shift
-        ;;
-        *)
-        GCLOUD_INIT_REST="${GCLOUD_INIT_REST} $1" 
-        shift
-        ;;
-    esac
-done
+        case $key in
+            -ip|--ingressIP)
+            export INGRESS_IP="$2"
+            shift
+            shift
+            ;;
+            -ns|--namespace)
+            export PROJECT_NAMESPACE="$2"
+            shift
+            shift
+            ;;
+            -pn|--projectName)
+            export PROJECT_ID="$2"
+            shift
+            shift
+            ;;
+            -rg|--region)
+            export PROJECT_REGION="$2"
+            shift
+            shift
+            ;;
+            -z|--zone)
+            export PROJECT_ZONE="$2"
+            shift
+            shift
+            ;;
+            *)
+            chalk error 101
+            exit 1
+            ;;
+        esac
+    done
+}
+
+progress_indicator () {
+    echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
+    sleep 3m    
 }

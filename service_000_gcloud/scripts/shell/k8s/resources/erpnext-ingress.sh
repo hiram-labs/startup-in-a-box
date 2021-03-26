@@ -1,11 +1,11 @@
-# #! /bin/sh
+#! /bin/sh
 
 # set -x
 # set -euo pipefail
 
-eval LAST_ARG=\"\${$#}\"
+eval LAST_ARG=\"\$\{$#\}\"
 
-cat <<EOF > $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
+cat <<EOF > "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -13,44 +13,36 @@ metadata:
   name: erpnext-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt-prod
 spec:
   rules:
-    - host: "erpnext.hiramlabs.com"
+    - host: erpnext.hiramlabs.com
       http:
         paths:
           - backend:
               serviceName: erpnext
               servicePort: 80
             path: /
+  tls:
+    - hosts:
+        - erpnext.hiramlabs.com
+      secretName: erpnext-tls-secret
 EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
-        rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
+        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && kubectl delete secrets erpnext-tls-secret -n erpnext \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
         return 1
 fi
 
-kubectl apply -f $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
-rm $SCRIPTS/k8s/resources/erpnext-ingress-resource.yml
-kubectl get ingress erpnext-ingress -n erpnext
-
-# # This section is only required if TLS is to be enabled for the Ingress
-# tls:
-#     - hosts:
-#         - www.example.com
-#       secretName: example-tls
-# # If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
-
-#   apiVersion: v1
-#   kind: Secret
-#   metadata:
-#     name: example-tls
-#     namespace: foo
-#   data:
-#     tls.crt: <base64 encoded cert>
-#     tls.key: <base64 encoded key>
-#   type: kubernetes.io/tls
-
-# kubectl create namespace ingress
-# kubectl apply -f /usr/src/service_000_gcloud/ingress/erpnext.yml
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl apply -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && progress_indicator short \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && kubectl get ingress erpnext-ingress -n erpnext \
+          && kubectl describe certificate -n erpnext
+        return 1
+fi

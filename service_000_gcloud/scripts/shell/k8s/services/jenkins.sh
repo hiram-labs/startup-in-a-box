@@ -21,7 +21,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         helm upgrade jenkins \
             -f "$HELM_VALUES"/jenkins.yml \
             --atomic \
-            --version 3.2.2 \
+            --version 3.3.0 \
             --namespace jenkins \
             jenkins/jenkins
         return 1
@@ -38,6 +38,7 @@ if [[ "$LAST_ARG" =  "install" ]]
             jenkins/jenkins \
             && progress_indicator long \
             && JENKINS_PASSWORD=$(kubectl exec --namespace jenkins -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo) \
+            && echo -e "${BLUE}Admin username:${RESET_COLOR} admin" \
             && echo -e "${BLUE}Admin password:${RESET_COLOR} ${JENKINS_PASSWORD}" \
             && kubectl get svc -n jenkins
         return 1

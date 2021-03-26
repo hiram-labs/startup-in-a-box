@@ -26,11 +26,27 @@ if [[ $1 = 'db' ]] && [[ $2 = 'erpnext-db' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'cert-issue' ]]
+if [[ $1 = 'resource' ]] && [[ $2 = 'namespace-issuer' ]]
     then
         shift
         shift
-        . $SCRIPTS/k8s/resources/cert-issue.sh "$@"
+        . $SCRIPTS/k8s/resources/namespace-issuer.sh "$@"
+        return 1
+fi
+
+if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-prod-issuer' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/cluster-prod-issuer.sh "$@"
+        return 1
+fi
+
+if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-staging-issuer' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/cluster-staging-issuer.sh "$@"
         return 1
 fi
 
@@ -90,11 +106,11 @@ if [[ $1 = 'service' ]] && [[ $2 = 'jenkins' ]]
         return 1
 fi
 
-if [[ $1 = 'volume' ]] && [[ $2 = 'jenkins' ]]
+if [[ $1 = 'volume' ]] && [[ $2 = 'nfs' ]]
     then
         shift
         shift
-        . $SCRIPTS/k8s/volumes/jenkins.sh "$@"
+        . $SCRIPTS/k8s/volumes/nfs.sh "$@"
         return 1
 fi
 

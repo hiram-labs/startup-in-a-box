@@ -21,7 +21,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         helm upgrade gitea \
         -f "$HELM_VALUES"/gitea.yml \
             --atomic \
-            --version 2.1.2 \
+            --version 2.2.3 \
             --namespace gitea \
             gitea-charts/gitea 
         return 1

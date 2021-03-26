@@ -13,3 +13,4 @@ echo -e "${RED}error_config with args${RESET_COLOR}: $*"
 # error 101 - unknown flag
 # error 102 - missing ip argument
 # error 103 - missing setup argument
+# error 104 - missing namespace argument

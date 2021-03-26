@@ -8,7 +8,7 @@ parse_general_flags () {
     while [[ $# -gt 0 ]]
         do
         key="$1"
-
+        
         case $key in
             -ip|--ingressIP)
             export INGRESS_IP="$2"
@@ -35,6 +35,9 @@ parse_general_flags () {
             shift
             shift
             ;;
+            install|uninstall|upgrade)
+            shift
+            ;;
             *)
             chalk error 101
             exit 1
@@ -43,7 +46,10 @@ parse_general_flags () {
     done
 }
 
+# TODO:
+# handle short and long time ags
+
 progress_indicator () {
-    echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
-    sleep 3m    
+    echo -e "${BLUE}Please wait for 1 mins!${RESET_COLOR}" 
+    sleep 1m    
 }

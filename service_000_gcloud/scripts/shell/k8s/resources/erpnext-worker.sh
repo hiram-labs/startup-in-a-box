@@ -49,13 +49,16 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
-        rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
+        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
         return 1
 fi
 
-kubectl create -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
-echo -e "${BLUE}Please wait for 1 mins!${RESET_COLOR}"
-sleep 1m
-rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml
-kubectl get ingress erpnext-worker -n erpnext
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl create -f "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && progress_indicator short \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-worker-resource.yml \
+          && kubectl get ingress erpnext-worker -n erpnext
+        return 1
+fi

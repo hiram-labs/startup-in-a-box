@@ -28,14 +28,17 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f "$SCRIPTS"/k8s/resources/cert-issue-resource.yml
-        kubectl delete secrets letsencrypt-prod -n "$CERT_NAMESPACE"
-        rm "$SCRIPTS"/k8s/resources/cert-issue-resource.yml
+        kubectl delete -f "$SCRIPTS"/k8s/resources/cert-issue-resource.yml \
+          && kubectl delete secrets letsencrypt-prod -n "$CERT_NAMESPACE" \
+          && rm "$SCRIPTS"/k8s/resources/cert-issue-resource.yml
         return 1
 fi
 
-kubectl apply -f "$SCRIPTS"/k8s/resources/cert-issue-resource.yml
-echo -e "${BLUE}Please wait for 1 mins!${RESET_COLOR}"
-sleep 1m
-rm "$SCRIPTS"/k8s/resources/cert-issue-resource.yml
-kubectl describe issuer letsencrypt-prod -n "$CERT_NAMESPACE"
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl apply -f "$SCRIPTS"/k8s/resources/cert-issue-resource.yml \
+          && progress_indicator short \
+          && rm "$SCRIPTS"/k8s/resources/cert-issue-resource.yml \
+          && kubectl describe issuer letsencrypt-prod -n "$CERT_NAMESPACE"
+        return 1
+fi

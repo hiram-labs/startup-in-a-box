@@ -31,15 +31,18 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
-        kubectl delete secrets erpnext-tls-secret -n erpnext
-        rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
+        kubectl delete -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && kubectl delete secrets erpnext-tls-secret -n erpnext \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
         return 1
 fi
 
-kubectl apply -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
-echo -e "${BLUE}Please wait for 1 mins!${RESET_COLOR}"
-sleep 1m
-rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml
-kubectl get ingress erpnext-ingress -n erpnext
-kubectl describe certificate -n erpnext
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl apply -f "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && progress_indicator short \
+          && rm "$SCRIPTS"/k8s/resources/erpnext-ingress-resource.yml \
+          && kubectl get ingress erpnext-ingress -n erpnext \
+          && kubectl describe certificate -n erpnext
+        return 1
+fi

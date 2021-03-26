@@ -3,14 +3,14 @@
 # set -x
 # set -euo pipefail
 
-MANAGEMENT_IP=$(gcloud compute addresses describe management-ip --format="value(address)")
+CLUSTER_STATIC_IP=$(gcloud compute addresses describe management-ip --format="value(address)")
 
-if [[ -z "$MANAGEMENT_IP" ]]
+if [[ -z "$CLUSTER_STATIC_IP" ]]
     then
         gcloud compute addresses create management-ip \
-        && MANAGEMENT_IP=$(gcloud compute addresses describe management-ip --format="value(address)")
+        && CLUSTER_STATIC_IP=$(gcloud compute addresses describe management-ip --format="value(address)")
 fi
 
-export MANAGEMENT_IP
+export CLUSTER_STATIC_IP
 
 gcloud compute addresses list

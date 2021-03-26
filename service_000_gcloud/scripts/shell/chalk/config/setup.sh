@@ -50,6 +50,14 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
         return 1
 fi
 
+if [[ $1 = 'resource' ]] && [[ $2 = 'jenkins-ingress' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/jenkins-ingress.sh "$@"
+        return 1
+fi
+
 if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-worker' ]]
     then
         shift

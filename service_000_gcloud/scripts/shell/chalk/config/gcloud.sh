@@ -46,5 +46,5 @@ fi
 if [[ -n $1 ]]
     then
         . $SCRIPTS/chalk/config/errors.sh "$@"
-        return 1
+        exit 1
 fi

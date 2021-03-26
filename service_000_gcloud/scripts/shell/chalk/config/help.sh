@@ -49,10 +49,10 @@ help_fn() {
     echo
     echo "Syntax: scriptTemplate [-g|h|t|v|V]"
     echo "options:"
-    echo "g     Print the GPL license notification."
-    echo "h     Print this Help."
-    echo "v     Verbose mode."
-    echo "V     Print software version and exit."
+    echo "  g     Print the GPL license notification."
+    echo "  h     Print this Help."
+    echo "  v     Verbose mode."
+    echo "  V     Print software version and exit."
     echo
 }
 

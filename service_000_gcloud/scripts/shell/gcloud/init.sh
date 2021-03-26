@@ -23,6 +23,3 @@ gcloud services enable cloudresourcemanager.googleapis.com
 
 gcloud config configurations list
 
-# get and set static IP address for services to the current process environment
-. "$SCRIPTS"/gcloud/static-ip.sh
-

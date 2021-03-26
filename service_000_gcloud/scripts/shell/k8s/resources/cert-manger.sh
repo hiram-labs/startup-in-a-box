@@ -7,11 +7,15 @@ eval LAST_ARG=\"\$\{$#\}\"
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yml
-        rm "$SCRIPTS"/k8s/resources/cert-manager-resource.yml
+        kubectl delete -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yml \
+            && rm "$SCRIPTS"/k8s/resources/cert-manager-resource.yml
         return 1
 fi
 
-kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yml
-rm "$SCRIPTS"/k8s/resources/cert-manager-resource.yml
-kubectl get pods --namespace cert-manager
+if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yml \
+            && rm "$SCRIPTS"/k8s/resources/cert-manager-resource.yml \
+            && kubectl get pods --namespace cert-manager
+        return 1
+fi

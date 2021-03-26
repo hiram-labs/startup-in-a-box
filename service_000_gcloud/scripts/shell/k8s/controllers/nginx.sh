@@ -1,27 +1,50 @@
-# #! /bin/sh
+#! /bin/sh
 
 # set -x
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         helm uninstall nginx -n nginx 
-        echo -e "${RED}"nginx uninstall"${RESET_COLOR}"
         return 1
 fi
 
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo update
-helm install nginx \
-    -f "$HELM_VALUES"/nginx.yml \
-    --atomic \
-    --create-namespace \
-    --namespace nginx \
-    ingress-nginx/ingress-nginx
+# throws error if no IP is provided
+parse_general_flags "$@"
+if [[ -z "$INGRESS_IP" ]]
+    then
+        chalk error 102
+        exit 1
+fi
 
-echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
-sleep 3m
+if [[ "$LAST_ARG" =  "upgrade" ]]
+    then
+        helm upgrade nginx \
+            --atomic \
+            --version 3.24.0 \
+            --namespace nginx \
+            --set controller.service.loadBalancerIP="$INGRESS_IP" \
+            ingress-nginx/ingress-nginx 
+        return 1
+fi
 
-kubectl get svc -n nginx
+if [[ "$LAST_ARG" =  "install" ]]
+    then
+        helm install nginx \
+            --atomic \
+            --version 3.24.0 \
+            --create-namespace \
+            --namespace nginx \
+            --set controller.service.loadBalancerIP="$INGRESS_IP" \
+            ingress-nginx/ingress-nginx \
+            && progress_indicator long \
+            && kubectl get svc -n nginx
+        return 1
+fi
+
+

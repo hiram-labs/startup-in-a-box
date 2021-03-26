@@ -10,6 +10,11 @@ parse_general_flags () {
         key="$1"
 
         case $key in
+            -ip|--ingressIP)
+            export INGRESS_IP="$2"
+            shift
+            shift
+            ;;
             -ns|--namespace)
             export PROJECT_NAMESPACE="$2"
             shift
@@ -20,7 +25,7 @@ parse_general_flags () {
             shift
             shift
             ;;
-            -r|--region)
+            -rg|--region)
             export PROJECT_REGION="$2"
             shift
             shift
@@ -31,9 +36,14 @@ parse_general_flags () {
             shift
             ;;
             *)
-            . "$SCRIPTS"/chalk/config/errors.sh -error 101
+            chalk error 101
             exit 1
             ;;
         esac
     done
+}
+
+progress_indicator () {
+    echo -e "${BLUE}Please wait for 3 mins!${RESET_COLOR}" 
+    sleep 3m    
 }

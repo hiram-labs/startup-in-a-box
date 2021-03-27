@@ -26,7 +26,6 @@ EOF
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         kubectl delete -f "$CLUSTER_PROD_ISSUER_MANIFEST" \
-          && kubectl delete secrets letsencrypt-prod \
           && rm "$CLUSTER_PROD_ISSUER_MANIFEST"
         return 1
 fi

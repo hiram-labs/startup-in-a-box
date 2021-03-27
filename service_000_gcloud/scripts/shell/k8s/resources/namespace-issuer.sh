@@ -22,14 +22,14 @@ cat <<EOF > "$NAMESPACE_ISSUER_MANIFEST"
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  namespace: "$PROJECT_NAMESPACE"
+  namespace: $PROJECT_NAMESPACE
   name: letsencrypt-prod-"$PROJECT_NAMESPACE"
 spec:
   acme:
     email: hiram.labs@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: "$PROJECT_NAMESPACE"-letsencrypt-key
+      name: $PROJECT_NAMESPACE-letsencrypt-key
     solvers:
     - http01:
         ingress:
@@ -39,7 +39,6 @@ EOF
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
       kubectl delete -f "$NAMESPACE_ISSUER_MANIFEST" -n "$PROJECT_NAMESPACE" \
-        && kubectl delete secrets letsencrypt-prod -n "$PROJECT_NAMESPACE" \
         && rm "$NAMESPACE_ISSUER_MANIFEST"
       return 1
 fi

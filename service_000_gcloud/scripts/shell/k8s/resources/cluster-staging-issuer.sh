@@ -26,7 +26,6 @@ EOF
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         kubectl delete -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
-          && kubectl delete secrets letsencrypt-staging \
           && rm "$CLUSTER_STAGING_ISSUER_MANIFEST"
         return 1
 fi

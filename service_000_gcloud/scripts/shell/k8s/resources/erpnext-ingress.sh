@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: erpnext
   annotations:
-    cert-manager.io/issuer: letsencrypt-staging
+    cert-manager.io/issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
 spec:

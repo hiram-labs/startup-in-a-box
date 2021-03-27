@@ -58,6 +58,14 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'cert-manager' ]]
         return 1
 fi
 
+if [[ $1 = 'service' ]] && [[ $2 = 'erpnext' ]]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/services/erpnext.sh "$@"
+        return 1
+fi
+
 if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
     then
         shift
@@ -66,29 +74,14 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'jenkins-ingress' ]]
+if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-sites-base' ]]
     then
         shift
         shift
-        . $SCRIPTS/k8s/resources/jenkins-ingress.sh "$@"
+        . $SCRIPTS/k8s/resources/erpnext-sites-base.sh "$@"
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-worker' ]]
-    then
-        shift
-        shift
-        . $SCRIPTS/k8s/resources/erpnext-worker.sh "$@"
-        return 1
-fi
-
-if [[ $1 = 'service' ]] && [[ $2 = 'erpnext' ]]
-    then
-        shift
-        shift
-        . $SCRIPTS/k8s/services/erpnext.sh "$@"
-        return 1
-fi
 
 if [[ $1 = 'service' ]] && [[ $2 = 'gitea' ]]
     then

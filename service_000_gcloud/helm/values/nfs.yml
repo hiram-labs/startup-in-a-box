@@ -5,3 +5,5 @@ persistence:
 
 storageClass:
   defaultClass: true
+# TODO:
+# add prometheus

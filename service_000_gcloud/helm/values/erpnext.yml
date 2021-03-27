@@ -1,11 +1,14 @@
 mariadbHost: "erpnext-mariadb.erpnext.svc.cluster.local"
 persistence:
   worker:
+    size: 10Gi
     storageClass: "nfs"
   logs:
-    size: 1Gi
+    size: 5Gi
     storageClass: "nfs"
 redis:
   extraEnv:
     - name: ALLOW_EMPTY_PASSWORD
       value: "yes"
+# TODO:
+# add prometheus

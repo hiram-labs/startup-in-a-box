@@ -1,3 +1,7 @@
+image:
+  registry: docker.io
+  repository: bitnami/mariadb
+  tag: 10.5.9-debian-10-r28
 global:
   storageClass: "nfs"
 auth:
@@ -60,3 +64,6 @@ secondary:
     port=3306
     socket=/opt/bitnami/mariadb/tmp/mysql.sock
     pid-file=/opt/bitnami/mariadb/tmp/mysqld.pid
+
+# TODO:
+# add prometheus

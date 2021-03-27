@@ -1,15 +1,67 @@
+image:
+  repository: gitea/gitea
+  tag: 1.13.5
+service:
+  http:
+    annotations:
+  ssh:
+    annotations:
 ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/issuer: letsencrypt-prod
+    cert-manager.io/issuer: letsencrypt-staging
   hosts:
     - gitea.hiramlabs.com
   tls:
     - hosts:
         - gitea.hiramlabs.com
       secretName: gitea-tls-secret
-# service:
-#   ssh:
-#     annotations:
-#       metallb.universe.tf/allow-shared-ip: test
+gitea:
+  database:
+    builtIn:
+      postgresql:
+        enabled: false
+      mysql:
+        enabled: true
+      mariadb:
+        enabled: false
+  cache:
+    builtIn:
+      enabled: true
+memcached:
+  service:
+    port: 11211
+postgresql:
+  global:
+    postgresql:
+      postgresqlDatabase: gitea
+      postgresqlUsername: gitea
+      postgresqlPassword: gitea
+      servicePort: 5432
+  persistence:
+    size: 10Gi
+mysql:
+  root:
+    password: gitea
+  db:
+    user: gitea
+    password: gitea
+    name: gitea
+  service:
+    port: 3306
+  persistence:
+    size: 10Gi
+mariadb:
+  auth:
+    database: gitea
+    username: gitea
+    password: gitea
+    rootPassword: gitea
+  primary:
+    service:
+      port: 3306
+    persistence:
+      size: 10Gi
+# TODO:
+# add prometheus

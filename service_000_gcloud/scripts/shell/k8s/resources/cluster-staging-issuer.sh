@@ -4,8 +4,9 @@
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
+CLUSTER_STAGING_ISSUER_MANIFEST="$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml
 
-cat <<EOF > "$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml
+cat <<EOF > "$CLUSTER_STAGING_ISSUER_MANIFEST"
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -24,17 +25,17 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f "$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml \
+        kubectl delete -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && kubectl delete secrets letsencrypt-staging \
-          && rm "$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml
+          && rm "$CLUSTER_STAGING_ISSUER_MANIFEST"
         return 1
 fi
 
 if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
     then
-        kubectl apply -f "$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml \
+        kubectl apply -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && progress_indicator short \
-          && rm "$SCRIPTS"/k8s/resources/cluster-staging-issuer-manifest.yml \
+          && rm "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && kubectl describe ClusterIssuer letsencrypt-staging
         return 1
 fi

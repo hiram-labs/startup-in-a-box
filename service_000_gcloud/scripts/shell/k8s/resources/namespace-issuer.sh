@@ -4,6 +4,7 @@
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
+NAMESPACE_ISSUER_MANIFEST="$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
 
 parse_general_flags "$@"
 # throws error if no namespace is provided
@@ -17,7 +18,7 @@ if [[ -z "$PROJECT_NAMESPACE" ]] \
         exit 1
 fi
 
-cat <<EOF > "$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
+cat <<EOF > "$NAMESPACE_ISSUER_MANIFEST"
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -37,17 +38,18 @@ EOF
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        kubectl delete -f "$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml \
-          && kubectl delete secrets letsencrypt-prod -n "$PROJECT_NAMESPACE" \
-          && rm "$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
-        return 1
+      kubectl delete -f "$NAMESPACE_ISSUER_MANIFEST" -n "$PROJECT_NAMESPACE" \
+        && kubectl delete secrets letsencrypt-prod -n "$PROJECT_NAMESPACE" \
+        && rm "$NAMESPACE_ISSUER_MANIFEST"
+      return 1
 fi
 
 if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
     then
-        kubectl apply -f "$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml \
-          && progress_indicator short \
-          && rm "$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml \
-          && kubectl describe issuer letsencrypt-prod -n "$PROJECT_NAMESPACE"
-        return 1
+      kubectl create namespace "$NAMESPACE_ISSUER_MANIFEST"
+      kubectl apply -f "$NAMESPACE_ISSUER_MANIFEST" \
+        && progress_indicator short \
+        && rm "$NAMESPACE_ISSUER_MANIFEST" \
+        && kubectl describe issuer letsencrypt-prod -n "$PROJECT_NAMESPACE"
+      return 1
 fi

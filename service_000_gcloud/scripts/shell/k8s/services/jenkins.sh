@@ -11,8 +11,7 @@ helm repo update
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
         helm uninstall jenkins -n jenkins \
-            && kubectl delete pvc data-gitea-0 -n  gitea \
-            && kubectl delete pvc data-gitea-postgresql-0 -n  gitea
+            && kubectl delete pvc jenkins -n jenkins
         return 1
 fi
 
@@ -21,7 +20,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         helm upgrade jenkins \
             -f "$HELM_VALUES"/jenkins.yml \
             --atomic \
-            --version 3.3.0 \
+            --version 3.2.2 \
             --namespace jenkins \
             jenkins/jenkins
         return 1

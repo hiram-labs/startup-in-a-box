@@ -13,9 +13,7 @@ RUN cd "$(mktemp -d)" \
     && curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" \
     && tar zxvf krew.tar.gz \
     && KREW=./krew-"${OS}_${ARCH}" \
-    && "$KREW" install krew \
-    && kubectl krew install cert-manager \
-    && kubectl krew install ingress-nginx
+    && "$KREW" install krew
 RUN printf "# chalk initialiser\n" >> /root/.profile
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk
@@ -24,5 +22,9 @@ ENV PATH=/root/.krew/bin:$PATH
 ENV PATH=/usr/src/service_000_gcloud/bin:$PATH
 
 WORKDIR /usr/src/service_000_gcloud
+
 COPY . ./
 
+RUN kubectl krew update \
+    && kubectl krew install cert-manager \
+    && kubectl krew install ingress-nginx

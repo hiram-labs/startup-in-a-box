@@ -10,16 +10,18 @@ helm repo update
 
 if [[ "$LAST_ARG" =  "uninstall" ]]
     then
-        helm uninstall erpnext-mariadb -n erpnext 
+        helm uninstall erpnext-mariadb -n erpnext \
+        && kubectl delete pvc data-erpnext-mariadb-0 -n erpnext \
+        && kubectl delete pvc erpnext -n erpnext \
+        && kubectl delete pvc erpnext-logs -n erpnext
         return 1
 fi
 
 if [[ "$LAST_ARG" =  "upgrade" ]]
     then
         helm upgrade erpnext-mariadb \
-            -f "$HELM_VALUES"/mariadb.yml \
+            -f "$HELM_VALUES"/erpnext-db.yml \
             --atomic \
-            --version 10.5.9 \
             --namespace erpnext \
             bitnami/mariadb 
         return 1
@@ -28,9 +30,8 @@ fi
 if [[ "$LAST_ARG" =  "install" ]]
     then
         helm install erpnext-mariadb \
-            -f "$HELM_VALUES"/mariadb.yml \
+            -f "$HELM_VALUES"/erpnext-db.yml \
             --atomic \
-            --version 10.5.9 \
             --create-namespace \
             --namespace erpnext \
             bitnami/mariadb \

@@ -23,14 +23,14 @@ spec:
           class: nginx
 EOF
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         kubectl delete -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && rm "$CLUSTER_STAGING_ISSUER_MANIFEST"
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
     then
         kubectl apply -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && progress_indicator short \

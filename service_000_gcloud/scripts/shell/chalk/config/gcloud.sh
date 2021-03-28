@@ -4,14 +4,14 @@
 # set -euo pipefail
 
 # catch no arguments errors
-if [[ $# -eq 0 ]]
+if [ $# -eq 0 ]
     then
         prompt_missing_arg
         return 1
 fi
 
 # sets gcloud admin permissions and basic configs 
-if [[ $1 = 'init' ]]
+if [ $1 = 'init' ]
     then
         shift
         . $SCRIPTS/gcloud/init.sh "$@"
@@ -19,7 +19,7 @@ if [[ $1 = 'init' ]]
 fi
 
 # create a cluster
-if [[ $1 = 'cluster' ]]
+if [ $1 = 'cluster' ]
     then
         shift
         . $SCRIPTS/gcloud/cluster.sh "$@"
@@ -27,7 +27,7 @@ if [[ $1 = 'cluster' ]]
 fi
 
 # connect to a cluster and issue gcloud commands against it 
-if [[ $1 = 'connect' ]]
+if [ $1 = 'connect' ]
     then
         shift
         . $SCRIPTS/gcloud/connect.sh "$@"
@@ -35,7 +35,7 @@ if [[ $1 = 'connect' ]]
 fi
 
 # provision static-ip
-if [[ $1 = 'static-ip' ]]
+if [ $1 = 'static-ip' ]
     then
         shift
         . $SCRIPTS/gcloud/static-ip.sh "$@"
@@ -43,7 +43,7 @@ if [[ $1 = 'static-ip' ]]
 fi
 
 # catch invalid arguments errors
-if [[ -n $1 ]]
+if [ -n $1 ]
     then
         . $SCRIPTS/chalk/config/errors.sh "$@"
         exit 1

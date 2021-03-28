@@ -8,13 +8,13 @@ eval LAST_ARG=\"\$\{$#\}\"
 helm repo add kvaps https://kvaps.github.io/charts
 helm repo update
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall nfs -n nfs 
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade nfs-server \
             -f "$HELM_VALUES"/nfs.yml \
@@ -25,7 +25,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]]
+if [ "$LAST_ARG" =  "install" ]
     then
         helm install nfs-server \
             -f "$HELM_VALUES"/nfs.yml \

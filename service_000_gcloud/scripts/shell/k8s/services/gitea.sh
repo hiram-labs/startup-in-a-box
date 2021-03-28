@@ -8,7 +8,7 @@ eval LAST_ARG=\"\$\{$#\}\"
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall gitea -n gitea \
             && kubectl delete pvc data-gitea-0 -n  gitea \
@@ -17,7 +17,7 @@ if [[ "$LAST_ARG" =  "uninstall" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade gitea \
         -f "$HELM_VALUES"/gitea.yml \
@@ -28,7 +28,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]]
+if [ "$LAST_ARG" =  "install" ]
     then
         helm install gitea \
         -f "$HELM_VALUES"/gitea.yml \

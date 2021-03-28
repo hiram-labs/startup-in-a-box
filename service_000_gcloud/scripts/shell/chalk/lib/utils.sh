@@ -5,7 +5,7 @@
 
 # handles flags
 parse_general_flags () {
-    while [[ $# -gt 0 ]]
+    while [ $# -gt 0 ]
         do
         key="$1"
         

@@ -25,7 +25,7 @@ cleanup_db_secrets_manifest () {
 helm repo add frappe https://helm.erpnext.com
 helm repo update
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall erpnext -n erpnext \
             && create_db_secrets_manifest \
@@ -34,7 +34,7 @@ if [[ "$LAST_ARG" =  "uninstall" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade erpnext \
             -f "$HELM_VALUES"/erpnext.yml \
@@ -45,7 +45,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]]
+if [ "$LAST_ARG" =  "install" ]
     then
         helm install erpnext \
             -f "$HELM_VALUES"/erpnext.yml \

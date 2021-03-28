@@ -5,7 +5,7 @@
 
 STATIC_IP_01=$(gcloud compute addresses describe static-ip-01 --format="value(address)")
 
-if [[ -z "$STATIC_IP_01" ]]
+if [ -z "$STATIC_IP_01" ]
     then
         gcloud compute addresses create static-ip-01 \
         && STATIC_IP_01=$(gcloud compute addresses describe static-ip-01 --format="value(address)")

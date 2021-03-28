@@ -3,7 +3,7 @@ const path = require("path");
 
 const dockerComposeFile = path.join(
   __dirname,
-  "../project_base/docker-handlers/compose-database.yml"
+  "../project_base/docker/compose-database.yml"
 );
 const mysqlContainer = spawn(
   "docker-compose",

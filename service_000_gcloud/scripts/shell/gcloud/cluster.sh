@@ -5,7 +5,7 @@
 
 CLUSTER_NAME=default
 
-if [[ -n "$1" ]]
+if [ -n "$1" ]
     then
         CLUSTER_NAME=$1
         shift

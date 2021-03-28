@@ -9,10 +9,10 @@ NAMESPACE_ISSUER_MANIFEST="$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
 parse_general_flags "$@"
 # throws error if no namespace is provided
 parse_general_flags "$@"
-if [[ -z "$PROJECT_NAMESPACE" ]] \
-  || [[ "$PROJECT_NAMESPACE" = "install" ]] \
-  || [[ "$PROJECT_NAMESPACE" = "uninstall" ]] \
-  || [[ "$PROJECT_NAMESPACE" = "upgrade" ]]
+if [ -z "$PROJECT_NAMESPACE" ] \
+  || [ "$PROJECT_NAMESPACE" = "install" ] \
+  || [ "$PROJECT_NAMESPACE" = "uninstall" ] \
+  || [ "$PROJECT_NAMESPACE" = "upgrade" ]
     then
         chalk error 104
         exit 1
@@ -36,14 +36,14 @@ spec:
           class: nginx
 EOF
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
       kubectl delete -f "$NAMESPACE_ISSUER_MANIFEST" -n "$PROJECT_NAMESPACE" \
         && rm "$NAMESPACE_ISSUER_MANIFEST"
       return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
     then
       kubectl create namespace "$NAMESPACE_ISSUER_MANIFEST"
       kubectl apply -f "$NAMESPACE_ISSUER_MANIFEST" \

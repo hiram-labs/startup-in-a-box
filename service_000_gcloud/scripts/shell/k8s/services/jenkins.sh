@@ -8,14 +8,14 @@ eval LAST_ARG=\"\$\{$#\}\"
 helm repo add jenkins https://charts.jenkins.io 
 helm repo update 
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall jenkins -n jenkins \
             && kubectl delete pvc jenkins -n jenkins
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade jenkins \
             -f "$HELM_VALUES"/jenkins.yml \
@@ -26,7 +26,7 @@ if [[ "$LAST_ARG" =  "upgrade" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]]
+if [ "$LAST_ARG" =  "install" ]
     then
         helm install jenkins \
             -f "$HELM_VALUES"/jenkins.yml \

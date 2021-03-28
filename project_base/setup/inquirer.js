@@ -2,14 +2,14 @@
 
 const inquirer = require("inquirer");
 
-const setupBase = require("../setup-handlers/base");
-const setupEnv = require("../setup-handlers/env");
-const setupStorybook = require("../setup-handlers/storybook");
-const setupGatsby = require("../setup-handlers/gatsby");
-const setupStrapi = require("../setup-handlers/strapi");
-const setupIonic = require("../setup-handlers/ionic");
+const setupBase = require("./base");
+const setupEnv = require("./env");
+const setupStorybook = require("./storybook");
+const setupGatsby = require("./gatsby");
+const setupStrapi = require("./strapi");
+const setupIonic = require("./ionic");
 
-const resetAll = require("../reset-handlers");
+const resetAll = require("../reset");
 
 const { isRequired, oneOff } = require("../utils");
 const {

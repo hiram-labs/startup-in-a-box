@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: erpnext
   annotations:
-    cert-manager.io/issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
 spec:
@@ -33,7 +33,7 @@ spec:
       secretName: erpnext-tls-secret
 EOF
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         kubectl delete -f "$ERPNEXT_INGRESS_MANIFEST" -n erpnext \
           && kubectl delete secrets erpnext-tls-secret -n erpnext \
@@ -41,7 +41,7 @@ if [[ "$LAST_ARG" =  "uninstall" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
     then
       kubectl create namespace erpnext
       kubectl apply -f "$ERPNEXT_INGRESS_MANIFEST" \

@@ -94,7 +94,7 @@ spec:
             readOnly: false
 EOF
 
-if [[ "$LAST_ARG" =  "uninstall" ]]
+if [ "$LAST_ARG" =  "uninstall" ]
     then
         kubectl create -f "$ERPNEXT_ADD_SITE_WORKER_MANIFEST" -n erpnext \
           && kubectl delete -f "$ERPNEXT_DROP_SITE_WORKER_MANIFEST" -n erpnext \
@@ -103,7 +103,7 @@ if [[ "$LAST_ARG" =  "uninstall" ]]
         return 1
 fi
 
-if [[ "$LAST_ARG" =  "install" ]] || [[ "$LAST_ARG" =  "upgrade" ]]
+if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
     then
         kubectl create -f "$ERPNEXT_ADD_SITE_WORKER_MANIFEST" -n erpnext \
           && progress_indicator short \

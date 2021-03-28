@@ -4,13 +4,14 @@
 # set -euo pipefail
 
 # catch no arguments errors
-if [[ $# -eq 0 ]]
+if [ $# -eq 0 ]
     then
         prompt_missing_arg
         return 1
 fi
 
-if [[ $1 = 'controller' ]] && [[ $2 = 'nginx' ]]
+# controllers
+if [ "$1" = 'controller' ] && [ "$2" = 'nginx' ]
     then
         shift
         shift
@@ -18,7 +19,8 @@ if [[ $1 = 'controller' ]] && [[ $2 = 'nginx' ]]
         return 1
 fi
 
-if [[ $1 = 'db' ]] && [[ $2 = 'erpnext-db' ]]
+# databases
+if [ "$1" = 'db' ] && [ "$2" = 'erpnext-db' ]
     then
         shift
         shift
@@ -26,15 +28,8 @@ if [[ $1 = 'db' ]] && [[ $2 = 'erpnext-db' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'namespace-issuer' ]]
-    then
-        shift
-        shift
-        . $SCRIPTS/k8s/resources/namespace-issuer.sh "$@"
-        return 1
-fi
-
-if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-prod-issuer' ]]
+# resources
+if [ "$1" = 'resource' ] && [ "$2" = 'cluster-prod-issuer' ]
     then
         shift
         shift
@@ -42,7 +37,7 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-prod-issuer' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-staging-issuer' ]]
+if [ "$1" = 'resource' ] && [ "$2" = 'cluster-staging-issuer' ]
     then
         shift
         shift
@@ -50,7 +45,7 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'cluster-staging-issuer' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'cert-manager' ]]
+if [ "$1" = 'resource' ] && [ "$2" = 'cert-manager' ]
     then
         shift
         shift
@@ -58,15 +53,7 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'cert-manager' ]]
         return 1
 fi
 
-if [[ $1 = 'service' ]] && [[ $2 = 'erpnext' ]]
-    then
-        shift
-        shift
-        . $SCRIPTS/k8s/services/erpnext.sh "$@"
-        return 1
-fi
-
-if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
+if [ "$1" = 'resource' ] && [ "$2" = 'erpnext-ingress' ]
     then
         shift
         shift
@@ -74,7 +61,7 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-ingress' ]]
         return 1
 fi
 
-if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-sites-base' ]]
+if [ "$1" = 'resource' ] && [ "$2" = 'erpnext-sites-base' ]
     then
         shift
         shift
@@ -82,8 +69,24 @@ if [[ $1 = 'resource' ]] && [[ $2 = 'erpnext-sites-base' ]]
         return 1
 fi
 
+if [ "$1" = 'resource' ] && [ "$2" = 'namespace-issuer' ]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/resources/namespace-issuer.sh "$@"
+        return 1
+fi
 
-if [[ $1 = 'service' ]] && [[ $2 = 'gitea' ]]
+# services
+if [ "$1" = 'service' ] && [ "$2" = 'erpnext' ]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/services/erpnext.sh "$@"
+        return 1
+fi
+
+if [ "$1" = 'service' ] && [ "$2" = 'gitea' ]
     then
         shift
         shift
@@ -91,7 +94,15 @@ if [[ $1 = 'service' ]] && [[ $2 = 'gitea' ]]
         return 1
 fi
 
-if [[ $1 = 'service' ]] && [[ $2 = 'jenkins' ]]
+if [ "$1" = 'service' ] && [ "$2" = 'harbor' ]
+    then
+        shift
+        shift
+        . $SCRIPTS/k8s/services/harbor.sh "$@"
+        return 1
+fi
+
+if [ "$1" = 'service' ] && [ "$2" = 'jenkins' ]
     then
         shift
         shift
@@ -99,7 +110,8 @@ if [[ $1 = 'service' ]] && [[ $2 = 'jenkins' ]]
         return 1
 fi
 
-if [[ $1 = 'volume' ]] && [[ $2 = 'nfs' ]]
+# volumes
+if [ "$1" = 'volume' ] && [ "$2" = 'nfs' ]
     then
         shift
         shift
@@ -108,7 +120,7 @@ if [[ $1 = 'volume' ]] && [[ $2 = 'nfs' ]]
 fi
 
 # catch invalid arguments errors
-if [[ -n $1 ]]
+if [ -n "$1" ]
     then
         . $SCRIPTS/chalk/config/errors.sh "$@"
         return 1

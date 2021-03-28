@@ -1,0 +1,64 @@
+version: "3.7"
+
+services:
+  mysql_db:
+    image: mysql:5.7
+    container_name: mysql_db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysql_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_db:/var/lib/mysql_db
+
+  service-000-storybook:
+    build:
+      context: ./service-000-storybook
+      dockerfile: Dockerfile-production
+    container_name: service-000-storybook
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - ../env/storybook/prod.env
+
+  service-001-gatsby:
+    build:
+      context: ./service-001-gatsby
+      dockerfile: Dockerfile-production
+    container_name: service-001-gatsby
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - ../env/gatsby/prod.env
+
+  service-002-strapi:
+    build:
+      context: ./service-002-strapi
+      dockerfile: Dockerfile-production
+    container_name: service-002-strapi
+    restart: unless-stopped
+    ports:
+      - "8080:1337"
+    env_file:
+      - ../env/strapi/prod.env
+    depends_on:
+      - mysql_db
+
+  service-003-ionic:
+    build:
+      context: ./service-003-ionic
+      dockerfile: Dockerfile-production
+    container_name: service-003-ionic
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - ../env/ionic/prod.env
+
+volumes:
+  mysql_db:

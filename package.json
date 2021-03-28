@@ -1,18 +1,19 @@
 {
   "name": "startup_in_a_box",
   "version": "1.0.0",
-  "description": "Production and Deployment ready boilerplate.",
+  "description": "End to end enterprise solution",
   "directories": {
-    "doc": "./project_docs"
+    "doc": "./project-docs"
   },
   "scripts": {
-    "start-gcloud": "node ./service_000_gcloud/start-development.js",
-    "setup-project": "yarn && node ./project_base/scripts/setup.js",
-    "reset-project": "node ./project_base/scripts/reset.js",
-    "develop-local": "pm2 start ecosystem.config.js && pm2 logs",
-    "stop-local": "pm2 stop ecosystem.config.js && pm2 flush",
-    "develop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml up",
-    "stop-container": "docker-compose -f ./project_base/docker-handlers/compose-database.yml -f ./project_base/docker-handlers/compose-development.yml stop",
+    "push-project": "git add . && git commit -m 'initial commit' && git push origin develop",
+    "setup-project": "yarn && node ./project-base/scripts/setup.js",
+    "reset-project": "yarn && node ./project-base/scripts/reset.js",
+    "start-dev-local": "pm2 start ecosystem.config.js && pm2 logs",
+    "stop-dev-local": "pm2 stop ecosystem.config.js && pm2 flush",
+    "start-gcloud-container": "node ./service-000-gcloud/start-development.js",
+    "start-dev-container": "docker-compose -f ./project-base/docker/compose-database.yml -f ./project-base/docker/compose-development.yml up",
+    "stop-dev-container": "docker-compose -f ./project-base/docker/compose-database.yml -f ./project-base/docker/compose-development.yml stop",
     "preinstall": "npx only-allow yarn"
   },
   "repository": {
@@ -28,6 +29,7 @@
   "dependencies": {
     "boxen": "^5.0.0",
     "inquirer": "^8.0.0",
-    "ora": "^5.3.0"
+    "ora": "^5.3.0",
+    "rimraf": "3.0.2"
   }
 }

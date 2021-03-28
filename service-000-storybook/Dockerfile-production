@@ -1,0 +1,23 @@
+ARG node_env
+
+FROM node:12.18.3 AS build
+
+# Setting working directory. All the path will be relative to WORKDIR
+WORKDIR /usr/src/service-000-storybook
+
+# Set NODE_ENV to the value from host
+ENV NODE_ENV=$node_env
+
+# Copying source files
+COPY . ./
+
+# Installing dependencies
+RUN yarn install --pure-lockfile
+
+
+# Building app
+RUN yarn build-storybook
+
+# Serve static with nginx
+FROM nginx
+COPY --from=build ./usr/src/service-000-storybook/storybook-static /usr/share/nginx/html

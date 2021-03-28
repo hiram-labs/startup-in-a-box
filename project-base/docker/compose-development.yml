@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  service-000-storybook:
+    build:
+      context: ../../service-000-storybook
+      dockerfile: Dockerfile-development
+    container_name: service-000-storybook
+    command: sh -c "yarn && yarn storybook"
+    ports:
+      - "8000:6006"
+    volumes:
+      - ../../service-000-storybook:/usr/src/service-000-storybook
+    env_file:
+      - ../env/storybook/dev.env
+
+  service-001-gatsby:
+    build:
+      context: ../../service-001-gatsby
+      dockerfile: Dockerfile-development
+    container_name: service-001-gatsby
+    command: sh -c "yarn && yarn develop -H 0.0.0.0"
+    ports:
+      - "8001:8000"
+    volumes:
+      - ../../service-001-gatsby:/usr/src/service-001-gatsby
+    env_file:
+      - ../env/gatsby/dev.env
+
+  service-002-strapi:
+    build:
+      context: ../../service-002-strapi
+      dockerfile: Dockerfile-development
+    container_name: service-002-strapi
+    command: sh -c "yarn && yarn develop"
+    ports:
+      - "8002:1337"
+      - "8003:8000"
+    volumes:
+      - ../../service-002-strapi:/usr/source/service-002-strapi
+    env_file:
+      - ../env/strapi/dev.env
+    depends_on:
+      - mysql_db
+
+  service-003-ionic:
+    build:
+      context: ../../service-003-ionic
+      dockerfile: Dockerfile-development
+    container_name: service-003-ionic
+    command: sh -c "npm install && npm start"
+    ports:
+      - "8004:3000"
+    volumes:
+      - ../../service-003-ionic:/usr/src/service-003-ionic
+    env_file:
+      - ../env/ionic/dev.env

@@ -1,3 +1,0 @@
-controller:
-  additionalPlugins:
-    - matrix-auth:2.6.4

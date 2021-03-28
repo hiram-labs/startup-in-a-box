@@ -1,0 +1,23 @@
+controller:
+  image: "jenkins/jenkins"
+  tag: "2.277.1-jdk11"
+  additionalPlugins:
+    - matrix-auth:2.6.4
+  # Enable to initialize the Jenkins controller only once on initial installation.
+  # Without this, whenever the controller gets restarted (Evicted, etc.) it will fetch plugin updates which has the potential to cause breakage.
+  # Note that for this to work, `persistence.enabled` needs to be set to `true`
+  initializeOnce: true
+  # Configures if plugins bundled with `controller.image` should be overwritten with the values of 'controller.installPlugins' on upgrade or redeployment.
+  overwritePluginsFromImage: false
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hostName: jenkins.hiramlabs.com
+    tls:
+      - hosts:
+          - jenkins.hiramlabs.com
+        secretName: jenkins-tls-secret
+# TODO:
+# add prometheus

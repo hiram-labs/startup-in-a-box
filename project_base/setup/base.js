@@ -26,10 +26,10 @@ module.exports = function (answers) {
       .toString();
 
     const customisedConfigFile = configFile
-      .replace(/{ service: storybook }/g, `{${env["storybook"]}}`)
-      .replace(/{ service: gatsby }/g, `{${env["gatsby"]}}`)
-      .replace(/{ service: strapi }/g, `{${env["strapi"]}}`)
-      .replace(/{ service: ionic }/g, `{${env["ionic"]}}`);
+      .replace(/"{{service: storybook}}"/g, `{${env["storybook"]}}`)
+      .replace(/"{{service: gatsby}}"/g, `{${env["gatsby"]}}`)
+      .replace(/"{{service: strapi}}"/g, `{${env["strapi"]}}`)
+      .replace(/"{{service: ionic}}"/g, `{${env["ionic"]}}`);
 
     fs.writeFileSync(path.join(root, `./${file}`), customisedConfigFile);
   });

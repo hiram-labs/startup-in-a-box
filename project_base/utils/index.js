@@ -1,12 +1,29 @@
 "use strict";
 
 module.exports = {
-  isRequired: (value) => {
-    return !!value ? true : "Required";
+  // inquirer helper to force a user input
+  isRequired: (answer) => {
+    return !!answer ? true : "Required";
   },
-  oneOff: (value) => {
-    if (value.match(/^y$/i)) return true;
-    if (value.match(/^n$/i)) return true;
+  // inquirer helper which matches a y or n answer
+  oneOff: (answer) => {
+    if (answer.match(/^y$/i)) return true;
+    if (answer.match(/^n$/i)) return true;
     return "Invalid input";
+  },
+  // insert user answer into config files
+  populateConfigFile: (answer, template) => {
+    return template
+      .replace(/"{{gtagID}}"/g, `"${answer["gtagID"]}"` || `"{{gtagID}}"`)
+      .replace(/"{{companyName}}"/g, `"${answer["companyName"]}"`)
+      .replace(/"{{companyDescription}}"/g, `"${answer["companyDescription"]}"`)
+      .replace(
+        /"{{maintainerName}}"/g,
+        `"${answer["maintainerName"]} <${answer["maintainerEmail"]}>"`
+      )
+      .replace(
+        /"{{companyNameShort}}"/g,
+        `"${answer["companyName"].slice(0, 4).toLowerCase().replace(" ", "")}"`
+      );
   },
 };

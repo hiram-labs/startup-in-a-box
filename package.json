@@ -1,15 +1,15 @@
 {
   "name": "startup_in_a_box",
   "version": "1.0.0",
-  "description": "Production and Deployment ready boilerplate.",
+  "description": "End to end enterprise solution",
   "directories": {
     "doc": "./project_docs"
   },
   "scripts": {
-    "push": "git add . && git commit -m 'initial commit' && git push origin develop",
-    "start-gcloud": "node ./service_000_gcloud/start-development.js",
+    "push-project": "git add . && git commit -m 'initial commit' && git push origin develop",
     "setup-project": "yarn && node ./project_base/scripts/setup.js",
     "reset-project": "node ./project_base/scripts/reset.js",
+    "start-gcloud": "node ./service_000_gcloud/start-development.js",
     "develop-local": "pm2 start ecosystem.config.js && pm2 logs",
     "stop-local": "pm2 stop ecosystem.config.js && pm2 flush",
     "develop-container": "docker-compose -f ./project_base/docker/compose-database.yml -f ./project_base/docker/compose-development.yml up",

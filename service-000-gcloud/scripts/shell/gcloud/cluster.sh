@@ -12,4 +12,8 @@ if [ -n "$1" ]
 fi
 
 gcloud container clusters create $CLUSTER_NAME "$@" \
+    --num-nodes 2 \
+    --enable-autoscaling \
+    --min-nodes 1 \
+    --max-nodes 5 \
     --enable-network-policy

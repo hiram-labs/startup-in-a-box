@@ -7,9 +7,9 @@ parse_general_flags "$@"
 
 PROJECT_ZONE=${PROJECT_ZONE:-"europe-west2-b"}
 PROJECT_REGION=${PROJECT_REGION:-"europe-west2"}
-PROJECT_ID=${PROJECT_ID:-$(jq -r '.project_id' < "${GCLOUD_SECRET_KEY}"/gcloud-key.json)}
+PROJECT_ID=${PROJECT_ID:-$(jq -r '.project_id' < "${GCLOUD_SECRETS}"/gcloud-key.json)}
 
-gcloud auth activate-service-account  --key-file="${GCLOUD_SECRET_KEY}"/gcloud-key.json
+gcloud auth activate-service-account  --key-file="${GCLOUD_SECRETS}"/gcloud-key.json
 
 gcloud config set disable_prompts true
 gcloud config set project "$PROJECT_ID"

@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# shellcheck disable=SC2240
+# shellcheck disable=SC1090
+
 # set -x
 # set -euo pipefail
 
@@ -16,7 +19,7 @@ if [ -z "$CHALK_STATUS" ]
         "
 
         printf "%s" "$LIB_RESOURCES" >> "$PROFILE_FILE"
-        sleep 10
+        sleep 5
 
         chalk "$@"
         return 1 
@@ -25,7 +28,7 @@ fi
 if [ -z $1 ] || [ $1 = "help" ]
     then 
         shift
-        . ${SCRIPTS:-$SCRIPTS_DEFAULT_PATH}/chalk/config/help.sh "$@"
+        . "${SCRIPTS:-$SCRIPTS_DEFAULT_PATH}"/chalk/config/help.sh "$@"
         return 1
     else
 

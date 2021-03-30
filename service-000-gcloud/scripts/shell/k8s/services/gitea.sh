@@ -17,7 +17,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
         return 1
 fi
 
-if [ "$LAST_ARG" =  "upgrade" ]
+if [ "$LAST_ARG" = "upgrade" ]
     then
         helm upgrade gitea \
         -f "$HELM_VALUES"/gitea.yml \
@@ -45,3 +45,5 @@ if [ "$LAST_ARG" =  "install" ]
             && kubectl get svc -n gitea
         return 1
 fi
+
+# kubectl exec -n gitea --stdin --tty gitea-0 -- /bin/bash

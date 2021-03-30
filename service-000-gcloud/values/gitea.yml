@@ -1,6 +1,3 @@
-image:
-  repository: gitea/gitea
-  tag: 1.13.5
 service:
   http:
     annotations:
@@ -13,12 +10,20 @@ ingress:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
   hosts:
-    - gitea.$REGISTERED_DOMAIN
+    - gitea.hiramlabs.com
   tls:
     - hosts:
-        - gitea.$REGISTERED_DOMAIN
+        - gitea.hiramlabs.com
       secretName: gitea-tls-secret
 gitea:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  admin:
+    username: gitea_admin
+    password: r8sA8CPHD9!bt6d
+    email: "gitea@local.domain"
   database:
     builtIn:
       postgresql:
@@ -64,5 +69,3 @@ mariadb:
       port: 3306
     persistence:
       size: 10Gi
-# TODO:
-# add prometheus

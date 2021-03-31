@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/gitea-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/gitea.yml
+
 helm repo add gitea-charts https://dl.gitea.io/charts/
 helm repo update
 
@@ -20,7 +23,7 @@ fi
 if [ "$LAST_ARG" = "upgrade" ]
     then
         helm upgrade gitea \
-        -f "$HELM_VALUES"/gitea.yml \
+        -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 2.1.2 \
             --namespace gitea \
@@ -31,7 +34,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install gitea \
-        -f "$HELM_VALUES"/gitea.yml \
+        -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 2.1.2 \
             --create-namespace \

@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/jenkins-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/jenkins.yml
+
 helm repo add jenkins https://charts.jenkins.io 
 helm repo update 
 
@@ -18,7 +21,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade jenkins \
-            -f "$HELM_VALUES"/jenkins.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 3.2.2 \
             --namespace jenkins \
@@ -29,7 +32,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install jenkins \
-            -f "$HELM_VALUES"/jenkins.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 3.2.2 \
             --create-namespace \

@@ -2,22 +2,22 @@
 
 const fs = require("fs");
 const path = require("path");
-const { populateConfigFile } = require("../utils");
+const { populateConfigFile } = require("../../utils");
 
 const root = process.cwd();
 
-module.exports = function (answers) {
+module.exports = async (answers) => {
   const targetFiles = ["package.json"];
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../data/storybook/_${file}`))
+      .readFileSync(path.join(__dirname, `../data/gcloud/_${file}`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);
 
     fs.writeFileSync(
-      path.join(root, `./service-000-storybook/${file}`),
+      path.join(root, `./service-000-gcloud/${file}`),
       customisedConfigFile
     );
   });

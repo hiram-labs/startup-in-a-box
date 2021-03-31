@@ -2,14 +2,13 @@
 
 const path = require("path");
 const { spawn } = require("child_process");
-const boxen = require("boxen");
-const { setup } = require("../setup/inquirer");
-const { setupConfig } = require("../data/base/inquirer-config");
 
-const boxenConfig = {
-  padding: 1,
-};
+const { setup } = require("../wizard");
+const { setupConfig } = require("../data/base/wizard.config");
 
+const [, , serviceName] = process.argv;
+
+// starts mysql db ie strapi depends on this
 const dockerComposeFile = path.join(
   __dirname,
   `../docker/compose-database.yml`
@@ -17,5 +16,5 @@ const dockerComposeFile = path.join(
 
 spawn("docker-compose", ["-f", dockerComposeFile, "up", "-d", "mysql_db"]);
 
-console.log(boxen(setupConfig.introMessage, boxenConfig));
-setup();
+console.log(setupConfig.introMessage);
+setup(serviceName);

@@ -9,7 +9,7 @@ VERSION=v12.19.0
 ADMIN_USERNAME=Administrator
 ADMIN_PASSWORD=p4ssw0rd
 SITES_PVC=erpnext
-SITE_NAME=erpnext.hiramlabs.com
+SITE_NAME=erpnext.$REGISTERED_DOMAIN
 
 ERPNEXT_ADD_SITE_WORKER_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-add-site-worker-manifest.yml
 ERPNEXT_DROP_SITE_WORKER_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-drop-site-worker-manifest.yml
@@ -114,6 +114,3 @@ if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
           && kubectl get ingress -n erpnext
         return 1
 fi
-
-# get container image name for line 24
-# kubectl get deployments.apps -n erpnext erpnext-erpnext -o jsonpath="{.spec.template.spec.containers[0].image}"

@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/harbor-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/harbor.yml
+
 helm repo add harbor https://helm.goharbor.io
 helm repo update 
 
@@ -18,7 +21,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade harbor \
-            -f "$HELM_VALUES"/harbor.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 1.5.4 \
             --namespace harbor \
@@ -29,7 +32,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install harbor \
-            -f "$HELM_VALUES"/harbor.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 1.5.4 \
             --create-namespace \

@@ -1,12 +1,9 @@
 "use strict";
 
-const boxen = require("boxen");
-const { reset } = require("../setup/inquirer");
-const { resetConfig } = require("../data/base/inquirer-config");
-const [, , serviceName] = process.argv;
-const boxenConfig = {
-  padding: 1,
-};
+const { reset } = require("../wizard");
+const { resetConfig } = require("../data/base/wizard.config");
 
-console.log(boxen(resetConfig.introMessage, boxenConfig));
+const [, , serviceName] = process.argv;
+
+console.log(resetConfig.introMessage);
 reset(serviceName);

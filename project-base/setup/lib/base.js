@@ -5,7 +5,7 @@ const path = require("path");
 
 const root = process.cwd();
 
-module.exports = function (answers) {
+module.exports = async (answers) => {
   const env = {};
   const serviceNames = ["storybook", "gatsby", "strapi", "ionic"];
 

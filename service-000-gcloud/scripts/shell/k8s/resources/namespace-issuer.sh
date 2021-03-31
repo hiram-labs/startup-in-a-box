@@ -15,7 +15,6 @@ if [ -z "$PROJECT_NAMESPACE" ] \
   || [ "$PROJECT_NAMESPACE" = "upgrade" ]
     then
         chalk error 104
-        exit 1
 fi
 
 cat <<EOF > "$NAMESPACE_ISSUER_MANIFEST"

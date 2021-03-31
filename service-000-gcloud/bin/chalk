@@ -25,7 +25,7 @@ if [ -z "$CHALK_STATUS" ]
         return 1 
 fi
 
-if [ -z $1 ] || [ $1 = "help" ]
+if [ -z "$1" ] || [ "$1" = "help" ]
     then 
         shift
         . "${SCRIPTS:-$SCRIPTS_DEFAULT_PATH}"/chalk/config/help.sh "$@"
@@ -33,31 +33,35 @@ if [ -z $1 ] || [ $1 = "help" ]
     else
 
         # handle gcloud commands
-        if [ $1 = "gcloud" ]
+        if [ "$1" = "gcloud" ]
             then 
                 shift
                 . "$SCRIPTS"/chalk/config/gcloud.sh "$@"
+                clean_all_temp_files
                 return 1
         fi
 
         # handle install / uninstall of services and resources
-        if [ $1 = "install" ] || [ $1 = "uninstall" ] || [ $1 = "upgrade" ]
+        if [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]
             then 
-                SETUP_ACTION=$1
+                SETUP_ACTION="$1"
                 shift
                 . "$SCRIPTS"/chalk/config/setup.sh "$@" "$SETUP_ACTION"
+                clean_all_temp_files
                 return 1
         fi
 
         # handle error commands
-        if [ $1 = "error" ] || [ $1 = "errors" ]
+        if [ "$1" = "error" ] || [ "$1" = "errors" ]
             then 
                 shift
                 . "$SCRIPTS"/chalk/config/errors.sh "$@"
+                clean_all_temp_files
                 return 1
         fi
 
         # catch all errors
         . "$SCRIPTS"/chalk/config/errors.sh "$@"
-        exit 1
+        clean_all_temp_files
+        return 1
 fi

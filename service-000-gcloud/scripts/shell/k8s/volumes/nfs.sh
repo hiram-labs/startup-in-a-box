@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/nfs-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/nfs.yml
+
 helm repo add kvaps https://kvaps.github.io/charts
 helm repo update
 
@@ -17,7 +20,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade nfs-server \
-            -f "$HELM_VALUES"/nfs.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 1.2.1 \
             --namespace nfs \
@@ -28,7 +31,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install nfs-server \
-            -f "$HELM_VALUES"/nfs.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 1.2.1 \
             --create-namespace \

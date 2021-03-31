@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\" 
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/erpnext-db-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/erpnext-db.yml
+
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
@@ -20,7 +23,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade erpnext-mariadb \
-            -f "$HELM_VALUES"/erpnext-db.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --namespace erpnext \
             bitnami/mariadb 
@@ -30,7 +33,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install erpnext-mariadb \
-            -f "$HELM_VALUES"/erpnext-db.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --create-namespace \
             --namespace erpnext \

@@ -2,24 +2,28 @@
 
 const inquirer = require("inquirer");
 
-const setupBase = require("./base");
-const setupEnv = require("./env");
-const setupStorybook = require("./storybook");
-const setupGatsby = require("./gatsby");
-const setupStrapi = require("./strapi");
-const setupIonic = require("./ionic");
-
+const initialSetup = require("../setup");
 const factoryReset = require("../reset");
 
-const { isRequired, oneOff } = require("../utils");
+const { isRequired, oneOff, answeredYes } = require("../utils");
 const {
   resetConfig,
   organisation,
   analytics,
-} = require("../data/base/inquirer-config");
+} = require("../data/base/wizard.config");
+
+// catch inquirer errors
+const onError = (error) => {
+  if (error.isTtyError) {
+    console.error("An error ocurred with your TTY environment");
+  } else {
+    console.error(error, "Something went wrong");
+  }
+};
 
 module.exports = {
-  setup: async () => {
+  // initial setup inquirer prompts
+  setup: async (serviceName) => {
     inquirer
       .prompt([
         {
@@ -61,26 +65,17 @@ module.exports = {
           name: analytics.gtagID.field,
           message: analytics.gtagID.prompt,
           default: analytics.gtagID.placeholder,
-          when: (answers) => answers[analytics.gtagEnable.field].match(/^y$/i),
+          when: (answers) => answeredYes(answers[analytics.gtagEnable.field]),
           validate: isRequired,
         },
       ])
       .then((answers) => {
-        setupBase(answers);
-        setupEnv(answers);
-        setupStorybook(answers);
-        setupGatsby(answers);
-        setupStrapi(answers);
-        setupIonic(answers);
+        initialSetup(serviceName, answers);
       })
-      .catch((error) => {
-        if (error.isTtyError) {
-          console.error("An error ocurred with your TTY environment");
-        } else {
-          console.error(error, "Something went wrong");
-        }
-      });
+      .catch(onError);
   },
+
+  // reset to factory settings inquirer prompts
   reset: async (serviceName) => {
     inquirer
       .prompt([
@@ -92,16 +87,10 @@ module.exports = {
         },
       ])
       .then((answers) => {
-        answers[resetConfig.confirmReset.field].match(/^y$/i)
-          ? factoryReset(serviceName)
+        answeredYes(answers[resetConfig.confirmReset.field])
+          ? factoryReset(serviceName, answers)
           : process.exit(0);
       })
-      .catch((error) => {
-        if (error.isTtyError) {
-          console.error("An error ocurred with your TTY environment");
-        } else {
-          console.error(error, "Something went wrong");
-        }
-      });
+      .catch(onError);
   },
 };

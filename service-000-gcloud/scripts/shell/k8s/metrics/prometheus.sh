@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/prometheus-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/prometheus.yml
+
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 
@@ -25,7 +28,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade prometheus \
-            -f "$HELM_VALUES"/prometheus.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 14.4.0 \
             --namespace prometheus \
@@ -36,7 +39,7 @@ fi
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install prometheus \
-            -f "$HELM_VALUES"/prometheus.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 14.4.0 \
             --create-namespace \

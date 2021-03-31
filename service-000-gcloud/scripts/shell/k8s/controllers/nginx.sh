@@ -5,6 +5,9 @@
 
 eval LAST_ARG=\"\$\{$#\}\"
 
+VALUES_ENV_INJECTED="$HELM_VALUES"/nginx-env-injected.yml
+inject_env_vars_yml "$HELM_VALUES"/nginx.yml
+
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
@@ -17,7 +20,7 @@ fi
 if [ "$LAST_ARG" =  "upgrade" ]
     then
         helm upgrade nginx \
-            -f "$HELM_VALUES"/nginx.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 3.24.0 \
             --namespace nginx \
@@ -30,14 +33,13 @@ parse_general_flags "$@"
 if [ -z "$INGRESS_IP" ]
     then
         chalk error 102
-        exit 1
 fi
 
 
 if [ "$LAST_ARG" =  "install" ]
     then
         helm install nginx \
-            -f "$HELM_VALUES"/nginx.yml \
+            -f "$VALUES_ENV_INJECTED" \
             --atomic \
             --version 3.24.0 \
             --create-namespace \

@@ -40,10 +40,18 @@ parse_general_flags () {
             ;;
             *)
             chalk error 101
-            exit 1
             ;;
         esac
     done
+}
+
+inject_env_vars_yml () {
+    TEMP_DESTINATION=$(echo "$1" | sed -e 's/.yml/-env-injected.yml/g')
+    envsubst "$(printf '${%s} ' $(env | sed 's/=.*//'))" < "$1" > "$TEMP_DESTINATION" 
+}
+
+clean_all_temp_files () {
+    find / -name "*-env-injected.yml" -delete
 }
 
 # TODO:

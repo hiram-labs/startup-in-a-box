@@ -57,14 +57,6 @@ if [ "$1" = 'resource' ] && [ "$2" = 'cluster-staging-issuer' ]
         return 1
 fi
 
-if [ "$1" = 'resource' ] && [ "$2" = 'erpnext-db' ]
-    then
-        shift
-        shift
-        . "$SCRIPTS"/k8s/resources/erpnext-db.sh "$@"
-        return 1
-fi
-
 if [ "$1" = 'resource' ] && [ "$2" = 'erpnext-ingress' ]
     then
         shift
@@ -90,6 +82,14 @@ if [ "$1" = 'resource' ] && [ "$2" = 'namespace-issuer' ]
 fi
 
 # services
+if [ "$1" = 'service' ] && [ "$2" = 'erpnext-db' ]
+    then
+        shift
+        shift
+        . "$SCRIPTS"/k8s/services/erpnext-db.sh "$@"
+        return 1
+fi
+
 if [ "$1" = 'service' ] && [ "$2" = 'erpnext' ]
     then
         shift

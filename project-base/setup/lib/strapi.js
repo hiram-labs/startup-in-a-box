@@ -4,15 +4,15 @@ const fs = require("fs");
 const path = require("path");
 const ora = require("ora");
 const { exec } = require("child_process");
-const { populateConfigFile } = require("../utils");
 const {
+  populateConfigFile,
   progressStarting,
   progressFinishing,
-} = require("../data/base/progress-config");
+} = require("../../utils");
 
 const root = process.cwd();
 
-module.exports = function (answers) {
+module.exports = async (answers) => {
   const targetFiles = ["package.json"];
 
   targetFiles.forEach((file) => {

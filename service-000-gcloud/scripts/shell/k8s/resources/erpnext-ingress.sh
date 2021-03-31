@@ -20,7 +20,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-    - host: erpnext.hiramlabs.com
+    - host: erpnext.$REGISTERED_DOMAIN
       http:
         paths:
           - backend:
@@ -29,7 +29,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - erpnext.hiramlabs.com
+        - erpnext.$REGISTERED_DOMAIN
       secretName: erpnext-tls-secret
 EOF
 

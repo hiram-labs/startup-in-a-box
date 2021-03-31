@@ -35,6 +35,11 @@ module.exports = {
       prompt: "Project or company description",
       placeholder: "A cool startup company!",
     },
+    companyUrl: {
+      field: "companyUrl",
+      prompt: "Project or company URL in this format",
+      placeholder: "example.com",
+    },
     maintainerName: {
       field: "maintainerName",
       prompt: "Maintainer name",

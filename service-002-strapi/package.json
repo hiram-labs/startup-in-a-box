@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "{{companyDescription}}",
-  "author": "{{maintainerName}}",
+  "author": "{{maintainerName}} <{{maintainerEmail}}>",
   "scripts": {
     "start": "strapi start",
     "build": "strapi build",

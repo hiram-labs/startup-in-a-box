@@ -78,12 +78,11 @@ module.exports = {
   populateConfigFile: (answer, template) => {
     return template
       .replace(/{{gtagID}}/g, answer["gtagID"] || `{{gtagID}}`)
+      .replace(/{{maintainerName}}/g, `${answer["maintainerName"]} `)
+      .replace(/{{maintainerEmail}}/g, `${answer["maintainerEmail"]}`)
       .replace(/{{companyName}}/g, answer["companyName"])
+      .replace(/{{companyUrl}}/g, answer["companyUrl"])
       .replace(/{{companyDescription}}/g, answer["companyDescription"])
-      .replace(
-        /{{maintainerName}}/g,
-        `${answer["maintainerName"]} <${answer["maintainerEmail"]}>`
-      )
       .replace(
         /{{companyNameShort}}/g,
         answer["companyName"].slice(0, 4).toLowerCase().replace(" ", "")

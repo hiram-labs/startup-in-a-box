@@ -42,6 +42,13 @@ module.exports = {
         },
         {
           type: "input",
+          name: organisation.companyUrl.field,
+          message: organisation.companyUrl.prompt,
+          default: organisation.companyUrl.placeholder,
+          validate: isRequired,
+        },
+        {
+          type: "input",
           name: organisation.maintainerName.field,
           message: organisation.maintainerName.prompt,
           default: organisation.maintainerName.placeholder,

@@ -2,7 +2,7 @@
   "name": "service-000-storybook",
   "version": "1.0.0",
   "description": "{{companyDescription}}",
-  "author": "{{maintainerName}}",
+  "author": "{{maintainerName}} <{{maintainerEmail}}>",
   "license": "MIT",
   "private": true,
   "main": "src/index.js",

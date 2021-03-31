@@ -7,7 +7,7 @@ const { populateConfigFile } = require("../../utils");
 const root = process.cwd();
 
 module.exports = async (answers) => {
-  const targetFiles = ["package.json"];
+  const targetFiles = ["package.json", "env.sh"];
 
   targetFiles.forEach((file) => {
     const configFile = fs
@@ -16,9 +16,18 @@ module.exports = async (answers) => {
 
     const customisedConfigFile = populateConfigFile(answers, configFile);
 
-    fs.writeFileSync(
-      path.join(root, `./service-000-gcloud/${file}`),
-      customisedConfigFile
-    );
+    file === targetFiles[0] &&
+      fs.writeFileSync(
+        path.join(root, `./service-000-gcloud/${file}`),
+        customisedConfigFile
+      );
+    file === targetFiles[1] &&
+      fs.writeFileSync(
+        path.join(
+          root,
+          `./service-000-gcloud/src/scripts/shell/chalk/lib/${file}`
+        ),
+        customisedConfigFile
+      );
   });
 };

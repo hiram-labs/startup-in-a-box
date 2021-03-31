@@ -17,7 +17,7 @@ module.exports = async (answers) => {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../data/strapi/_${file}`))
+      .readFileSync(path.join(__dirname, `../../data/strapi/_${file}`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);

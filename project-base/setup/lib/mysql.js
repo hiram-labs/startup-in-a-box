@@ -11,7 +11,7 @@ module.exports = async (answers) => {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../data/mysql/_${file}`))
+      .readFileSync(path.join(__dirname, `../../data/mysql/_${file}`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);

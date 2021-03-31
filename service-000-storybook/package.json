@@ -1,8 +1,8 @@
 {
   "name": "service-000-storybook",
   "version": "1.0.0",
-  "description": "{{companyDescription}}",
-  "author": "{{maintainerName}}",
+  "description": "A cool startup company!",
+  "author": "Jo Blog <jo.blog@email.com>",
   "license": "MIT",
   "private": true,
   "main": "src/index.js",
@@ -57,8 +57,8 @@
     ]
   },
   "customMeta": {
-    "gtagID": "{{gtagID}}",
-    "companyName": "{{companyName}}",
-    "companyNameShort": "{{companyNameShort}}"
+    "gtagID": "G-xxxxxx",
+    "companyName": "My Startup",
+    "companyNameShort": "mys"
   }
 }

@@ -5,18 +5,18 @@ const path = require("path");
 const root = process.cwd();
 
 const sourceFiles = [
-  `../env/gatsby/dev.env`,
-  `../env/gcloud/dev.env`,
-  `../env/ionic/dev.env`,
-  `../env/selenium/dev.env`,
-  `../env/storybook/dev.env`,
-  `../env/strapi/dev.env`,
-  `../env/mysql/dev.env`,
+  `../../env/gatsby/dev.env`,
+  `../../env/gcloud/dev.env`,
+  `../../env/ionic/dev.env`,
+  `../../env/selenium/dev.env`,
+  `../../env/storybook/dev.env`,
+  `../../env/strapi/dev.env`,
+  `../../env/mysql/dev.env`,
 ];
 
 const targetFiles = [
   "./service-001-gatsby/.env",
-  "./service-000-gcloud/scripts/shell/chalk/lib/",
+  "./service-000-gcloud/scripts/shell/chalk/lib/env.sh",
   "./service-003-ionic/.env",
   "./service-000-selenium/.env",
   "./service-000-storybook/.env",

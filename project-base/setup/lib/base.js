@@ -11,7 +11,7 @@ module.exports = async (answers) => {
 
   serviceNames.forEach((serviceName) => {
     env[serviceName] = fs
-      .readFileSync(path.join(__dirname, `../env/${serviceName}/dev.env`))
+      .readFileSync(path.join(__dirname, `../../env/${serviceName}/dev.env`))
       .toString()
       .concat('"')
       .replace(/=/g, ':"')
@@ -22,7 +22,7 @@ module.exports = async (answers) => {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../data/base/_${file}`))
+      .readFileSync(path.join(__dirname, `../../data/base/_${file}`))
       .toString();
 
     const customisedConfigFile = configFile

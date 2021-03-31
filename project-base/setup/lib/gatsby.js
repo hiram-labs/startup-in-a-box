@@ -11,7 +11,9 @@ module.exports = async (answers) => {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(path.join(__dirname, `../data/gatsby/_${file}`)))
+      .readFileSync(
+        path.join(path.join(__dirname, `../../data/gatsby/_${file}`))
+      )
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);

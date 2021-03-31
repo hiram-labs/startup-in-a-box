@@ -3,6 +3,15 @@
 const path = require("path");
 const rimraf = require("rimraf");
 
+const root = process.cwd();
+
+const deleteFile = (filePath) =>
+  new Promise((resolve) => {
+    rimraf(path.join(root, filePath), () => {
+      resolve();
+    });
+  });
+
 module.exports = {
   /**
    * blocks async loop
@@ -50,13 +59,14 @@ module.exports = {
   },
   /**
    * cleans up dependencies
+   * @returns
    */
-  removeServicesDependencies: () => {
-    const root = process.cwd();
-
-    rimraf(path.join(root, `./*/yarn.lock`), () => {});
-    rimraf(path.join(root, `./*/node_modules`), () => {});
-    rimraf(path.join(root, `./*/package-lock.json`), () => {});
+  removeServicesDependencies: async () => {
+    return await Promise.all([
+      deleteFile("./*/yarn.lock"),
+      deleteFile("./*/node_modules"),
+      deleteFile("./*/package-lock.json"),
+    ]);
   },
 
   /**

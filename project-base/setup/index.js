@@ -1,7 +1,6 @@
 const ora = require("ora");
 const { progressFinishing } = require("../utils");
 
-const setupBase = require("./lib/base");
 const setupEnv = require("./lib/env");
 const setupGatsby = require("./lib/gatsby");
 const setupGcloud = require("./lib/gcloud");
@@ -14,7 +13,6 @@ const setupMysql = require("./lib/mysql");
 module.exports = async (serviceName, answers) => {
   const spinner = ora(progressFinishing()).start();
 
-  const isSetupBase = serviceName === "base";
   const isSetupEnv = serviceName === "env";
   const isSetupGatsby = serviceName === "gatsby";
   const isSetupGcloud = serviceName === "gcloud";
@@ -25,7 +23,6 @@ module.exports = async (serviceName, answers) => {
   const isSetupMysql = serviceName === "mysql";
 
   if (serviceName) {
-    isSetupBase && (await setupBase(answers));
     isSetupEnv && (await setupEnv(answers));
     isSetupGatsby && (await setupGatsby(answers));
     isSetupGcloud && (await setupGcloud(answers));
@@ -37,8 +34,6 @@ module.exports = async (serviceName, answers) => {
     return;
   }
 
-  await setupBase(answers);
-  await setupEnv(answers);
   await setupGatsby(answers);
   await setupGcloud(answers);
   await setupIonic(answers);
@@ -46,6 +41,7 @@ module.exports = async (serviceName, answers) => {
   await setupStorybook(answers);
   await setupStrapi(answers);
   await setupMysql(answers);
+  await setupEnv(answers);
 
   spinner.stop();
 };

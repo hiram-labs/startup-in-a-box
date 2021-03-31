@@ -1,7 +1,6 @@
 const ora = require("ora");
 const { progressFinishing, removeServicesDependencies } = require("../utils");
 
-const resetBase = require("./lib/base");
 const resetEnv = require("./lib/env");
 const resetGatsby = require("./lib/gatsby");
 const resetGcloud = require("./lib/gcloud");
@@ -14,7 +13,6 @@ const resetMysql = require("./lib/mysql");
 module.exports = async (serviceName, answers) => {
   const spinner = ora(progressFinishing()).start();
 
-  const isResetBase = serviceName === "base";
   const isResetEnv = serviceName === "env";
   const isResetGatsby = serviceName === "gatsby";
   const isResetGcloud = serviceName === "gcloud";
@@ -25,7 +23,6 @@ module.exports = async (serviceName, answers) => {
   const isResetMysql = serviceName === "mysql";
 
   if (serviceName) {
-    isResetBase && (await resetBase(answers));
     isResetEnv && (await resetEnv(answers));
     isResetGatsby && (await resetGatsby(answers));
     isResetGcloud && (await resetGcloud(answers));
@@ -37,8 +34,6 @@ module.exports = async (serviceName, answers) => {
     return;
   }
 
-  await resetBase(answers);
-  await resetEnv(answers);
   await resetGatsby(answers);
   await resetGcloud(answers);
   await resetIonic(answers);
@@ -46,7 +41,8 @@ module.exports = async (serviceName, answers) => {
   await resetStorybook(answers);
   await resetStrapi(answers);
   await resetMysql(answers);
+  await resetEnv(answers);
 
-  removeServicesDependencies();
+  await removeServicesDependencies();
   spinner.stop();
 };

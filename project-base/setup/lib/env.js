@@ -16,7 +16,7 @@ const sourceFiles = [
 
 const targetFiles = [
   "./service-001-gatsby/.env",
-  "./service-000-gcloud/scripts/shell/chalk/lib/env.sh",
+  "./service-000-gcloud/src/scripts/shell/chalk/lib/env.sh",
   "./service-003-ionic/.env",
   "./service-000-selenium/.env",
   "./service-000-storybook/.env",

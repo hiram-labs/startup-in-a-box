@@ -1,0 +1,12 @@
+ARG node_env
+
+FROM nikolaik/python-nodejs:python3.6-nodejs12-alpine
+
+RUN apk update
+
+ENV NODE_ENV=$node_env
+ENV PATH=/usr/src/service-000-selenium/src/bin:$PATH
+
+WORKDIR /usr/src/service-000-storybook
+
+COPY . ./

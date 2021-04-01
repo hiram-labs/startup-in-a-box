@@ -1,133 +1,48 @@
-const fs = require("fs");
-const path = require("path");
 const ora = require("ora");
-const rimraf = require("rimraf");
-const { progressFinishing } = require("../data/base/progress-config");
+const { progressFinishing, removeServicesDependencies } = require("../utils");
 
-const root = process.cwd();
+const resetEnv = require("./lib/env");
+const resetGatsby = require("./lib/gatsby");
+const resetGcloud = require("./lib/gcloud");
+const resetIonic = require("./lib/ionic");
+const resetSelenium = require("./lib/selenium");
+const resetStorybook = require("./lib/storybook");
+const resetStrapi = require("./lib/strapi");
+const resetMysql = require("./lib/mysql");
 
-const removeDependencies = (service) => {
-  rimraf(path.join(root, `./${service}/node_modules`), () => {
-    console.log(`${service} node_modules reset successful`);
-  });
-  rimraf(path.join(root, `./${service}/yarn.lock`), () => {
-    console.log(`${service} yarn.lock reset successful`);
-  });
-  rimraf(path.join(root, `./${service}/package-lock.json`), () => {
-    console.log(`${service} package-lock.json reset successful`);
-  });
-};
+module.exports = async (serviceName, answers) => {
+  const spinner = ora(progressFinishing()).start();
 
-const resetStorybook = async () => {
-  const targetFiles = ["package.json"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/storybook/_${file}`),
-      path.join(root, `./service-000-storybook/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-000-storybook");
-};
+  const isResetEnv = serviceName === "env";
+  const isResetGatsby = serviceName === "gatsby";
+  const isResetGcloud = serviceName === "gcloud";
+  const isResetIonic = serviceName === "ionic";
+  const isResetSelenium = serviceName === "selenium";
+  const isResetStorybook = serviceName === "storybook";
+  const isResetStrapi = serviceName === "strapi";
+  const isResetMysql = serviceName === "mysql";
 
-const resetGatsby = async () => {
-  const targetFiles = ["package.json"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/gatsby/_${file}`),
-      path.join(root, `./service-001-gatsby/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-001-gatsby");
-};
-
-const resetStrapi = async () => {
-  const targetFiles = ["package.json"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/strapi/_${file}`),
-      path.join(root, `./service-002-strapi/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-002-strapi");
-};
-
-const resetIonic = async () => {
-  const targetFiles = ["package.json"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/ionic/_${file}`),
-      path.join(root, `./service-003-ionic/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-003-ionic");
-};
-
-const resetMysql = async () => {
-  const targetFiles = ["init.sql"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/mysql/_${file}`),
-      path.join(root, `./service-000-mysql/backup/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-000-mysql");
-};
-
-const resetGcloud = async () => {
-  const targetFiles = ["env.sh"];
-  targetFiles.forEach((file) => {
-    fs.copyFile(
-      path.join(__dirname, `../data/gcloud/_${file}`),
-      path.join(root, `./service-000-gcloud/scripts/shell/chalk/lib/${file}`),
-      (err) => {
-        if (err) throw err;
-      }
-    );
-  });
-  removeDependencies("service-000-gcloud");
-};
-
-module.exports = async (service) => {
-  const isResetStorybook = service === "storybook";
-  const isResetGatsby = service === "gatsby";
-  const isResetStrapi = service === "strapi";
-  const isResetIonic = service === "ionic";
-  const isResetMysql = service === "mysql";
-  const isResetGcloud = service === "gcloud";
-
-  if (service) {
-    isResetStorybook && (await resetStorybook());
-    isResetGatsby && (await resetGatsby());
-    isResetStrapi && (await resetStrapi());
-    isResetIonic && (await resetIonic());
-    isResetMysql && (await resetMysql());
-    isResetGcloud && (await resetGcloud());
+  if (serviceName) {
+    isResetEnv && (await resetEnv(answers));
+    isResetGatsby && (await resetGatsby(answers));
+    isResetGcloud && (await resetGcloud(answers));
+    isResetIonic && (await resetIonic(answers));
+    isResetSelenium && (await resetSelenium(answers));
+    isResetStorybook && (await resetStorybook(answers));
+    isResetStrapi && (await resetStrapi(answers));
+    isResetMysql && (await resetMysql(answers));
     return;
   }
-  const spinner = ora(progressFinishing());
-  spinner.start();
 
-  await resetStorybook();
-  await resetGatsby();
-  await resetStrapi();
-  await resetIonic();
-  await resetMysql();
-  await resetGcloud();
+  await resetGatsby(answers);
+  await resetGcloud(answers);
+  await resetIonic(answers);
+  await resetSelenium(answers);
+  await resetStorybook(answers);
+  await resetStrapi(answers);
+  await resetMysql(answers);
+  await resetEnv(answers);
 
+  await removeServicesDependencies();
   spinner.stop();
 };

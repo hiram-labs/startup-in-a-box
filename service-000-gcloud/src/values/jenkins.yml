@@ -1,0 +1,21 @@
+controller:
+  image: "jenkins/jenkins"
+  tag: "2.277.1-jdk11"
+  additionalPlugins:
+    - matrix-auth:2.6.4
+    - prometheus:2.0.9
+  initializeOnce: true
+  overwritePluginsFromImage: false
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hostName: jenkins.$REGISTERED_DOMAIN
+    tls:
+      - hosts:
+          - jenkins.$REGISTERED_DOMAIN
+        secretName: jenkins-tls-secret
+  prometheus:
+    enabled: true

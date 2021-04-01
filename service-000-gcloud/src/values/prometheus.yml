@@ -1,0 +1,56 @@
+grafana:
+  adminPassword: prom-operator
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - grafana.$REGISTERED_DOMAIN
+    tls:
+      - secretName: grafana-general-tls
+        hosts:
+          - grafana.$REGISTERED_DOMAIN
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - alertmanager.$REGISTERED_DOMAIN
+    tls:
+      - secretName: alertmanager-general-tls
+        hosts:
+          - alertmanager.$REGISTERED_DOMAIN
+prometheus:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-staging
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - prometheus.$REGISTERED_DOMAIN
+    tls:
+      - secretName: prometheus-general-tls
+        hosts:
+          - prometheus.$REGISTERED_DOMAIN
+  # prometheusSpec:
+  #   ruleSelectorNilUsesHelmValues: false
+  #   probeSelectorNilUsesHelmValues: false
+  #   podMonitorSelectorNilUsesHelmValues: false
+  #   serviceMonitorSelectorNilUsesHelmValues: false
+  # additionalScrapeConfigs:
+  #   - job_name: jenkins
+  #     metrics_path: /prometheus
+  #     static_configs:
+  #       - targets:
+  #           - jenkins.jenkins.svc.cluster.local:8080
+  # - job_name: gitea
+  #   metrics_path: /metrics
+  #   static_configs:
+  #     - targets:
+  #         - gitea.gitea.svc.cluster.local:3000

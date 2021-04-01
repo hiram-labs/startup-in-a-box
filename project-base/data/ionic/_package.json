@@ -2,7 +2,7 @@
   "name": "service-003-ionic",
   "version": "1.0.0",
   "description": "{{companyDescription}}",
-  "author": "{{maintainerName}}",
+  "author": "{{maintainerName}} <{{maintainerEmail}}>",
   "license": "MIT",
   "private": true,
   "scripts": {

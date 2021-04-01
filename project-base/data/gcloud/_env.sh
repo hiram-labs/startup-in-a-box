@@ -11,13 +11,13 @@ BLUE='\033[0;34m'
 GREEN='\033[0;32m'
 RESET_COLOR='\033[0m' 
 
-SCRIPTS=/usr/src/service-000-gcloud/scripts/shell
-HELM_VALUES=/usr/src/service-000-gcloud/values
-HELM_SECRETS=/usr/src/service-000-gcloud/secrets
-GCLOUD_SECRETS=/usr/src/service-000-gcloud/secrets
+SCRIPTS=/usr/src/service-000-gcloud/src/scripts/shell
+HELM_VALUES=/usr/src/service-000-gcloud/src/values
+HELM_SECRETS=/usr/src/service-000-gcloud/src/secrets
+GCLOUD_SECRETS=/usr/src/service-000-gcloud/src/secrets
 
-LETSENCRYPT_EMAIL=hiram.labs@gmail.com
-REGISTERED_DOMAIN=hiramlabs.com
+LETSENCRYPT_EMAIL={{maintainerEmail}}
+REGISTERED_DOMAIN={{companyUrl}}
 
 export CHALK_STATUS
 

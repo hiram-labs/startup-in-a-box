@@ -1,6 +1,6 @@
 FROM google/cloud-sdk:alpine
 
-RUN apk --update add openjdk7 jq curl openssl tree --no-cache 
+RUN apk --update add openjdk7 jq curl openssl tree gettext --no-cache 
 RUN gcloud components install app-engine-java kubectl beta
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
     && chmod +x get_helm.sh && ./get_helm.sh
@@ -19,7 +19,7 @@ RUN printf "# chalk initialiser\n" >> /root/.profile
 ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk
 ENV PATH=$JAVA_HOME/bin:$PATH
 ENV PATH=/root/.krew/bin:$PATH
-ENV PATH=/usr/src/service-000-gcloud/bin:$PATH
+ENV PATH=/usr/src/service-000-gcloud/src/bin:$PATH
 
 WORKDIR /usr/src/service-000-gcloud
 

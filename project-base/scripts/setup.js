@@ -1,21 +1,13 @@
 "use strict";
 
-const path = require("path");
 const { spawn } = require("child_process");
-const boxen = require("boxen");
-const { setup } = require("../setup/inquirer");
-const { setupConfig } = require("../data/base/inquirer-config");
 
-const boxenConfig = {
-  padding: 1,
-};
+const { setup } = require("../wizard");
+const { setupConfig } = require("../data/base/wizard.config");
 
-const dockerComposeFile = path.join(
-  __dirname,
-  `../docker/compose-database.yml`
-);
+const [, , serviceName] = process.argv;
 
-spawn("docker-compose", ["-f", dockerComposeFile, "up", "-d", "mysql_db"]);
+spawn("yarn", [`start:database:container`]);
 
-console.log(boxen(setupConfig.introMessage, boxenConfig));
-setup();
+console.log(setupConfig.introMessage);
+setup(serviceName);

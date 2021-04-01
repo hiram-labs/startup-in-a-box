@@ -1,9 +1,0 @@
-persistence:
-  enabled: true
-  storageClass: "standard"
-  size: 100Gi
-
-storageClass:
-  defaultClass: true
-# TODO:
-# add prometheus

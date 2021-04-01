@@ -31,7 +31,7 @@ module.exports = async (answers) => {
   const packagePath = path.join(root, `./service-002-strapi`);
   const spinner = ora(progressStarting()).start();
   exec(
-    `cd ${packagePath} && yarn setup-strapi && yarn dump-db && docker stop mysql_db && docker stop adminer`,
+    `cd ${packagePath} && yarn setup-strapi && yarn dump-db && docker stop adminer && docker stop mysql_db && exit 0`,
     (error, stdout, stderr) => {
       if (error) {
         throw error;

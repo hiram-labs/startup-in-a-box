@@ -1,4 +1,72 @@
 #!/bin/sh
 
-echo Hello World 
-exec sh
+# shellcheck disable=SC2240
+# shellcheck disable=SC1090
+
+# set -x
+# set -euo pipefail
+
+. ~/.profile
+
+# TODO:
+# programmatically add all lib and utils files
+
+if [ -z "$CHALK_STATUS" ]; then
+    PROFILE_FILE=$HOME/.profile
+    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-selenium/src/.chalk/lib
+        . \$LIB_PATH/env.sh
+        . \$LIB_PATH/utils.sh
+        . \$LIB_PATH/prompts.sh
+        "
+
+    printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
+    sleep 3
+
+    chalk init
+    exec sh
+fi
+
+if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
+    shift
+    . "$LIB_PATH"/help.sh "$@"
+    return 1
+else
+
+    # handle chalk initialisation
+    if [ "$1" = "init" ]; then
+        wait_for_grid
+        chalk Help
+        return 1
+    fi
+
+    # handle selenium python commands
+    if [ "$1" = "selenium" ] && [ "$2" = "python" ]; then
+        shift
+        shift
+        . "$SCRIPTS"/parse-python-commands.sh "$@"
+        tear_down
+        return 1
+    fi
+
+    # handle selenium javascript commands
+    if [ "$1" = "selenium" ] && [ "$2" = "javascript" ]; then
+        shift
+        shift
+        . "$SCRIPTS"/parse-javascript-commands.sh "$@"
+        tear_down
+        return 1
+    fi
+
+    # handle error commands
+    if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
+        shift
+        . "$LIB_PATH"/error.sh "$@"
+        tear_down
+        return 1
+    fi
+
+    # catch all errors
+    . "$LIB_PATH"/error.sh "$@"
+    tear_down
+    return 1
+fi

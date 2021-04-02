@@ -26,6 +26,8 @@ installDependencies.on("close", (code) => {
       `${localVolume}:/usr/src/service-000-gcloud/src`,
       `gcloud`,
       `sh`,
+      `-c`,
+      `chalk`,
     ],
     {
       stdio: [process.stdin, process.stdout, process.stderr],

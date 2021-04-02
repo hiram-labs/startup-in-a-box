@@ -3,7 +3,7 @@
 # set -x
 # set -euo pipefail
 
-prompt_intro_msg () {
+chalk prompt 101 () {
     echo -e "
     ${BLUE}##################################
     ${BLUE}### ${GREEN}Thanks for using chalk CLI${BLUE} ###

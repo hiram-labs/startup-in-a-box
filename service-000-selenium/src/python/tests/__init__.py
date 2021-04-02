@@ -26,3 +26,5 @@ def test():
 
 if __name__ == "__main__":
     test()
+
+    # find ./ -type f -exec sed -i '' -e "s/prompt_intro_msg/chalk prompt 101/" {} \;

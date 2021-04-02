@@ -9,18 +9,19 @@
 . ~/.profile
 
 if [ -z "$CHALK_STATUS" ]; then
+    SCRIPTS_DEFAULT_PATH=/usr/src/service-000-gcloud/scripts/shell
     PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-selenium/src/.chalk/lib
-        . \$LIB_PATH/env.sh
-        . \$LIB_PATH/utils.sh
-        . \$LIB_PATH/prompt.sh
+    LIB_RESOURCES="UTILS_LIB=/usr/src/service-000-gcloud/scripts/shell/chalk/lib
+        . \$UTILS_LIB/env.sh
+        . \$UTILS_LIB/utils.sh
+        . \$UTILS_LIB/prompt.sh
         "
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
-    sleep 3
+    sleep 5
 
     chalk init
-    exec sh
+    return 1
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
@@ -31,28 +32,26 @@ else
 
     # handle chalk initialisation
     if [ "$1" = "init" ]; then
-        wait_for_grid
         chalk Help
         return 1
     fi
 
-    # handle selenium python commands
-    if [ "$1" = "selenium" ] && [ "$2" = "python" ] || [ "$1" = "python" ]; then
-        shift
-        [ "$1" = "python" ] && shift
-        . "$SCRIPTS"/parse-python-commands.sh "$@"
-        tear_down
-        return 1
-    fi
+    # # handle gcloud commands
+    # if [ "$1" = "gcloud" ]; then
+    #     shift
+    #     . "$SCRIPTS"/chalk/config/gcloud.sh "$@"
+    #     clean_all_temp_files
+    #     return 1
+    # fi
 
-    # handle selenium javascript commands
-    if [ "$1" = "selenium" ] && [ "$2" = "javascript" ] || [ "$1" = "javascript" ]; then
-        shift
-        [ "$1" = "javascript" ] && shift
-        . "$SCRIPTS"/parse-javascript-commands.sh "$@"
-        tear_down
-        return 1
-    fi
+    # # handle install / uninstall of services and resources
+    # if [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]; then
+    #     SETUP_ACTION="$1"
+    #     shift
+    #     . "$SCRIPTS"/chalk/config/setup.sh "$@" "$SETUP_ACTION"
+    #     clean_all_temp_files
+    #     return 1
+    # fi
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then

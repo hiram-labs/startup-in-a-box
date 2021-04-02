@@ -17,13 +17,13 @@ module.exports = async (answers) => {
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../../data/strapi/${file}.json`))
+      .readFileSync(path.join(__dirname, `../../data/strapi/${file}`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);
 
     fs.writeFileSync(
-      path.join(root, `./service-002-strapi/${file}`),
+      path.join(root, `./service-002-strapi/${file}.json`),
       customisedConfigFile
     );
   });

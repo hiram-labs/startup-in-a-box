@@ -7,7 +7,7 @@ const { populateConfigFile } = require("../../utils");
 const root = process.cwd();
 
 module.exports = async (answers) => {
-  const targetFiles = ["package.json"];
+  const targetFiles = ["package"];
 
   targetFiles.forEach((file) => {
     const configFile = fs

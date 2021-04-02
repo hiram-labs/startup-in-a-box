@@ -8,7 +8,7 @@
 
 # catch no arguments errors
 if [ $# -eq 0 ]; then
-    chalk prompt 102
+    chalk error 106
     return 1
 fi
 
@@ -117,6 +117,6 @@ fi
 
 # catch invalid arguments errors
 if [ -n "$1" ]; then
-    chalk error 105
+    chalk error 106
     return 1
 fi

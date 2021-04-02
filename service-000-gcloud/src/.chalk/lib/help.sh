@@ -47,15 +47,23 @@ help_fn() {
     echo -e "Chalk commands to make gcloud cluster management a breeze"
     echo -e
     echo -e "${YELLOW}gcloud${RESET_STYLE}"
-    echo -e "    python init      Start python dev environment with pipenv  "
-    echo -e "                     managing dependencies.                    "
+    echo -e "    connect          Connect to a cluster                      "
     echo -e "                                                               "
-    echo -e "    python pretty    Prettifies all python files in /python    "
+    echo -e "    cluster          Creates a cluster different form          "
+    echo -e "                    [chalk cluster <install|uninstal|upgrade>] "
     echo -e "                                                               "
-    echo -e "    python isort     Sort all python imports in /python        "
+    echo -e "    static-ip        Provisions or gets already existing IP    "
+    echo -e "                     static ip address                         "
     echo -e "                                                               "
-    echo -e "    python lint      Lint all python files in /python          "
     echo -e
+    echo -e "${YELLOW}cluster${RESET_STYLE}"
+    echo -e "    install      Installs k8s helm charts and manifests        "
+    echo -e "                                                               "
+    echo -e "    uninstall    Uninstalls k8s helm charts and manifests      "
+    echo -e "                                                               "
+    echo -e "    upgrade      Patches k8s helm charts and manifest          "
+    echo -e "                                                               "
+    echo -e " Check out the docs on resources available through chalk       "
 }
 
 ################################################################################

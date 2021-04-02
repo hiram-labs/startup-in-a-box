@@ -33,6 +33,7 @@ else
     if [ "$1" = "init" ]; then
         chalk gcloud init
         chalk Help
+        chalk prompt 103
         return 1
     fi
 
@@ -46,7 +47,7 @@ else
 
     # handle install / uninstall of services and resources
     if [ "$1" = "cluster" ] || [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]; then
-        [ "$1" = "cluster" ] && shift
+        [ "$1" = "cluster" ] && [ -n "$2" ] && shift
         SETUP_ACTION="$1"
         shift
         . "$SH_PATH"/setup.sh "$@" "$SETUP_ACTION"
@@ -69,6 +70,6 @@ else
     fi
 
     # catch all errors
-    . "$LIB_PATH"/error.sh 101
+    . "$LIB_PATH"/error.sh 107
     return 1
 fi

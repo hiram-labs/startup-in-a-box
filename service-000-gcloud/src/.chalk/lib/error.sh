@@ -17,16 +17,19 @@ case $* in
     ERROR_MESSAGE="Missing IP address as argument"
     ;;
 103)
-    ERROR_MESSAGE="Missing argument [ install | uninstall | upgrade ]"
+    ERROR_MESSAGE="Missing / Invalid argument [ install | uninstall | upgrade ]"
     ;;
 104)
     ERROR_MESSAGE="Missing namespace argument"
     ;;
 105)
-    ERROR_MESSAGE="Missing argument [ cluster | connect | static-ip ]"
+    ERROR_MESSAGE="Missing / Invalid argument [ cluster | connect | static-ip ]"
     ;;
 106)
-    ERROR_MESSAGE="Missing argument [ metrics | volumes | services | resources | controllers ]"
+    ERROR_MESSAGE="Missing / Invalid argument [ metrics | volumes | services | resources | controllers ]"
+    ;;
+107)
+    ERROR_MESSAGE="Missing / Invalid argument [ gcloud | cluster | install | uninstall | upgrade ]"
     ;;
 esac
 

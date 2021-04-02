@@ -23,7 +23,7 @@ UNDERLINE_FONT='\033[4m'
 
 RESET_STYLE='\033[0m'
 
-SH_SCRIPTS=/usr/src/service-000-gcloud/src/.chalk/sh
+SH_PATH=/usr/src/service-000-gcloud/src/.chalk/sh
 SHELL_SCRIPTS=/usr/src/service-000-gcloud/src/scripts/shell
 HELM_VALUES=/usr/src/service-000-gcloud/src/values
 HELM_SECRETS=/usr/src/service-000-gcloud/src/secrets
@@ -32,4 +32,3 @@ GCLOUD_SECRETS=/usr/src/service-000-gcloud/src/secrets
 LETSENCRYPT_EMAIL=hiram.labs@gmail.com
 REGISTERED_DOMAIN=hiramlabs.com
 set +a
-# find ./ -type f -exec sed -i '' -e "s/\$SHELL_SCRIPTS/\$SHELL_SCRIPTS/g" {} \;

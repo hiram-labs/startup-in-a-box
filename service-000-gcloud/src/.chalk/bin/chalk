@@ -39,7 +39,7 @@ else
     # handle gcloud commands
     if [ "$1" = "gcloud" ]; then
         shift
-        . "$SCRIPTS"/chalk/config/gcloud.sh "$@"
+        . "$SH_PATH"/gcloud.sh "$@"
         clean_all_temp_files
         return 1
     fi
@@ -49,7 +49,7 @@ else
         [ "$1" = "cluster" ] && shift
         SETUP_ACTION="$1"
         shift
-        . "$SCRIPTS"/chalk/config/setup.sh "$@" "$SETUP_ACTION"
+        . "$SH_PATH"/setup.sh "$@" "$SETUP_ACTION"
         clean_all_temp_files
         return 1
     fi

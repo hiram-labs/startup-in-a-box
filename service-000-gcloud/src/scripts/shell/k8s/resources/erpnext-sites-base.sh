@@ -11,8 +11,8 @@ ADMIN_PASSWORD=p4ssw0rd
 SITES_PVC=erpnext
 SITE_NAME=erpnext.$REGISTERED_DOMAIN
 
-ERPNEXT_ADD_SITE_WORKER_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-add-site-worker-manifest.yml
-ERPNEXT_DROP_SITE_WORKER_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-drop-site-worker-manifest.yml
+ERPNEXT_ADD_SITE_WORKER_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/erpnext-add-site-worker-manifest.yml
+ERPNEXT_DROP_SITE_WORKER_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/erpnext-drop-site-worker-manifest.yml
 
 cat <<EOF > "$ERPNEXT_ADD_SITE_WORKER_MANIFEST"
 apiVersion: batch/v1

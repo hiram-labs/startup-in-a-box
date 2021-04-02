@@ -4,7 +4,7 @@
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
-CLUSTER_PROD_ISSUER_MANIFEST="$SCRIPTS"/k8s/resources/cluster-prod-issuer-manifest.yml
+CLUSTER_PROD_ISSUER_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/cluster-prod-issuer-manifest.yml
 
 cat <<EOF > "$CLUSTER_PROD_ISSUER_MANIFEST"
 apiVersion: cert-manager.io/v1

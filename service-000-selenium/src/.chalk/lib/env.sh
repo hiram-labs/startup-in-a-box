@@ -23,7 +23,7 @@ UNDERLINE_FONT='\033[4m'
 
 RESET_STYLE='\033[0m'
 
-SCRIPTS=/usr/src/service-000-selenium/src/.chalk/sh
+SH_PATH=/usr/src/service-000-selenium/src/.chalk/sh
 PYTHON_ROOT=/usr/src/service-000-selenium/src/python
 PYTHON_TESTS=/usr/src/service-000-selenium/src/python/tests
 JAVASCRIPT_ROOT=/usr/src/service-000-selenium/src/javascript

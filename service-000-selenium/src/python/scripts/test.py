@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
 from time import sleep
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+
 def test():
     driver = webdriver.Remote(
-        command_executor='http://selenium-hub:4444/wd/hub',
-        desired_capabilities={'browserName': 'chrome', 'javascriptEnabled': True}
+        command_executor="http://selenium-hub:4444/wd/hub",
+        desired_capabilities={"browserName": "chrome", "javascriptEnabled": True},
     )
 
     driver.get("https://www.python.org")
@@ -20,7 +22,7 @@ def test():
     # print(driver.current_url)
     # driver.close()
     # driver.quit()
-    
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test()

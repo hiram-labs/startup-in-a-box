@@ -14,4 +14,6 @@ WORKDIR /usr/src/service-000-selenium
 
 COPY . ./
 
-RUN cd src/python && pipenv install
+RUN cd src/python \
+    && pipenv lock --pre \
+    && pipenv install --dev

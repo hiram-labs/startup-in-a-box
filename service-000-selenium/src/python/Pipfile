@@ -5,8 +5,16 @@ name = "pypi"
 
 [packages]
 selenium = "*"
+pytest = "*"
+behave = "*"
+robotframework = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
+black = "*"
+isort = "*"
+flake8 = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.9"

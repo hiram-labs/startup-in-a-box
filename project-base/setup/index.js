@@ -35,7 +35,7 @@ module.exports = async (serviceName, answers) => {
   }
 
   await setupGatsby(answers);
-  // await setupGcloud(answers);
+  await setupGcloud(answers);
   await setupIonic(answers);
   await setupSelenium(answers);
   await setupStorybook(answers);

@@ -109,8 +109,8 @@ if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
           && progress_indicator short \
           && rm "$ERPNEXT_ADD_SITE_WORKER_MANIFEST" \
           && rm "$ERPNEXT_DROP_SITE_WORKER_MANIFEST" \
-          && echo -e "${BLUE}username:${RESET_COLOR} $ADMIN_USERNAME" \
-          && echo -e "${BLUE}email:${RESET_COLOR} $ADMIN_PASSWORD" \
+          && echo -e "${BLUE}username:${RESET_STYLE} $ADMIN_USERNAME" \
+          && echo -e "${BLUE}email:${RESET_STYLE} $ADMIN_PASSWORD" \
           && kubectl get ingress -n erpnext
         return 1
 fi

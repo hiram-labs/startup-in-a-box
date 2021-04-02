@@ -41,10 +41,10 @@ if [ "$LAST_ARG" =  "install" ]
             --namespace gitea \
             gitea-charts/gitea \
             && progress_indicator long \
-            && echo -e "${BLUE}Default credentials.${RESET_COLOR}" \
-            && echo -e "${BLUE}username:${RESET_COLOR} gitea_admin" \
-            && echo -e "${BLUE}email:${RESET_COLOR} gitea@local.domain" \
-            && echo -e "${BLUE}password:${RESET_COLOR} r8sA8CPHD9!bt6d" \
+            && echo -e "${BLUE}Default credentials.${RESET_STYLE}" \
+            && echo -e "${BLUE}username:${RESET_STYLE} gitea_admin" \
+            && echo -e "${BLUE}email:${RESET_STYLE} gitea@local.domain" \
+            && echo -e "${BLUE}password:${RESET_STYLE} r8sA8CPHD9!bt6d" \
             && kubectl get svc -n gitea
         return 1
 fi

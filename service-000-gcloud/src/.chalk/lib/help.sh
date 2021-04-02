@@ -46,7 +46,7 @@ help_fn() {
     chalk prompt 101
     echo -e "Chalk commands to make gcloud cluster management a breeze"
     echo -e
-    echo -e "${YELLOW}gcloud${RESET_COLOR}"
+    echo -e "${YELLOW}gcloud${RESET_STYLE}"
     echo -e "    python init      Start python dev environment with pipenv  "
     echo -e "                     managing dependencies.                    "
     echo -e "                                                               "

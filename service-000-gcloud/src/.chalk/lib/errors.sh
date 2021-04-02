@@ -6,7 +6,7 @@
 ERROR_MESSAGE="unknown error!"
 
 style_error_message() {
-    echo -e "${RED}$ERROR_MESSAGE${RESET_COLOR}" >&2
+    echo -e "${RED}$ERROR_MESSAGE${RESET_STYLE}" >&2
 }
 
 case $* in

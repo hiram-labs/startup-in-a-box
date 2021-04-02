@@ -58,6 +58,6 @@ clean_all_temp_files () {
 # handle short and long time ags
 
 progress_indicator () {
-    echo -e "${BLUE}Please wait for 1 mins!${RESET_COLOR}" 
+    echo -e "${BLUE}Please wait for 1 mins!${RESET_STYLE}" 
     sleep 1m
 }

@@ -10,17 +10,17 @@
 
 if [ -z "$CHALK_STATUS" ]; then
     PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="UTILS_LIB=/usr/src/service-000-gcloud/scripts/shell/chalk/lib
-        . \$UTILS_LIB/env.sh
-        . \$UTILS_LIB/utils.sh
-        . \$UTILS_LIB/prompt.sh
+    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-gcloud/src/.chalk/lib
+        . \$LIB_PATH/env.sh
+        . \$LIB_PATH/utils.sh
+        . \$LIB_PATH/prompt.sh
         "
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
-    sleep 5
+    sleep 3
 
     chalk init
-    return 1
+    exec sh
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
@@ -31,26 +31,28 @@ else
 
     # handle chalk initialisation
     if [ "$1" = "init" ]; then
+        chalk gcloud init
         chalk Help
         return 1
     fi
 
-    # # handle gcloud commands
-    # if [ "$1" = "gcloud" ]; then
-    #     shift
-    #     . "$SCRIPTS"/chalk/config/gcloud.sh "$@"
-    #     clean_all_temp_files
-    #     return 1
-    # fi
+    # handle gcloud commands
+    if [ "$1" = "gcloud" ]; then
+        shift
+        . "$SCRIPTS"/chalk/config/gcloud.sh "$@"
+        clean_all_temp_files
+        return 1
+    fi
 
-    # # handle install / uninstall of services and resources
-    # if [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]; then
-    #     SETUP_ACTION="$1"
-    #     shift
-    #     . "$SCRIPTS"/chalk/config/setup.sh "$@" "$SETUP_ACTION"
-    #     clean_all_temp_files
-    #     return 1
-    # fi
+    # handle install / uninstall of services and resources
+    if [ "$1" = "cluster" ] || [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]; then
+        [ "$1" = "cluster" ] && shift
+        SETUP_ACTION="$1"
+        shift
+        . "$SCRIPTS"/chalk/config/setup.sh "$@" "$SETUP_ACTION"
+        clean_all_temp_files
+        return 1
+    fi
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then

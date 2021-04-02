@@ -9,12 +9,12 @@ style_prompt_message() {
 
 case $* in
 101)
-    PROMPT_MESSAGE="${BLUE}####################################################################\n${BLUE}### ${GREEN}              ✨ Thanks for using chalk CLI ✨              ${BLUE} ###\n${BLUE}####################################################################${RESET_STYLE}"
+    PROMPT_MESSAGE="${BLUE}####################################################################\n${BLUE}### ${GREEN}              ✨ Thanks for using chalk CLI ✨              ${BLUE} ###\n${BLUE}####################################################################${RESET_COLOR}"
     ;;
 102)
-    PROMPT_MESSAGE="${YELLOW}😟 Please provide an argument${RESET_STYLE}"
+    PROMPT_MESSAGE="${YELLOW}😟 Please provide an argument${RESET_COLOR}"
     ;;
 esac
 
 style_prompt_message
-# find ./ -type f -exec sed -i '' -e "s/\#\! \/bin\/sh/\#\!\/bin\/sh/g" {} \;
+# find ./ -type f -exec sed -i '' -e "s/RESET_COLOR/RESET_COLOR/g" {} \;

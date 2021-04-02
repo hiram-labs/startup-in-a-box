@@ -1,6 +1,7 @@
 FROM google/cloud-sdk:alpine
 
-RUN apk --update add openjdk7 jq curl openssl tree gettext --no-cache 
+RUN apk update
+RUN apk add openjdk7 jq curl openssl tree gettext --no-cache 
 RUN gcloud components install app-engine-java kubectl beta
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
     && chmod +x get_helm.sh && ./get_helm.sh

@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -12,6 +12,6 @@ chalk prompt 101 () {
     # echo -e "${GREEN}Thanks for using chalk CLI${RESET_COLOR}"
 }
 
-prompt_missing_arg () {
+chalk prompt 102 () {
     echo -e "${RED}Please provide an argument${RESET_COLOR}"
 }

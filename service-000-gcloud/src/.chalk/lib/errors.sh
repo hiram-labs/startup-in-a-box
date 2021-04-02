@@ -1,16 +1,33 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
-# TODO:
-# set up error hints for all commands
+ERROR_MESSAGE="unknown error!"
 
-echo -e "${RED}error_config with args${RESET_COLOR}: $*"
+style_error_message() {
+    echo -e "${RED}$ERROR_MESSAGE${RESET_STYLE}" >&2
+}
 
-# return 1 - normal return for break
-# exit 1 - error and send to error script
-# error 101 - unknown flag
-# error 102 - missing ip argument
-# error 103 - missing setup argument
-# error 104 - missing namespace argument
+case $* in
+101)
+    ERROR_MESSAGE="Unknown flag"
+    ;;
+102)
+    ERROR_MESSAGE="Missing IP address as argument"
+    ;;
+103)
+    ERROR_MESSAGE="Missing argument [ install | uninstall | upgrade ]"
+    ;;
+104)
+    ERROR_MESSAGE="Missing namespace argument"
+    ;;
+105)
+    ERROR_MESSAGE="Missing argument [ cluster | connect | static-ip ]"
+    ;;
+106)
+    ERROR_MESSAGE="Missing argument [ metrics | volumes | services | resources | controllers ]"
+    ;;
+esac
+
+style_error_message

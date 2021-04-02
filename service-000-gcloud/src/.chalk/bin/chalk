@@ -9,7 +9,6 @@
 . ~/.profile
 
 if [ -z "$CHALK_STATUS" ]; then
-    SCRIPTS_DEFAULT_PATH=/usr/src/service-000-gcloud/scripts/shell
     PROFILE_FILE=$HOME/.profile
     LIB_RESOURCES="UTILS_LIB=/usr/src/service-000-gcloud/scripts/shell/chalk/lib
         . \$UTILS_LIB/env.sh

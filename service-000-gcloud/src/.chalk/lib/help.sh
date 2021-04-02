@@ -1,18 +1,17 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
 ################################################################################
-#                              scriptTemplate                                  #
+#                              Chalk Selenium CLI                              #
 #                                                                              #
-# Use this template as the beginning of a new program. Place a short           #
-# description of the script here.                                              #
+# Containerised development environment for managing                          #
+# gcloud kubernetes cluster                                                    #
+#                                                                              #
 #                                                                              #
 # Change History                                                               #
-# 11/11/2019  David Both    Original code. This is a template for creating     #
-#                           new Bash shell scripts.                            #
-#                           Add new history entries as needed.                 #
+# 01/01/2020  Owusu K    Original code.                                        #
 #                                                                              #
 #                                                                              #
 ################################################################################
@@ -20,7 +19,7 @@
 ################################################################################
 #                                                                              #
 #  Copyright (C) 2021 Owusu K                                                  #
-#  LinuxGeek46@both.org                                                        #
+#  hiramlabs.com                                                               #
 #                                                                              #
 #  This program is free software; you can redistribute it and/or modify        #
 #  it under the terms of the GNU General Public License as published by        #
@@ -45,15 +44,18 @@
 ################################################################################
 help_fn() {
     chalk prompt 101
-    echo "Add description of the script functions here."
-    echo
-    echo "Syntax: scriptTemplate [-g|h|t|v|V]"
-    echo "options:"
-    echo "  g     Print the GPL license notification."
-    echo "  h     Print this Help."
-    echo "  v     Verbose mode."
-    echo "  V     Print software version and exit."
-    echo
+    echo -e "Chalk commands to make gcloud cluster management a breeze"
+    echo -e
+    echo -e "${YELLOW}gcloud${RESET_STYLE}"
+    echo -e "    python init      Start python dev environment with pipenv  "
+    echo -e "                     managing dependencies.                    "
+    echo -e "                                                               "
+    echo -e "    python pretty    Prettifies all python files in /python    "
+    echo -e "                                                               "
+    echo -e "    python isort     Sort all python imports in /python        "
+    echo -e "                                                               "
+    echo -e "    python lint      Lint all python files in /python          "
+    echo -e
 }
 
 ################################################################################

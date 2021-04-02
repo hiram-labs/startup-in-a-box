@@ -1,11 +1,11 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
 # catch no arguments errors
 if [ $# -eq 0 ]; then
-    prompt_missing_arg
+    chalk prompt 102
     return 1
 fi
 
@@ -39,6 +39,6 @@ fi
 
 # catch invalid arguments errors
 if [ -n $1 ]; then
-    . $SCRIPTS/chalk/config/errors.sh "$@"
+    chalk error 105
     return 1
 fi

@@ -6,7 +6,7 @@
 ################################################################################
 #                              Chalk Selenium CLI                              #
 #                                                                              #
-# Containerised developer environment for writing  and testing selenium        #
+# Containerised development environment for writing  and testing selenium      #
 # automation tasks                                                             #
 #                                                                              #
 # Change History                                                               #
@@ -45,7 +45,7 @@ help_fn() {
     chalk prompt 101
     echo -e "Chalk commands to make Selenium automation a breeze"
     echo -e
-    echo -e "${YELLOW}Selenium${RESET_STYLE}"
+    echo -e "${YELLOW}selenium${RESET_STYLE}"
     echo -e "    python init      Start python dev environment with pipenv  "
     echo -e "                     managing dependencies.                    "
     echo -e "                                                               "

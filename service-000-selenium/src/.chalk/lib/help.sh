@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -42,16 +42,18 @@
 # Help                                                                         #
 ################################################################################
 help_fn() {
-    prompt_intro_msg
+    chalk prompt 101
     echo -e "Chalk commands to make Selenium automation a breeze"
     echo -e
     echo -e "${YELLOW}Selenium${RESET_STYLE}"
     echo -e "    python init      Start python dev environment with pipenv  "
     echo -e "                     managing dependencies.                    "
     echo -e "                                                               "
-    echo -e "    python pretty    Prettifies all python files in /src       "
+    echo -e "    python pretty    Prettifies all python files in /python    "
     echo -e "                                                               "
-    echo -e "    python isort     Sort all python imports in /src           "
+    echo -e "    python isort     Sort all python imports in /python        "
+    echo -e "                                                               "
+    echo -e "    python lint      Lint all python files in /python          "
     echo -e
 }
 

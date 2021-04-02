@@ -16,7 +16,7 @@ if [ -z "$CHALK_STATUS" ]; then
     LIB_RESOURCES="LIB_PATH=/usr/src/service-000-selenium/src/.chalk/lib
         . \$LIB_PATH/env.sh
         . \$LIB_PATH/utils.sh
-        . \$LIB_PATH/prompts.sh
+        . \$LIB_PATH/prompt.sh
         "
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
@@ -40,20 +40,27 @@ else
     fi
 
     # handle selenium python commands
-    if [ "$1" = "selenium" ] && [ "$2" = "python" ]; then
+    if [ "$1" = "selenium" ] && [ "$2" = "python" ] || [ "$1" = "python" ]; then
         shift
-        shift
+        [ "$1" = "python" ] && shift
         . "$SCRIPTS"/parse-python-commands.sh "$@"
         tear_down
         return 1
     fi
 
     # handle selenium javascript commands
-    if [ "$1" = "selenium" ] && [ "$2" = "javascript" ]; then
+    if [ "$1" = "selenium" ] && [ "$2" = "javascript" ] || [ "$1" = "javascript" ]; then
         shift
-        shift
+        [ "$1" = "javascript" ] && shift
         . "$SCRIPTS"/parse-javascript-commands.sh "$@"
         tear_down
+        return 1
+    fi
+
+    # handle prompt commands
+    if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then
+        shift
+        . "$LIB_PATH"/prompt.sh "$@"
         return 1
     fi
 
@@ -61,12 +68,10 @@ else
     if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
         shift
         . "$LIB_PATH"/error.sh "$@"
-        tear_down
         return 1
     fi
 
     # catch all errors
-    . "$LIB_PATH"/error.sh "$@"
-    tear_down
+    . "$LIB_PATH"/error.sh 101
     return 1
 fi

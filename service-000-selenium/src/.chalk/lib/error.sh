@@ -1,14 +1,24 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
-# TODO:
-# set up error hints for all commands
+ERROR_MESSAGE="unknown error!"
 
-echo -e "${RED}error_config with args${RESET_STYLE}: $*"
+style_error_message() {
+    echo -e "${RED}$ERROR_MESSAGE${RESET_STYLE}" >&2
+}
 
-# return 1 - normal return for break
-# exit 1 - error and send to error script
+case $* in
+101)
+    ERROR_MESSAGE="Missing argument [ selenium python | selenium javascript | python | javascript ]"
+    ;;
+102)
+    ERROR_MESSAGE="Python file structure has been changed please revert back to original!"
+    ;;
+103)
+    ERROR_MESSAGE="Missing argument [ init | pretty | isort | lint ]"
+    ;;
+esac
 
-# find . -type f -exec sed -i 's/RESET_STYLE/RESET_STYLE/g' {} \;
+style_error_message

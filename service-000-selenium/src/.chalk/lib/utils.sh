@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -13,10 +13,10 @@ tear_down() {
 wait_for_grid() {
     while ! curl -sSL "$SELENIUM_HUB_URL" 2>&1 |
         jq -r '.value.ready' 2>&1 | grep "true" >/dev/null; do
-        prompt_selenium_hub_not_ready >&2
+        chalk prompt 102
         sleep 3
     done
-    prompt_selenium_hub_ready
+    chalk prompt 103
 }
 
 replace_all_instances_of_sting() {

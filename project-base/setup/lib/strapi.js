@@ -13,11 +13,11 @@ const {
 const root = process.cwd();
 
 module.exports = async (answers) => {
-  const targetFiles = ["package.json"];
+  const targetFiles = ["package"];
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../../data/strapi/_${file}`))
+      .readFileSync(path.join(__dirname, `../../data/strapi/${file}.json`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);

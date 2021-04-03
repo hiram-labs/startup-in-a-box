@@ -6,7 +6,7 @@
 # TODO:
 # add clean up functionality
 tear_down() {
-    echo cleaning up...
+    echo -e "\n${BLUE}cleaning up...${RESET_STYLE}"
     return 1
 }
 

@@ -13,6 +13,7 @@ services:
       - VNC_NO_PASSWORD=1
     ports:
       - "6900:5900"
+    profiles: ["grid"]
 
   edge:
     image: selenium/node-edge:4.0.0-beta-3-prerelease-20210329
@@ -27,6 +28,7 @@ services:
       - VNC_NO_PASSWORD=1
     ports:
       - "6901:5900"
+    profiles: ["grid"]
 
   firefox:
     image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210329
@@ -41,6 +43,7 @@ services:
       - VNC_NO_PASSWORD=1
     ports:
       - "6902:5900"
+    profiles: ["grid"]
 
   opera:
     image: selenium/node-opera:4.0.0-beta-3-prerelease-20210329
@@ -55,6 +58,7 @@ services:
       - VNC_NO_PASSWORD=1
     ports:
       - "6903:5900"
+    profiles: ["grid"]
 
   selenium-hub:
     image: selenium/hub:4.0.0-beta-3-prerelease-20210329
@@ -63,4 +67,28 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    profiles: ["grid"]
+
+  selenium-report:
+    image: caddy:2.3.0-alpine
+    restart: unless-stopped
+    ports:
+      - "6904:443"
+    volumes:
+      - ../../service-000-selenium/src/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ../../service-000-selenium/src/caddy/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    profiles: ["grid"]
+
+  selenium-worker:
+    build:
+      context: ../../service-000-selenium
+      dockerfile: Dockerfile-development
+    container_name: selenium-worker
+    profiles: ["worker"]
+
+volumes:
+  caddy_data:
+  caddy_config:
 # vnc password is "secrets" but disabled in this compose yml

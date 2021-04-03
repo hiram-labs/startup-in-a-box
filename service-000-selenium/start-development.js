@@ -6,12 +6,7 @@ const seleniumComposeFile = path.join(
   "../project-base/docker/compose-selenium.yml"
 );
 
-const workerComposeFile = path.join(
-  __dirname,
-  "../project-base/docker/compose-selenium-worker.yml"
-);
-
-const localVolume = path.join(__dirname, "../service-000-selenium/src");
+const workerLocalVolume = path.join(__dirname, "../service-000-selenium/src");
 
 const installDependencies = spawn("yarn", [`install:selenium:dependencies`], {
   stdio: [process.stdin, process.stdout, process.stderr],
@@ -20,7 +15,15 @@ const installDependencies = spawn("yarn", [`install:selenium:dependencies`], {
 installDependencies.on("close", (code) => {
   const seleniumContainer = spawn(
     "docker-compose",
-    [`-f`, seleniumComposeFile, `up`, `--remove-orphans`, `-d`],
+    [
+      `-f`,
+      seleniumComposeFile,
+      `--profile`,
+      `grid`,
+      `up`,
+      `--remove-orphans`,
+      `-d`,
+    ],
     {
       stdio: [process.stdin, process.stdout, process.stderr],
     }
@@ -31,13 +34,13 @@ installDependencies.on("close", (code) => {
       "docker-compose",
       [
         `-f`,
-        workerComposeFile,
+        seleniumComposeFile,
         `run`,
         `--rm`,
         `--name`,
         `selenium-worker`,
         `--volume`,
-        `${localVolume}:/usr/src/service-000-selenium/src`,
+        `${workerLocalVolume}:/usr/src/service-000-selenium/src`,
         `selenium-worker`,
         `sh`,
         `-c`,

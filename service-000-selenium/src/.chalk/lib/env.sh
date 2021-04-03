@@ -24,10 +24,11 @@ UNDERLINE_FONT='\033[4m'
 RESET_STYLE='\033[0m'
 
 SH_PATH=/usr/src/service-000-selenium/src/.chalk/sh
+
 PYTHON_ROOT=/usr/src/service-000-selenium/src/python
-PYTHON_TESTS=/usr/src/service-000-selenium/src/python/tests
+PYTHON_UNITTEST=/usr/src/service-000-selenium/src/python/unittest
+
 JAVASCRIPT_ROOT=/usr/src/service-000-selenium/src/javascript
-JAVASCRIPT_TESTS=/usr/src/service-000-selenium/src/javascript/tests
 
 SELENIUM_HUB_URL=http://selenium-hub:4444/wd/hub/status
 set +a

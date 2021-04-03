@@ -54,6 +54,8 @@ help_fn() {
     echo -e "    python isort     Sort all python imports in /python        "
     echo -e "                                                               "
     echo -e "    python lint      Lint all python files in /python          "
+    echo -e "                                                               "
+    echo -e "    python unittest  Run unittest module                       "
     echo -e
 }
 

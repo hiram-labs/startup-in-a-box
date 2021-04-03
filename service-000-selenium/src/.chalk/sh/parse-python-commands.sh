@@ -28,4 +28,9 @@ if [ "$1" = "lint" ]; then
     return 1
 fi
 
+if [ "$1" = "unittest" ]; then
+    pipenv run python "$PYTHON_UNITTEST"/__init__.py
+    return 1
+fi
+
 chalk error 103

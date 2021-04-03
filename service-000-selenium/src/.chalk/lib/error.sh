@@ -17,7 +17,7 @@ case $* in
     ERROR_MESSAGE="Python file structure has been changed please revert back to original!"
     ;;
 103)
-    ERROR_MESSAGE="Missing argument [ init | pretty | isort | lint ]"
+    ERROR_MESSAGE="Missing argument [ init | pretty | isort | lint | unittest ]"
     ;;
 esac
 

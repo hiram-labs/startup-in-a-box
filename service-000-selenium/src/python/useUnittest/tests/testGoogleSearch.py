@@ -48,7 +48,7 @@ class TestGoogleSearch(unittest.TestCase):
         title_arr = self.driver.title.split("-")
         self.assertEqual(title_arr[0].strip(), search_term)
 
-        time.sleep(10)
+        # time.sleep(10)
 
 
 if __name__ == "__main__":

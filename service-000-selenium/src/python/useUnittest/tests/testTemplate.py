@@ -19,10 +19,10 @@ class TestTemplate(unittest.TestCase):
     def tearDownClass(cls):
         cls.browser.quit_driver()
 
-    def test_one(self):
+    def test_template_one(self):
         self.assertTrue(self.driver.current_url)
 
-    def test_two(self):
+    def test_template_two(self):
         self.assertTrue(self.driver.title)
 
 

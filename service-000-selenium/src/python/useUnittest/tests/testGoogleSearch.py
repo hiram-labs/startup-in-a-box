@@ -23,7 +23,7 @@ class TestGoogleSearch(unittest.TestCase):
     def tearDownClass(cls):
         cls.browser.quit_driver()
 
-    def test_one(self):
+    def test_search_action(self):
         data = Yaml(
             "/usr/src/service-000-selenium/src/python/useUnittest/data/google.yml"
         ).read()

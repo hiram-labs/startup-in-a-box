@@ -26,7 +26,7 @@ RESET_STYLE='\033[0m'
 SH_PATH=/usr/src/service-000-selenium/src/.chalk/sh
 
 PYTHON_ROOT=/usr/src/service-000-selenium/src/python
-PYTHON_UNITTEST=/usr/src/service-000-selenium/src/python/unittest
+PYTHON_UNITTEST=/usr/src/service-000-selenium/src/python/useUnittest
 
 JAVASCRIPT_ROOT=/usr/src/service-000-selenium/src/javascript
 

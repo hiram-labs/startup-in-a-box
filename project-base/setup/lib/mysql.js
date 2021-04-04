@@ -7,17 +7,17 @@ const { populateConfigFile } = require("../../utils");
 const root = process.cwd();
 
 module.exports = async (answers) => {
-  const targetFiles = ["package.json"];
+  const targetFiles = ["package"];
 
   targetFiles.forEach((file) => {
     const configFile = fs
-      .readFileSync(path.join(__dirname, `../../data/mysql/_${file}`))
+      .readFileSync(path.join(__dirname, `../../data/mysql/${file}`))
       .toString();
 
     const customisedConfigFile = populateConfigFile(answers, configFile);
 
     fs.writeFileSync(
-      path.join(root, `./service-000-mysql/${file}`),
+      path.join(root, `./service-000-mysql/${file}.json`),
       customisedConfigFile
     );
   });

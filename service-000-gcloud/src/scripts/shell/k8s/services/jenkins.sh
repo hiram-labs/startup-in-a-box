@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -40,8 +40,8 @@ if [ "$LAST_ARG" =  "install" ]
             jenkins/jenkins \
             && progress_indicator long \
             && JENKINS_PASSWORD=$(kubectl exec --namespace jenkins -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo) \
-            && echo -e "${BLUE}Admin username:${RESET_COLOR} admin" \
-            && echo -e "${BLUE}Admin password:${RESET_COLOR} ${JENKINS_PASSWORD}" \
+            && echo -e "${BLUE}Admin username:${RESET_STYLE} admin" \
+            && echo -e "${BLUE}Admin password:${RESET_STYLE} ${JENKINS_PASSWORD}" \
             && kubectl get svc -n jenkins
         return 1
 fi

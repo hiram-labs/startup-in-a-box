@@ -1,11 +1,11 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
 
-ERPNEXT_SECRETS_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-db-secrets-manifest.yml
+ERPNEXT_SECRETS_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/erpnext-db-secrets-manifest.yml
 VALUES_ENV_INJECTED="$HELM_VALUES"/erpnext-env-injected.yml
 inject_env_vars_yml "$HELM_VALUES"/erpnext.yml
 

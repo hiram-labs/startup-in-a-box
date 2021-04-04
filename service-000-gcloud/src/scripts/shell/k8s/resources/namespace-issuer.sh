@@ -1,10 +1,10 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
-NAMESPACE_ISSUER_MANIFEST="$SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
+NAMESPACE_ISSUER_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/namespace-issuer-manifest.yml
 
 parse_general_flags "$@"
 # throws error if no namespace is provided

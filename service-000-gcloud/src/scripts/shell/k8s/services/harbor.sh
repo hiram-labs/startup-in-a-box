@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -39,8 +39,8 @@ if [ "$LAST_ARG" =  "install" ]
             --namespace harbor \
             harbor/harbor \
             && progress_indicator long \
-            && echo -e "${BLUE}Admin username:${RESET_COLOR} admin" \
-            && echo -e "${BLUE}Admin password:${RESET_COLOR} Harbor12345" \
+            && echo -e "${BLUE}Admin username:${RESET_STYLE} admin" \
+            && echo -e "${BLUE}Admin password:${RESET_STYLE} Harbor12345" \
             && kubectl get svc -n harbor
         return 1
 fi

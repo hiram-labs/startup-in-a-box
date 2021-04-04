@@ -1,10 +1,10 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
 
 eval LAST_ARG=\"\$\{$#\}\"
-ERPNEXT_INGRESS_MANIFEST="$SCRIPTS"/k8s/resources/erpnext-ingress-manifest.yml
+ERPNEXT_INGRESS_MANIFEST="$SHELL_SCRIPTS"/k8s/resources/erpnext-ingress-manifest.yml
 
 cat <<EOF > "$ERPNEXT_INGRESS_MANIFEST"
 apiVersion: networking.k8s.io/v1beta1

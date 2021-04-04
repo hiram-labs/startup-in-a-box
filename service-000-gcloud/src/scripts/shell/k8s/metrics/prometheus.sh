@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 # set -x
 # set -euo pipefail
@@ -46,7 +46,7 @@ if [ "$LAST_ARG" =  "install" ]
             --namespace prometheus \
             prometheus-community/kube-prometheus-stack \
             && progress_indicator long \
-            && echo -e "${BLUE}Grafana username:${RESET_COLOR} admin"\
-            && echo -e "${BLUE}Grafana password:${RESET_COLOR} prom-operator"
+            && echo -e "${BLUE}Grafana username:${RESET_STYLE} admin"\
+            && echo -e "${BLUE}Grafana password:${RESET_STYLE} prom-operator"
         return 1
 fi

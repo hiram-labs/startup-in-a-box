@@ -1,0 +1,7 @@
+text:
+  search_term: "recursive"
+elements:
+  inputs:
+    search_input: "//body/div[1]/div[3]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/input[1]"
+  buttons:
+    i_agree_button: "//body[1]/div[2]/div[2]/div[3]/span[1]/div[1]/div[1]/div[3]/button[2]"

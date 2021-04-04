@@ -4,6 +4,8 @@ from selenium.webdriver import Remote
 
 
 class Driver:
+    # TODO:
+    # move user defined variables to central location
     def __init__(
         self,
         targetUrl="http://google.com",
@@ -23,8 +25,7 @@ class Driver:
                 "javascriptEnabled": True,
             },
         )
-        # self.driver.get(self.targetUrl)
-        # self.driver.quit()
+        self.driver.get(self.targetUrl)
 
     def quit_driver(self):
         if self.driver is not None:

@@ -1,3 +1,6 @@
+# TODO:
+# use env for url 
+
 localhost
 
 root * /srv

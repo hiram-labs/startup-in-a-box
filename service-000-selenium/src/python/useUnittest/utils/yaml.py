@@ -15,7 +15,7 @@ class Yaml:
 
     def write(self, data="empty"):
         if self.filePath is not None:
-            with io.open(self.filePath, "w", encoding="utf8") as outfile:
+            with open(self.filePath, "w", encoding="utf8") as outfile:
                 yaml.dump(data, outfile, default_flow_style=False, allow_unicode=True)
 
 

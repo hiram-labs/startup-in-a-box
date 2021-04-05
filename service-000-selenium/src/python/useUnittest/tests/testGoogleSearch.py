@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import unittest
-
 import time
+import unittest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -25,7 +24,7 @@ class TestGoogleSearch(unittest.TestCase):
 
     def test_search_action(self):
         data = Yaml(
-            "/usr/src/service-000-selenium/src/python/useUnittest/data/google.yml"
+            "/usr/src/service-000-selenium/src/python/useUnittest/data/testGoogleSearch.yml"
         ).read()
 
         i_agree_button = data["elements"]["buttons"]["i_agree_button"]
@@ -48,7 +47,7 @@ class TestGoogleSearch(unittest.TestCase):
         title_arr = self.driver.title.split("-")
         self.assertEqual(title_arr[0].strip(), search_term)
 
-        # time.sleep(10)
+        time.sleep(10)
 
 
 if __name__ == "__main__":

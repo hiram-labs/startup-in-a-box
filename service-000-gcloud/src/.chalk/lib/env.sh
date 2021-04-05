@@ -29,6 +29,7 @@ HELM_VALUES=/usr/src/service-000-gcloud/src/values
 HELM_SECRETS=/usr/src/service-000-gcloud/src/secrets
 GCLOUD_SECRETS=/usr/src/service-000-gcloud/src/secrets
 
-LETSENCRYPT_EMAIL=hiram.labs@gmail.com
-REGISTERED_DOMAIN=hiramlabs.com
+LETSENCRYPT_EMAIL=jo.blog@email.com
+REGISTERED_DOMAIN=example.com
 set +a
+

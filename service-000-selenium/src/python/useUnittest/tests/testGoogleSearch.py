@@ -27,25 +27,25 @@ class TestGoogleSearch(unittest.TestCase):
             "/usr/src/service-000-selenium/src/python/useUnittest/data/testGoogleSearch.yml"
         ).read()
 
-        i_agree_button = data["elements"]["buttons"]["i_agree_button"]
-        search_input = data["elements"]["inputs"]["search_input"]
-        search_term = data["text"]["search_term"]
+        I_AGREE_BUTTON = data["elements"]["buttons"]["i_agree_button"]
+        SEARCH_INPUT = data["elements"]["inputs"]["search_input"]
+        SEARCH_TERM = data["text"]["search_term"]
 
         # accept t&c
         self.current_selection = self.driver.find_element(
             By.XPATH,
-            i_agree_button,
+            I_AGREE_BUTTON,
         ).click()
 
         # make a simple search
         self.current_selection = self.driver.find_element(
             By.XPATH,
-            search_input,
-        ).send_keys(search_term + Keys.ENTER)
+            SEARCH_INPUT,
+        ).send_keys(SEARCH_TERM + Keys.ENTER)
 
         # perform test
         title_arr = self.driver.title.split("-")
-        self.assertEqual(title_arr[0].strip(), search_term)
+        self.assertEqual(title_arr[0].strip(), SEARCH_TERM)
 
         time.sleep(10)
 

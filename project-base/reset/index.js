@@ -31,17 +31,16 @@ module.exports = async (serviceName, answers) => {
     isResetStorybook && (await resetStorybook(answers));
     isResetStrapi && (await resetStrapi(answers));
     isResetMysql && (await resetMysql(answers));
-    return;
+  } else {
+    await resetGatsby(answers);
+    await resetGcloud(answers);
+    await resetIonic(answers);
+    await resetSelenium(answers);
+    await resetStorybook(answers);
+    await resetStrapi(answers);
+    await resetMysql(answers);
+    await resetEnv(answers);
   }
-
-  await resetGatsby(answers);
-  await resetGcloud(answers);
-  await resetIonic(answers);
-  await resetSelenium(answers);
-  await resetStorybook(answers);
-  await resetStrapi(answers);
-  await resetMysql(answers);
-  await resetEnv(answers);
 
   await removeServicesDependencies();
   spinner.stop();

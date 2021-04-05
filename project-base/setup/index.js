@@ -31,17 +31,16 @@ module.exports = async (serviceName, answers) => {
     isSetupStorybook && (await setupStorybook(answers));
     isSetupStrapi && (await setupStrapi(answers));
     isSetupMysql && (await setupMysql(answers));
-    return;
+  } else {
+    await setupGatsby(answers);
+    await setupGcloud(answers);
+    await setupIonic(answers);
+    await setupSelenium(answers);
+    await setupStorybook(answers);
+    await setupStrapi(answers);
+    await setupMysql(answers);
+    await setupEnv(answers);
   }
-
-  await setupGatsby(answers);
-  await setupGcloud(answers);
-  await setupIonic(answers);
-  await setupSelenium(answers);
-  await setupStorybook(answers);
-  await setupStrapi(answers);
-  await setupMysql(answers);
-  await setupEnv(answers);
 
   spinner.stop();
 };

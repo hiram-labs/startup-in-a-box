@@ -9,6 +9,9 @@ pytest = "*"
 behave = "*"
 robotframework = "*"
 beautifulsoup4 = "*"
+autopep8 = "*"
+pyyaml = "*"
+html-testrunner = "*"
 
 [dev-packages]
 black = "*"

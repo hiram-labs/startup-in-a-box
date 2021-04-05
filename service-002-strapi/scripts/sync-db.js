@@ -47,7 +47,7 @@ const connectToDB = () =>
     }
   });
 
-disconnectFromDB = () =>
+const disconnectFromDB = () =>
   new Promise((resolve) => {
     connection.end(() => {
       console.log("sync-db connection to db closed.");

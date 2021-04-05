@@ -24,6 +24,7 @@ if [ "$1" = "isort" ]; then
 fi
 
 if [ "$1" = "lint" ]; then
+    [ "$2" = "--fix" ] && pipenv run autopep8 --in-place --aggressive --recursive .
     pipenv run flake8 .
     return 1
 fi

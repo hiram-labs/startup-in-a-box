@@ -1,0 +1,15 @@
+ARG node_env
+
+FROM mysql:8.0
+
+RUN printf "# chalk initialiser\n" >> /root/.profile
+
+ENV MYSQL_ROOT_PASSWORD=p4ssw0rd
+ENV PATH=/usr/src/service-000-mysql/src/.chalk/bin:$PATH
+
+WORKDIR /usr/src/service-000-mysql
+
+COPY . ./
+
+RUN find . -type f -iname "*.sh" -exec chmod +x {} \;
+RUN find . -type f -iname "chalk" -exec chmod +x {} \;

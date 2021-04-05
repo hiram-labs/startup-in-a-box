@@ -2,4 +2,3 @@ node_modules
 .DS_Store
 .vscode
 .env*
-service-000-gcloud/secrets/gcloud-key.json

@@ -5,9 +5,9 @@ FROM mysql:8.0
 RUN printf "# chalk initialiser\n" >> /root/.profile
 
 ENV MYSQL_ROOT_PASSWORD=p4ssw0rd
-ENV PATH=/usr/src/service-000-mysql/src/.chalk/bin:$PATH
+ENV PATH=/usr/src/mysql/src/.chalk/bin:$PATH
 
-WORKDIR /usr/src/service-000-mysql
+WORKDIR /usr/src/mysql
 
 COPY . ./
 

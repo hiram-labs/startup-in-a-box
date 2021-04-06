@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:6006"
     volumes:
-      - ../../service-000-storybook:/usr/src/service-000-storybook
+      - ../../service-000-storybook:/usr/src/storybook
     env_file:
       - ../env/storybook/dev.env
 
@@ -23,7 +23,7 @@ services:
     ports:
       - "8001:8000"
     volumes:
-      - ../../service-001-gatsby:/usr/src/service-001-gatsby
+      - ../../service-001-gatsby:/usr/src/gatsby
     env_file:
       - ../env/gatsby/dev.env
 

@@ -40,7 +40,7 @@ installDependencies.on("close", (code) => {
         `--name`,
         `selenium-worker`,
         `--volume`,
-        `${workerLocalVolume}:/usr/src/service-000-selenium/src`,
+        `${workerLocalVolume}:/usr/src/selenium/src`,
         `selenium-worker`,
         `sh`,
         `-c`,

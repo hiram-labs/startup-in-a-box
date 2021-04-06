@@ -20,9 +20,9 @@ RUN printf "# chalk initialiser\n" >> /root/.profile
 ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk
 ENV PATH=$JAVA_HOME/bin:$PATH
 ENV PATH=/root/.krew/bin:$PATH
-ENV PATH=/usr/src/service-000-gcloud/src/.chalk/bin:$PATH
+ENV PATH=/usr/src/gcloud/src/.chalk/bin:$PATH
 
-WORKDIR /usr/src/service-000-gcloud
+WORKDIR /usr/src/gcloud
 
 COPY . ./
 

@@ -10,7 +10,7 @@
 
 if [ -z "$CHALK_STATUS" ]; then
     PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-mysql/src/.chalk/lib
+    LIB_RESOURCES="LIB_PATH=/usr/src/mysql/src/.chalk/lib
         . \$LIB_PATH/env.sh
         . \$LIB_PATH/utils.sh
         . \$LIB_PATH/prompt.sh
@@ -24,7 +24,7 @@ if [ -z "$CHALK_STATUS" ]; then
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
-    shift
+    [ "$#" -ne 0 ] && shift
     . "$LIB_PATH"/help.sh "$@"
     return 1
 else
@@ -37,14 +37,14 @@ else
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/prompt.sh "$@"
         return 1
     fi
 
     # handle error commands
     if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/error.sh "$@"
         return 1
     fi

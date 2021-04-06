@@ -3,7 +3,7 @@ ARG node_env
 FROM node:12.18.3 AS build
 
 # Setting working directory. All the path will be relative to WORKDIR
-WORKDIR /usr/src/service-001-gatsby
+WORKDIR /usr/src/gatsby
 
 # Set NODE_ENV to the value from host
 ENV NODE_ENV=$node_env
@@ -20,4 +20,4 @@ RUN yarn clean && yarn build
 
 # Serve static with nginx
 FROM nginx
-COPY --from=build ./usr/src/service-001-gatsby/public /usr/share/nginx/html
+COPY --from=build ./usr/src/gatsby/public /usr/share/nginx/html

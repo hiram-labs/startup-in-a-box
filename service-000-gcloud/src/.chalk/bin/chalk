@@ -10,7 +10,7 @@
 
 if [ -z "$CHALK_STATUS" ]; then
     PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-gcloud/src/.chalk/lib
+    LIB_RESOURCES="LIB_PATH=/usr/src/gcloud/src/.chalk/lib
         . \$LIB_PATH/env.sh
         . \$LIB_PATH/utils.sh
         . \$LIB_PATH/prompt.sh

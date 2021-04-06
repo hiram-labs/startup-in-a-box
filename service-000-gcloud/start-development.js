@@ -23,7 +23,7 @@ installDependencies.on("close", (code) => {
       `--name`,
       `gcloud`,
       `--volume`,
-      `${localVolume}:/usr/src/service-000-gcloud/src`,
+      `${localVolume}:/usr/src/gcloud/src`,
       `gcloud`,
       `sh`,
       `-c`,

@@ -3,7 +3,7 @@ ARG node_env
 FROM node:12.18.3
 
 # Setting working directory. All the path will be relative to WORKDIR
-WORKDIR /usr/src/service-001-gatsby
+WORKDIR /usr/src/gatsby
 
 # Set NODE_ENV to the value from host
 ENV NODE_ENV=$node_env

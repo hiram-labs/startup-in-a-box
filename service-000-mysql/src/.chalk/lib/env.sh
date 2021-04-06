@@ -1,9 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
-
-# shellcheck disable=SC2034
 
 set -a
 CHALK_STATUS=true
@@ -23,5 +21,7 @@ UNDERLINE_FONT='\033[4m'
 
 RESET_STYLE='\033[0m'
 
-SH_PATH=/usr/src/selenium/src/.chalk/sh
+PKG_PATH=/usr/src/mysql/src/.chalk/pkg
+DUMP_PATH=/usr/src/mysql/src/dump
+BACKUP_PATH=/usr/src/mysql/src/backup
 set +a

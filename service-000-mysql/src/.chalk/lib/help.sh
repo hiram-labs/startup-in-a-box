@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
 
 ################################################################################
-#                              Chalk Selenium CLI                              #
+#                              Chalk Mysql CLI                                 #
 #                                                                              #
-# Containerised development environment for writing  and testing selenium      #
-# automation tasks                                                             #
+# Containerised development environment for a mysql database with access to    #
+# the debian core                                                              #
 #                                                                              #
 # Change History                                                               #
 # 01/01/2020  Owusu K    Original code.                                        #
@@ -43,20 +43,17 @@
 ################################################################################
 help_fn() {
     chalk prompt 101
-    echo -e "Chalk commands to make Selenium automation a breeze"
+    echo -e "Chalk commands to make Mysql automation a breeze"
     echo -e
-    echo -e "${YELLOW}selenium${RESET_STYLE}"
-    echo -e "    python init      Start python dev environment with pipenv  "
-    echo -e "                     managing dependencies.                    "
-    echo -e "                                                               "
-    echo -e "    python pretty    Prettifies all python files in /python    "
-    echo -e "                                                               "
-    echo -e "    python isort     Sort all python imports in /python        "
-    echo -e "                                                               "
-    echo -e "    python lint      Lint all python files in /python          "
-    echo -e "                       [ --fix ] to force Pep8 rules           "
-    echo -e "                                                               "
-    echo -e "    python unittest  Run unittest module                       "
+    echo -e "${YELLOW}mysql${RESET_STYLE}"
+    echo -e "    client           Starts mysql client interface as root       "
+    echo -e "                                                                 "
+    echo -e "    populate         Push a *.sql file into an existing database "
+    echo -e "                     [/src/dump]                                 "
+    echo -e "                                                                 "
+    echo -e "    backup           Save an existing database to a *.sql file   "
+    echo -e "                     [/src/backup]                               "
+    echo -e "                                                                 "
     echo -e
 }
 

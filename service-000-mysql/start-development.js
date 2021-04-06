@@ -2,6 +2,7 @@ const { spawn } = require("child_process");
 const path = require("path");
 
 let isComposeUpComplete = false;
+let isContainerRunning = false;
 let startShellAttempts = 0;
 const [, , flag] = process.argv;
 
@@ -37,21 +38,22 @@ const startShell = () => {
     `mysql_db`,
   ]);
   checkContainerStatus.stdout.on("data", (data) => {
-    const isContainerRunning = `${data}`.trim() === "'true'";
+    isContainerRunning = `${data}`.trim() === "'true'";
     if (isContainerRunning && isComposeUpComplete && startShellAttempts < 15) {
       // start the shell once container is available
       console.log("🚀 Starting shell!");
       const containerShell = spawn(
         "docker",
-        [`exec`, `-it`, `mysql_db`, `sh`],
+        [`exec`, `-it`, `mysql_db`, `/bin/bash`, `--login`],
         {
           stdio: [process.stdin, process.stdout, process.stderr],
         }
       );
       containerShell.on("close", (code) => {
         console.log("Shell exited with code", code);
+        spawn("yarn", [`stop:database:container`]);
       });
-    } else {
+    } else if (startShellAttempts < 15) {
       // recursively check for availability of container
       console.log("⌛ Waiting for the Container!");
       startShellAttempts++;

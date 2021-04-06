@@ -12,7 +12,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql_db:/var/lib/mysql_db
+      - mysql_db:/var/lib/mysql
 
   service-000-storybook:
     build:

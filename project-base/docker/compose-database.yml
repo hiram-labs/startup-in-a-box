@@ -28,4 +28,3 @@ volumes:
 # server: mysql_db
 # username: root
 # password: p4ssw0rd
-# find ./ -type f -exec sed -i '' -e "s/\/usr\/src\/service\-003\-/\/usr\/src\//" {} \;

@@ -37,7 +37,7 @@ services:
       - "8002:1337"
       - "8003:8000"
     volumes:
-      - ../../service-002-strapi:/usr/source/service-002-strapi
+      - ../../service-002-strapi:/usr/source/strapi
     env_file:
       - ../env/strapi/dev.env
     depends_on:

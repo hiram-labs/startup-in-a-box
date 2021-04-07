@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -14,7 +14,7 @@ helm repo update
 if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall nginx -n nginx 
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -25,7 +25,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 3.24.0 \
             --namespace nginx \
             ingress-nginx/ingress-nginx 
-        return 1
+        exit 0
 fi
 
 # throws error if no IP is provided
@@ -48,7 +48,7 @@ if [ "$LAST_ARG" =  "install" ]
             ingress-nginx/ingress-nginx \
             && progress_indicator long \
             && kubectl get svc -n nginx
-        return 1
+        exit 0
 fi
 
 

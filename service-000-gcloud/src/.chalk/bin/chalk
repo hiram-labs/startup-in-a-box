@@ -1,32 +1,31 @@
-#!/bin/sh
-
-# shellcheck disable=SC2240
-# shellcheck disable=SC1090
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
 
-. ~/.profile
+. ~/.chalkrc
 
 if [ -z "$CHALK_STATUS" ]; then
-    PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/gcloud/src/.chalk/lib
-        . \$LIB_PATH/env.sh
-        . \$LIB_PATH/utils.sh
-        . \$LIB_PATH/prompt.sh
-        "
+    PROFILE_FILE=$HOME/.chalkrc
+    LIB_RESOURCES="
+LIB_PATH=/usr/src/gcloud/src/.chalk/lib
+. \$LIB_PATH/utils.sh
+. \$LIB_PATH/prompt.sh
+
+set -a
+CHALK_STATUS=true
+set +a
+"
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
     sleep 3
-
-    chalk init
-    exec sh
+    exec chalk init
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
-    shift
+    [ "$#" -ne 0 ] && shift
     . "$LIB_PATH"/help.sh "$@"
-    return 1
+    exit 0
 else
 
     # handle chalk initialisation
@@ -34,42 +33,42 @@ else
         chalk gcloud init
         chalk Help
         chalk prompt 103
-        return 1
+        exit 0
     fi
 
     # handle gcloud commands
     if [ "$1" = "gcloud" ]; then
-        shift
-        . "$SH_PATH"/gcloud.sh "$@"
-        clean_all_temp_files
-        return 1
+        [ "$#" -ne 0 ] && shift
+        . "$PKG_PATH"/parse-gcloud-commands.sh "$@"
+        clean_up
+        exit 0
     fi
 
     # handle install / uninstall of services and resources
     if [ "$1" = "cluster" ] || [ "$1" = "install" ] || [ "$1" = "uninstall" ] || [ "$1" = "upgrade" ]; then
         [ "$1" = "cluster" ] && [ -n "$2" ] && shift
         SETUP_ACTION="$1"
-        shift
-        . "$SH_PATH"/setup.sh "$@" "$SETUP_ACTION"
-        clean_all_temp_files
-        return 1
+        [ "$#" -ne 0 ] && shift
+        . "$PKG_PATH"/parse-setup-commands.sh "$@" "$SETUP_ACTION"
+        clean_up
+        exit 0
     fi
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/prompt.sh "$@"
-        return 1
+        exit 0
     fi
 
     # handle error commands
     if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/error.sh "$@"
-        return 1
+        exit 0
     fi
 
     # catch all errors
     . "$LIB_PATH"/error.sh 107
-    return 1
+    exit 0
 fi

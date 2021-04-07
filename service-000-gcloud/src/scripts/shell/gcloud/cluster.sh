@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -8,7 +8,7 @@ CLUSTER_NAME=default
 if [ -n "$1" ]
     then
         CLUSTER_NAME=$1
-        shift
+        [ "$#" -ne 0 ] && shift
 fi
 
 gcloud container clusters create $CLUSTER_NAME "$@" \

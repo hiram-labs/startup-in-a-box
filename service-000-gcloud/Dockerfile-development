@@ -15,7 +15,9 @@ RUN cd "$(mktemp -d)" \
     && tar zxvf krew.tar.gz \
     && KREW=./krew-"${OS}_${ARCH}" \
     && "$KREW" install krew
-RUN printf "# chalk initialiser\n" >> /root/.profile
+RUN printf "# chalk resources\n" >> /root/.chalkrc
+RUN printf "PATH=/usr/src/gcloud/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
+
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk
 ENV PATH=$JAVA_HOME/bin:$PATH

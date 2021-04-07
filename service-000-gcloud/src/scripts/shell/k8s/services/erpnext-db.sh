@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -17,7 +17,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
         && kubectl delete pvc data-erpnext-mariadb-0 -n erpnext \
         && kubectl delete pvc erpnext -n erpnext \
         && kubectl delete pvc erpnext-logs -n erpnext
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -27,7 +27,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --atomic \
             --namespace erpnext \
             bitnami/mariadb 
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -40,5 +40,5 @@ if [ "$LAST_ARG" =  "install" ]
             bitnami/mariadb \
             && progress_indicator long \
             && kubectl get svc -n erpnext
-        return 1
+        exit 0
 fi

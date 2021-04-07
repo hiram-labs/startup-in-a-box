@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -15,7 +15,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall jenkins -n jenkins \
             && kubectl delete pvc jenkins -n jenkins
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -26,7 +26,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 3.2.2 \
             --namespace jenkins \
             jenkins/jenkins
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -43,5 +43,5 @@ if [ "$LAST_ARG" =  "install" ]
             && echo -e "${BLUE}Admin username:${RESET_STYLE} admin" \
             && echo -e "${BLUE}Admin password:${RESET_STYLE} ${JENKINS_PASSWORD}" \
             && kubectl get svc -n jenkins
-        return 1
+        exit 0
 fi

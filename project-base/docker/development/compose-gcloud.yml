@@ -5,6 +5,11 @@ services:
     build:
       context: ../../../service-000-gcloud
       dockerfile: Dockerfile-development
+    image: chalk/gcloud:latest
+    stdin_open: true
+    tty: true
     container_name: gcloud
+    volumes:
+      - ../../../service-000-gcloud:/usr/src/gcloud
     env_file:
       - ../../env/gcloud/dev.env

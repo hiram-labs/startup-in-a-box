@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -12,31 +12,31 @@ parse_general_flags () {
         case $key in
             -ip|--ingressIP)
             export INGRESS_IP="$2"
-            shift
-            shift
+            [ "$#" -ne 0 ] && shift
+            [ "$#" -ne 0 ] && shift
             ;;
             -ns|--namespace)
             export PROJECT_NAMESPACE="$2"
-            shift
-            shift
+            [ "$#" -ne 0 ] && shift
+            [ "$#" -ne 0 ] && shift
             ;;
             -pn|--projectName)
             export PROJECT_ID="$2"
-            shift
-            shift
+            [ "$#" -ne 0 ] && shift
+            [ "$#" -ne 0 ] && shift
             ;;
             -rg|--region)
             export PROJECT_REGION="$2"
-            shift
-            shift
+            [ "$#" -ne 0 ] && shift
+            [ "$#" -ne 0 ] && shift
             ;;
             -z|--zone)
             export PROJECT_ZONE="$2"
-            shift
-            shift
+            [ "$#" -ne 0 ] && shift
+            [ "$#" -ne 0 ] && shift
             ;;
             install|uninstall|upgrade)
-            shift
+            [ "$#" -ne 0 ] && shift
             ;;
             *)
             chalk error 101
@@ -50,7 +50,7 @@ inject_env_vars_yml () {
     envsubst "$(printf '${%s} ' $(env | sed 's/=.*//'))" < "$1" > "$TEMP_DESTINATION" 
 }
 
-clean_all_temp_files () {
+clean_up () {
     find / -name "*-env-injected.yml" -delete
 }
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -23,7 +23,7 @@ UNDERLINE_FONT='\033[4m'
 
 RESET_STYLE='\033[0m'
 
-SH_PATH=/usr/src/gcloud/src/.chalk/sh
+PKG_PATH=/usr/src/gcloud/src/.chalk/sh
 SHELL_SCRIPTS=/usr/src/gcloud/src/scripts/shell
 HELM_VALUES=/usr/src/gcloud/src/values
 HELM_SECRETS=/usr/src/gcloud/src/secrets

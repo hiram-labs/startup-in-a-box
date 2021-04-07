@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -38,7 +38,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
         kubectl delete -f "$ERPNEXT_INGRESS_MANIFEST" -n erpnext \
           && kubectl delete secrets erpnext-tls-secret -n erpnext \
           && rm "$ERPNEXT_INGRESS_MANIFEST"
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
@@ -49,5 +49,5 @@ if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
         && rm "$ERPNEXT_INGRESS_MANIFEST" \
         && kubectl get ingress erpnext-ingress -n erpnext \
         && kubectl describe certificate -n erpnext
-        return 1
+        exit 0
 fi

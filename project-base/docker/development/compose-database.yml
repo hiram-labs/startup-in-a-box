@@ -5,6 +5,7 @@ services:
     build:
       context: ../../../service-000-mysql
       dockerfile: Dockerfile-development
+    image: chalk/mysql:latest
     container_name: mysql_db
     restart: always
     ports:

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -15,7 +15,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall harbor -n harbor \
             && kubectl delete pvc harbor -n harbor
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -26,7 +26,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 1.5.4 \
             --namespace harbor \
             harbor/harbor
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -42,5 +42,5 @@ if [ "$LAST_ARG" =  "install" ]
             && echo -e "${BLUE}Admin username:${RESET_STYLE} admin" \
             && echo -e "${BLUE}Admin password:${RESET_STYLE} Harbor12345" \
             && kubectl get svc -n harbor
-        return 1
+        exit 0
 fi

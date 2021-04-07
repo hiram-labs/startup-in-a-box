@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -17,7 +17,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
             && kubectl delete pvc data-gitea-0 -n  gitea \
             && kubectl delete pvc data-gitea-mysql-master-0 -n gitea \
             && kubectl delete pvc data-gitea-mysql-slave-0 -n gitea
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" = "upgrade" ]
@@ -28,7 +28,7 @@ if [ "$LAST_ARG" = "upgrade" ]
             --version 2.1.2 \
             --namespace gitea \
             gitea-charts/gitea 
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -46,7 +46,7 @@ if [ "$LAST_ARG" =  "install" ]
             && echo -e "${BLUE}email:${RESET_STYLE} gitea@local.domain" \
             && echo -e "${BLUE}password:${RESET_STYLE} r8sA8CPHD9!bt6d" \
             && kubectl get svc -n gitea
-        return 1
+        exit 0
 fi
 
 # kubectl exec -n gitea --stdin --tty gitea-0 -- /bin/bash

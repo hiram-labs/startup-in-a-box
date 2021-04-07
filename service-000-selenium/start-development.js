@@ -4,7 +4,7 @@ const path = require("path");
 let isComposeUpComplete = false;
 let isContainerRunning = false;
 let startShellAttempts = 0;
-let numAttempts = 15;
+let numAttempts = 25;
 let timeout = 10000;
 const [, , flag] = process.argv;
 
@@ -28,7 +28,7 @@ installDependencies.on("close", (code) => {
 
   seleniumContainer.on("close", (code) => {
     isComposeUpComplete = true;
-    console.log("Development server exited with code", code);
+    console.log("🛑 Development server exited with code", code);
   });
 });
 
@@ -57,7 +57,7 @@ const startShell = () => {
       );
       containerShell.on("close", (code) => {
         console.log(
-          `Shell exited with code: ${code}\n\nTaking down containers ...`
+          `🛑 Shell exited with code: ${code}\n\n🏗️ Taking down containers ...`
         );
         spawn("yarn", [`stop:selenium:container`]);
       });

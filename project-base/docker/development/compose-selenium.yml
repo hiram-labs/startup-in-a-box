@@ -2,6 +2,7 @@ version: "3.7"
 services:
   chrome:
     image: selenium/node-chrome:4.0.0-beta-3-prerelease-20210329
+    container_name: selenium-chrome
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -16,6 +17,7 @@ services:
 
   edge:
     image: selenium/node-edge:4.0.0-beta-3-prerelease-20210329
+    container_name: selenium-edge
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -30,6 +32,7 @@ services:
 
   firefox:
     image: selenium/node-firefox:4.0.0-beta-3-prerelease-20210329
+    container_name: selenium-firefox
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -44,6 +47,7 @@ services:
 
   opera:
     image: selenium/node-opera:4.0.0-beta-3-prerelease-20210329
+    container_name: selenium-opera
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
@@ -67,6 +71,7 @@ services:
   selenium-report:
     image: caddy:2.3.0-alpine
     restart: unless-stopped
+    container_name: selenium-report
     ports:
       - "6904:443"
     volumes:
@@ -79,6 +84,7 @@ services:
     build:
       context: ../../../service-000-selenium
       dockerfile: Dockerfile-development
+    image: chalk/selenium:latest
     stdin_open: true
     tty: true
     container_name: selenium-worker

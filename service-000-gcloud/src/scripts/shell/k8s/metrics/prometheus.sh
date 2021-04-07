@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -22,7 +22,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
         kubectl delete crd prometheusrules.monitoring.coreos.com
         kubectl delete crd servicemonitors.monitoring.coreos.com
         kubectl delete crd thanosrulers.monitoring.coreos.com
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -33,7 +33,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 14.4.0 \
             --namespace prometheus \
             prometheus-community/kube-prometheus-stack
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -48,5 +48,5 @@ if [ "$LAST_ARG" =  "install" ]
             && progress_indicator long \
             && echo -e "${BLUE}Grafana username:${RESET_STYLE} admin"\
             && echo -e "${BLUE}Grafana password:${RESET_STYLE} prom-operator"
-        return 1
+        exit 0
 fi

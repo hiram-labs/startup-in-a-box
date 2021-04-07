@@ -1,19 +1,17 @@
 ARG node_env
 
-FROM node:12.18.3
+FROM mhart/alpine-node:12
 
-# Setting working directory. All the path will be relative to WORKDIR
+RUN apk update
+RUN apk add bash git build-base jq curl openssl tree gettext --no-cache 
+RUN printf "# chalk resources\n" >> /root/.chalkrc
+RUN printf "PATH=/usr/src/storybook/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
+
+ENV PATH=/usr/src/storybook/src/.chalk/bin:$PATH
+
 WORKDIR /usr/src/storybook
 
-# Set NODE_ENV to the value from host
-ENV NODE_ENV=$node_env
-
-# Copying source files
 COPY . ./
 
-# Installing dependencies
-RUN yarn install --pure-lockfile
-
-
-# Building app
-RUN yarn build-storybook
+RUN find . -type f -iname "*.sh" -exec chmod +x {} \;
+RUN find . -type f -iname "chalk" -exec chmod +x {} \;

@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  storybook:
+    build:
+      context: ../../../service-000-storybook
+      dockerfile: Dockerfile-development
+    image: chalk/storybook:latest
+    stdin_open: true
+    tty: true
+    container_name: storybook
+    ports:
+      - "6099:6006"
+    volumes:
+      - ../../../service-000-storybook:/usr/src/storybook
+    env_file:
+      - ../../env/storybook/dev.env
+
+  storybook-dist:
+    image: caddy:2.3.0-alpine
+    restart: unless-stopped
+    container_name: storybook-dist
+    ports:
+      - "6007:443"
+    volumes:
+      - ../../../service-000-storybook/src/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ../../../service-000-storybook/src/caddy/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

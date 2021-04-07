@@ -10,7 +10,7 @@ const [, , flag] = process.argv;
 
 const dockerComposeFile = path.join(
   __dirname,
-  "../project-base/docker/development/compose-database.yml"
+  "../project-base/docker/development/compose-mysql.yml"
 );
 
 const installDependencies = spawn("yarn", [`install:mysql:dependencies`], {
@@ -59,7 +59,7 @@ const startShell = () => {
         console.log(
           `🛑 Shell exited with code: ${code}\n\n🏗️ Taking down containers ...`
         );
-        spawn("yarn", [`stop:database:container`]);
+        spawn("yarn", [`stop:mysql:container`]);
       });
     } else if (startShellAttempts < numAttempts) {
       // recursively check for availability of container

@@ -1,0 +1,19 @@
+ARG node_env
+
+FROM node:12.18.3
+
+# Setting working directory. All the path will be relative to WORKDIR
+WORKDIR /usr/src/storybook
+
+# Set NODE_ENV to the value from host
+ENV NODE_ENV=$node_env
+
+# Copying source files
+COPY . ./
+
+# Installing dependencies
+RUN yarn install --pure-lockfile
+
+
+# Building app
+RUN yarn build-storybook

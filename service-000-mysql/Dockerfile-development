@@ -1,6 +1,6 @@
 ARG node_env
 
-FROM mysql:8.0
+FROM mysql:5.7
 
 RUN apt-get update \ 
     && apt-get install -y curl git tree vim \
@@ -8,6 +8,7 @@ RUN apt-get update \
 RUN printf "# chalk resources\n" >> /root/.chalkrc
 RUN printf "PATH=/usr/src/mysql/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
 
+ENV MYSQL_DATABASE=base_db
 ENV MYSQL_ROOT_USERNAME=root
 ENV MYSQL_ROOT_PASSWORD=p4ssw0rd
 ENV CREDENTIALS_FILE=/root/.credentials

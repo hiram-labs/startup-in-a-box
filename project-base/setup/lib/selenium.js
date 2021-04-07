@@ -7,7 +7,7 @@ const { populateConfigFile } = require("../../utils");
 const root = process.cwd();
 
 module.exports = async (answers) => {
-  const targetFiles = ["package", "env"];
+  const targetFiles = ["package"];
 
   targetFiles.forEach((file) => {
     const configFile = fs
@@ -16,15 +16,9 @@ module.exports = async (answers) => {
 
     const customisedConfigFile = populateConfigFile(answers, configFile);
 
-    file === targetFiles[0] &&
-      fs.writeFileSync(
-        path.join(root, `./service-000-selenium/${file}.json`),
-        customisedConfigFile
-      );
-    file === targetFiles[1] &&
-      fs.writeFileSync(
-        path.join(root, `./service-000-selenium/src/.chalk/lib/${file}.sh`),
-        customisedConfigFile
-      );
+    fs.writeFileSync(
+      path.join(root, `./service-000-selenium/${file}.json`),
+      customisedConfigFile
+    );
   });
 };

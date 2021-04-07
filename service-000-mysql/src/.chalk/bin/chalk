@@ -11,9 +11,12 @@ if [ -z "$CHALK_STATUS" ]; then
     PROFILE_FILE=$HOME/.chalkrc
     LIB_RESOURCES="
 LIB_PATH=/usr/src/mysql/src/.chalk/lib
-. \$LIB_PATH/env.sh
 . \$LIB_PATH/utils.sh
 . \$LIB_PATH/prompt.sh
+
+set -a
+CHALK_STATUS=true
+set +a
 "
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"

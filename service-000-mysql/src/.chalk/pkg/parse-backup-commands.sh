@@ -4,7 +4,7 @@
 # set -euo pipefail
 
 if [ -n "$1" ]; then
-    CURRENT_DATE=$(date +'%Y-%m-%d')
+    CURRENT_DATE=$(date +'%Y-%m-%d-%H-%M')
     check_database_existence "$1"
 
     if [ "$?" -eq 0 ]; then

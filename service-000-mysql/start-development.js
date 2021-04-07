@@ -8,7 +8,7 @@ const [, , flag] = process.argv;
 
 const dockerComposeFile = path.join(
   __dirname,
-  "../project-base/docker/compose-database.yml"
+  "../project-base/docker/development/compose-database.yml"
 );
 
 const installDependencies = spawn("yarn", [`install:mysql:dependencies`], {

@@ -3,7 +3,7 @@ const path = require("path");
 
 const seleniumComposeFile = path.join(
   __dirname,
-  "../project-base/docker/compose-selenium.yml"
+  "../project-base/docker/development/compose-selenium.yml"
 );
 
 const workerLocalVolume = path.join(__dirname, "../service-000-selenium/src");

@@ -3,7 +3,7 @@ const path = require("path");
 
 const dockerComposeFile = path.join(
   __dirname,
-  "../project-base/docker/compose-gcloud.yml"
+  "../project-base/docker/development/compose-gcloud.yml"
 );
 
 const localVolume = path.join(__dirname, "../service-000-gcloud/src");

@@ -75,17 +75,19 @@ services:
     ports:
       - "6904:443"
     volumes:
-      - ../../service-000-selenium/src/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ../../service-000-selenium/src/caddy/site:/srv
+      - ../../../service-000-selenium/src/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ../../../service-000-selenium/src/caddy/site:/srv
       - caddy_data:/data
       - caddy_config:/config
     profiles: ["grid"]
 
   selenium-worker:
     build:
-      context: ../../service-000-selenium
+      context: ../../../service-000-selenium
       dockerfile: Dockerfile-development
     container_name: selenium-worker
+    env_file:
+      - ../../env/selenium/dev.env
     profiles: ["worker"]
 
 volumes:

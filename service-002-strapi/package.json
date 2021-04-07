@@ -2,8 +2,8 @@
   "name": "service-002-strapi",
   "private": true,
   "version": "1.0.0",
-  "description": "A cool startup company!",
-  "author": "Jo Blog  <jo.blog@email.com>",
+  "description": "{{companyDescription}}",
+  "author": "{{maintainerName}} <{{maintainerEmail}}>",
   "scripts": {
     "start": "strapi start",
     "build": "strapi build",
@@ -44,8 +44,8 @@
   },
   "license": "MIT",
   "customMeta": {
-    "gtagID": "G-xxxxxx",
-    "companyName": "My Startup",
-    "companyNameShort": "mys"
+    "gtagID": "{{gtagID}}",
+    "companyName": "{{companyName}}",
+    "companyNameShort": "{{companyNameShort}}"
   }
 }

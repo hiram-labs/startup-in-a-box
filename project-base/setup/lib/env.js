@@ -24,7 +24,7 @@ const targetFiles = [
   "./service-000-mysql/.env",
 ];
 
-module.exports = async (answers) => {
+module.exports = async (serviceName, answers) => {
   sourceFiles.forEach((file, index) => {
     fs.copyFile(
       path.join(__dirname, file),

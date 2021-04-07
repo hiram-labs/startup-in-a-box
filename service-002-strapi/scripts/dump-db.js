@@ -3,7 +3,7 @@ const path = require("path");
 
 const backupPath = path.join(
   __dirname,
-  "../../service-000-mysql/backup/init.sql"
+  "../../service-000-mysql/src/backup/strapi.sql"
 );
 
 mysqldump({

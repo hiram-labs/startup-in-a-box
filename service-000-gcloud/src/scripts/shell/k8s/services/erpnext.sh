@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -34,7 +34,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
             && create_db_secrets_manifest \
             && kubectl delete -n erpnext -f "$ERPNEXT_SECRETS_MANIFEST" \
             && cleanup_db_secrets_manifest
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -45,7 +45,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 2.1.8 \
             --namespace erpnext \
             frappe/erpnext
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -62,5 +62,5 @@ if [ "$LAST_ARG" =  "install" ]
             && kubectl create -n erpnext -f "$ERPNEXT_SECRETS_MANIFEST" \
             && cleanup_db_secrets_manifest \
             && kubectl get svc -n erpnext
-        return 1
+        exit 0
 fi

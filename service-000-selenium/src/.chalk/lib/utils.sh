@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
 
 # TODO:
 # add clean up functionality
-tear_down() {
+clean_up() {
     echo -e "\n${BLUE}cleaning up...${RESET_STYLE}"
-    return 1
+    exit 0
 }
 
 wait_for_grid() {

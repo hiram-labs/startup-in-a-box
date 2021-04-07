@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -11,13 +11,13 @@ style_error_message() {
 
 case $* in
 101)
-    ERROR_MESSAGE="Missing argument [ selenium python | selenium javascript | python | javascript ]"
+    ERROR_MESSAGE="Missing / Invalid argument [ mysql client |  mysql populate | mysql backup | client | populate | backup ]"
     ;;
 102)
-    ERROR_MESSAGE="Python file structure has been changed please revert back to original!"
+    ERROR_MESSAGE="Missing / Invalid argument [ <database name> ] [ <file> ]"
     ;;
 103)
-    ERROR_MESSAGE="Missing argument [ init | pretty | isort | lint | unittest ]"
+    ERROR_MESSAGE="Missing / Invalid argument [ <database name> ] [ optional <dirname/filename.ext> ]"
     ;;
 esac
 

@@ -13,7 +13,6 @@ const resetMysql = require("./lib/mysql");
 module.exports = async (serviceName, answers) => {
   const spinner = ora(progressFinishing()).start();
 
-  const isResetEnv = serviceName === "env";
   const isResetGatsby = serviceName === "gatsby";
   const isResetGcloud = serviceName === "gcloud";
   const isResetIonic = serviceName === "ionic";
@@ -23,7 +22,6 @@ module.exports = async (serviceName, answers) => {
   const isResetMysql = serviceName === "mysql";
 
   if (serviceName) {
-    isResetEnv && (await resetEnv(answers));
     isResetGatsby && (await resetGatsby(answers));
     isResetGcloud && (await resetGcloud(answers));
     isResetIonic && (await resetIonic(answers));
@@ -39,9 +37,9 @@ module.exports = async (serviceName, answers) => {
     await resetStorybook(answers);
     await resetStrapi(answers);
     await resetMysql(answers);
-    await resetEnv(answers);
   }
 
+  await resetEnv(serviceName, answers);
   await removeServicesDependencies();
   spinner.stop();
 };

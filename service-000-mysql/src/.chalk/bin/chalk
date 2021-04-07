@@ -1,55 +1,83 @@
-#!/bin/sh
-
-# shellcheck disable=SC2240
-# shellcheck disable=SC1090
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
 
-. ~/.profile
+# shellcheck source=s../lib/env.sh
+
+. ~/.chalkrc
 
 if [ -z "$CHALK_STATUS" ]; then
-    PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-mysql/src/.chalk/lib
-        . \$LIB_PATH/env.sh
-        . \$LIB_PATH/utils.sh
-        . \$LIB_PATH/prompt.sh
-        "
+    PROFILE_FILE=$HOME/.chalkrc
+    LIB_RESOURCES="
+LIB_PATH=/usr/src/mysql/src/.chalk/lib
+. \$LIB_PATH/utils.sh
+. \$LIB_PATH/prompt.sh
+
+set -a
+CHALK_STATUS=true
+set +a
+"
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
     sleep 3
-
-    chalk init
-    exec sh
+    exec chalk init
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
-    shift
+    [ "$#" -ne 0 ] && shift
     . "$LIB_PATH"/help.sh "$@"
-    return 1
+    exit 0
 else
 
     # handle chalk initialisation
     if [ "$1" = "init" ]; then
         chalk Help
-        return 1
+        exit 0
     fi
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/prompt.sh "$@"
-        return 1
+        exit 0
+    fi
+
+    # handle mysql populate commands
+    if [ "$1" = "mysql" ] && [ "$2" = "client" ] || [ "$1" = "client" ]; then
+        [ "$#" -ne 0 ] && shift
+        [ "$1" = "client" ] && shift
+        mysql --defaults-extra-file="$CREDENTIALS_FILE"
+        clean_up
+        exit 0
+    fi
+
+    # handle mysql populate commands
+    if [ "$1" = "mysql" ] && [ "$2" = "populate" ] || [ "$1" = "populate" ]; then
+        [ "$#" -ne 0 ] && shift
+        [ "$1" = "populate" ] && shift
+        . "$PKG_PATH"/parse-populate-commands.sh "$@"
+        clean_up
+        exit 0
+    fi
+
+    # handle mysql backup commands
+    if [ "$1" = "mysql" ] && [ "$2" = "backup" ] || [ "$1" = "backup" ]; then
+        [ "$#" -ne 0 ] && shift
+        [ "$1" = "backup" ] && shift
+        . "$PKG_PATH"/parse-backup-commands.sh "$@"
+        clean_up
+        exit 0
     fi
 
     # handle error commands
     if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/error.sh "$@"
-        return 1
+        exit 0
     fi
 
     # catch all errors
     . "$LIB_PATH"/error.sh 101
-    return 1
+    exit 0
 fi

@@ -1,8 +1,0 @@
-version: "3.7"
-
-services:
-  gcloud:
-    build:
-      context: ../../service-000-gcloud
-      dockerfile: Dockerfile-development
-    container_name: gcloud

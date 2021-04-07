@@ -24,7 +24,7 @@ class TestGoogleSearch(unittest.TestCase):
 
     def test_search_action(self):
         data = Yaml(
-            "/usr/src/service-000-selenium/src/python/useUnittest/data/testGoogleSearch.yml"
+            "/usr/src/selenium/src/python/useUnittest/data/testGoogleSearch.yml"
         ).read()
 
         I_AGREE_BUTTON = data["elements"]["buttons"]["i_agree_button"]

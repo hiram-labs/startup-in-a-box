@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -27,7 +27,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
     then
         kubectl delete -f "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && rm "$CLUSTER_STAGING_ISSUER_MANIFEST"
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
@@ -36,5 +36,5 @@ if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
           && progress_indicator short \
           && rm "$CLUSTER_STAGING_ISSUER_MANIFEST" \
           && kubectl describe ClusterIssuer letsencrypt-staging
-        return 1
+        exit 0
 fi

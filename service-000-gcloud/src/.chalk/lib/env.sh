@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -23,11 +23,11 @@ UNDERLINE_FONT='\033[4m'
 
 RESET_STYLE='\033[0m'
 
-SH_PATH=/usr/src/service-000-gcloud/src/.chalk/sh
-SHELL_SCRIPTS=/usr/src/service-000-gcloud/src/scripts/shell
-HELM_VALUES=/usr/src/service-000-gcloud/src/values
-HELM_SECRETS=/usr/src/service-000-gcloud/src/secrets
-GCLOUD_SECRETS=/usr/src/service-000-gcloud/src/secrets
+PKG_PATH=/usr/src/gcloud/src/.chalk/sh
+SHELL_SCRIPTS=/usr/src/gcloud/src/scripts/shell
+HELM_VALUES=/usr/src/gcloud/src/values
+HELM_SECRETS=/usr/src/gcloud/src/secrets
+GCLOUD_SECRETS=/usr/src/gcloud/src/secrets
 
 LETSENCRYPT_EMAIL=jo.blog@email.com
 REGISTERED_DOMAIN=example.com

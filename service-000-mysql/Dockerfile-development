@@ -1,13 +1,25 @@
 ARG node_env
 
-FROM mysql:8.0
+FROM mysql:5.7
 
-RUN printf "# chalk initialiser\n" >> /root/.profile
+RUN apt-get update \ 
+    && apt-get install -y curl git tree vim \
+    && apt-get clean 
+RUN printf "# chalk resources\n" >> /root/.chalkrc
+RUN printf "PATH=/usr/src/mysql/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
 
+ENV MYSQL_DATABASE=base_db
+ENV MYSQL_ROOT_USERNAME=root
 ENV MYSQL_ROOT_PASSWORD=p4ssw0rd
-ENV PATH=/usr/src/service-000-mysql/src/.chalk/bin:$PATH
+ENV CREDENTIALS_FILE=/root/.credentials
+ENV PATH=/usr/src/mysql/src/.chalk/bin:$PATH
 
-WORKDIR /usr/src/service-000-mysql
+RUN echo "[client]" > $CREDENTIALS_FILE \
+    && echo "user=$MYSQL_ROOT_USERNAME" >> $CREDENTIALS_FILE \
+    && echo "password=$MYSQL_ROOT_PASSWORD" >> $CREDENTIALS_FILE \
+    && echo "host=127.0.0.1" >> $CREDENTIALS_FILE 
+
+WORKDIR /usr/src/mysql
 
 COPY . ./
 

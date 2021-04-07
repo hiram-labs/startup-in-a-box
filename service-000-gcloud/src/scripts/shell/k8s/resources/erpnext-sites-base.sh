@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -100,7 +100,7 @@ if [ "$LAST_ARG" =  "uninstall" ]
           && kubectl delete -f "$ERPNEXT_DROP_SITE_WORKER_MANIFEST" -n erpnext \
           && rm "$ERPNEXT_ADD_SITE_WORKER_MANIFEST" \
           && rm "$ERPNEXT_DROP_SITE_WORKER_MANIFEST"
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
@@ -112,5 +112,5 @@ if [ "$LAST_ARG" =  "install" ] || [ "$LAST_ARG" =  "upgrade" ]
           && echo -e "${BLUE}username:${RESET_STYLE} $ADMIN_USERNAME" \
           && echo -e "${BLUE}email:${RESET_STYLE} $ADMIN_PASSWORD" \
           && kubectl get ingress -n erpnext
-        return 1
+        exit 0
 fi

@@ -1,74 +1,73 @@
-#!/bin/sh
-
-# shellcheck disable=SC2240
-# shellcheck disable=SC1090
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
 
-. ~/.profile
+. ~/.chalkrc
 
 if [ -z "$CHALK_STATUS" ]; then
-    PROFILE_FILE=$HOME/.profile
-    LIB_RESOURCES="LIB_PATH=/usr/src/service-000-selenium/src/.chalk/lib
-        . \$LIB_PATH/env.sh
-        . \$LIB_PATH/utils.sh
-        . \$LIB_PATH/prompt.sh
-        "
+    PROFILE_FILE=$HOME/.chalkrc
+    LIB_RESOURCES="
+LIB_PATH=/usr/src/selenium/src/.chalk/lib
+. \$LIB_PATH/utils.sh
+. \$LIB_PATH/prompt.sh
+
+set -a
+CHALK_STATUS=true
+set +a
+    "
 
     printf "%s" "$LIB_RESOURCES" >>"$PROFILE_FILE"
     sleep 3
-
-    chalk init
-    exec sh
+    exec chalk init
 fi
 
 if [ -z "$1" ] || [ "$1" = "help" ] || [ "$1" = "Help" ]; then
-    shift
+    [ "$#" -ne 0 ] && shift
     . "$LIB_PATH"/help.sh "$@"
-    return 1
+    exit 0
 else
 
     # handle chalk initialisation
     if [ "$1" = "init" ]; then
         wait_for_grid
         chalk Help
-        return 1
+        exit 0
     fi
 
     # handle selenium python commands
     if [ "$1" = "selenium" ] && [ "$2" = "python" ] || [ "$1" = "python" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         [ "$1" = "python" ] && shift
-        . "$SH_PATH"/parse-python-commands.sh "$@"
-        tear_down
-        return 1
+        . "$PKG_PATH"/parse-python-commands.sh "$@"
+        clean_up
+        exit 0
     fi
 
     # handle selenium javascript commands
     if [ "$1" = "selenium" ] && [ "$2" = "javascript" ] || [ "$1" = "javascript" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         [ "$1" = "javascript" ] && shift
-        . "$SH_PATH"/parse-javascript-commands.sh "$@"
-        tear_down
-        return 1
+        . "$PKG_PATH"/parse-javascript-commands.sh "$@"
+        clean_up
+        exit 0
     fi
 
     # handle prompt commands
     if [ "$1" = "prompt" ] || [ "$1" = "prompts" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/prompt.sh "$@"
-        return 1
+        exit 0
     fi
 
     # handle error commands
     if [ "$1" = "error" ] || [ "$1" = "errors" ]; then
-        shift
+        [ "$#" -ne 0 ] && shift
         . "$LIB_PATH"/error.sh "$@"
-        return 1
+        exit 0
     fi
 
     # catch all errors
     . "$LIB_PATH"/error.sh 101
-    return 1
+    exit 0
 fi

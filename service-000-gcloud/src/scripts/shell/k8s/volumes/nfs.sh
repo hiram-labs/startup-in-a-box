@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set -x
 # set -euo pipefail
@@ -14,7 +14,7 @@ helm repo update
 if [ "$LAST_ARG" =  "uninstall" ]
     then
         helm uninstall nfs -n nfs 
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "upgrade" ]
@@ -25,7 +25,7 @@ if [ "$LAST_ARG" =  "upgrade" ]
             --version 1.2.1 \
             --namespace nfs \
             kvaps/nfs-server-provisioner 
-        return 1
+        exit 0
 fi
 
 if [ "$LAST_ARG" =  "install" ]
@@ -40,5 +40,5 @@ if [ "$LAST_ARG" =  "install" ]
             && progress_indicator long \
             && kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}' \
             && kubectl get pvc -n nfs
-        return 1
+        exit 0
 fi

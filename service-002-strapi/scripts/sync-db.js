@@ -19,7 +19,9 @@ const connectionConfig = {
 const connection = mysql.createConnection(connectionConfig);
 const query = util.promisify(connection.query).bind(connection);
 const statements = fs
-  .readFileSync(path.join(__dirname, "../../service-000-mysql/backup/init.sql"))
+  .readFileSync(
+    path.join(__dirname, "../../service-000-mysql/src/backup/strapi.sql")
+  )
   .toString();
 
 let attempts = 0;
@@ -91,7 +93,7 @@ connectToDB()
       throw error;
     });
 
-    console.log("Running init.sql...");
+    console.log("Running strapi.sql...");
     await query(statements).catch((error) => {
       throw error;
     });

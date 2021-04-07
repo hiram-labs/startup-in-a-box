@@ -3,12 +3,11 @@ ARG node_env
 FROM nikolaik/python-nodejs:python3.9-nodejs12-alpine
 
 RUN apk update
-RUN apk add build-base jq curl openssl tree gettext --no-cache 
-RUN printf "# chalk initialiser\n" >> /root/.profile
+RUN apk add bash build-base jq curl openssl tree gettext --no-cache 
+RUN printf "# chalk resources\n" >> /root/.chalkrc
+RUN printf "PATH=/usr/src/selenium/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
 
 ENV PYTHONUNBUFFERED=1
-
-ENV NODE_ENV=$node_env
 ENV PATH=/usr/src/selenium/src/.chalk/bin:$PATH
 
 WORKDIR /usr/src/selenium

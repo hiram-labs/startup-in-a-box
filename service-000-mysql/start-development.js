@@ -50,7 +50,9 @@ const startShell = () => {
         }
       );
       containerShell.on("close", (code) => {
-        console.log("Shell exited with code", code);
+        console.log(
+          `Shell exited with code: ${code}\n\nTaking down containers ...`
+        );
         spawn("yarn", [`stop:database:container`]);
       });
     } else if (startShellAttempts < 15) {

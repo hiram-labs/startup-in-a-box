@@ -1,12 +1,17 @@
 const { spawn } = require("child_process");
 const path = require("path");
 
-const seleniumComposeFile = path.join(
+let isComposeUpComplete = false;
+let isContainerRunning = false;
+let startShellAttempts = 0;
+let numAttempts = 15;
+let timeout = 10000;
+const [, , flag] = process.argv;
+
+const dockerComposeFile = path.join(
   __dirname,
   "../project-base/docker/development/compose-selenium.yml"
 );
-
-const workerLocalVolume = path.join(__dirname, "../service-000-selenium/src");
 
 const installDependencies = spawn("yarn", [`install:selenium:dependencies`], {
   stdio: [process.stdin, process.stdout, process.stderr],
@@ -15,44 +20,55 @@ const installDependencies = spawn("yarn", [`install:selenium:dependencies`], {
 installDependencies.on("close", (code) => {
   const seleniumContainer = spawn(
     "docker-compose",
-    [
-      `-f`,
-      seleniumComposeFile,
-      `--profile`,
-      `grid`,
-      `up`,
-      `--remove-orphans`,
-      `-d`,
-    ],
+    [`-f`, dockerComposeFile, `up`, `-d`],
     {
       stdio: [process.stdin, process.stdout, process.stderr],
     }
   );
 
   seleniumContainer.on("close", (code) => {
-    const workerContainer = spawn(
-      "docker-compose",
-      [
-        `-f`,
-        seleniumComposeFile,
-        `run`,
-        `--rm`,
-        `--name`,
-        `selenium-worker`,
-        `--volume`,
-        `${workerLocalVolume}:/usr/src/selenium/src`,
-        `selenium-worker`,
-        `sh`,
-        `-c`,
-        `chalk`,
-      ],
-      {
-        stdio: [process.stdin, process.stdout, process.stderr],
-      }
-    );
-
-    workerContainer.on("close", (code) => {
-      console.log("Development server exited with code", code);
-    });
+    isComposeUpComplete = true;
+    console.log("Development server exited with code", code);
   });
 });
+
+const startShell = () => {
+  const checkContainerStatus = spawn("docker", [
+    `inspect`,
+    `--format`,
+    `'{{json .State.Running}}'`,
+    `selenium-hub`,
+  ]);
+  checkContainerStatus.stdout.on("data", (data) => {
+    isContainerRunning = `${data}`.trim() === "'true'";
+    if (
+      isContainerRunning &&
+      isComposeUpComplete &&
+      startShellAttempts < numAttempts
+    ) {
+      // start the shell once container is available
+      console.log("🚀 Starting shell!");
+      const containerShell = spawn(
+        "docker",
+        [`exec`, `-it`, `selenium-worker`, `/bin/bash`, `--login`],
+        {
+          stdio: [process.stdin, process.stdout, process.stderr],
+        }
+      );
+      containerShell.on("close", (code) => {
+        console.log(
+          `Shell exited with code: ${code}\n\nTaking down containers ...`
+        );
+        spawn("yarn", [`stop:selenium:container`]);
+      });
+    } else if (startShellAttempts < numAttempts) {
+      // recursively check for availability of container
+      console.log("⌛ Waiting for the Container!");
+      startShellAttempts++;
+      setTimeout(() => {
+        startShell();
+      }, timeout);
+    }
+  });
+};
+flag === "--shell" && startShell();

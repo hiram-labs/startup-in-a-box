@@ -13,7 +13,6 @@ const setupMysql = require("./lib/mysql");
 module.exports = async (serviceName, answers) => {
   const spinner = ora(progressFinishing()).start();
 
-  const isSetupEnv = serviceName === "env";
   const isSetupGatsby = serviceName === "gatsby";
   const isSetupGcloud = serviceName === "gcloud";
   const isSetupIonic = serviceName === "ionic";
@@ -23,7 +22,6 @@ module.exports = async (serviceName, answers) => {
   const isSetupMysql = serviceName === "mysql";
 
   if (serviceName) {
-    isSetupEnv && (await setupEnv(answers));
     isSetupGatsby && (await setupGatsby(answers));
     isSetupGcloud && (await setupGcloud(answers));
     isSetupIonic && (await setupIonic(answers));
@@ -39,8 +37,8 @@ module.exports = async (serviceName, answers) => {
     await setupStorybook(answers);
     await setupStrapi(answers);
     await setupMysql(answers);
-    await setupEnv(answers);
   }
 
+  await setupEnv(serviceName, answers);
   spinner.stop();
 };

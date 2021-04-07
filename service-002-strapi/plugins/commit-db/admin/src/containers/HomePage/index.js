@@ -45,9 +45,7 @@ const HomePage = () => {
           >
             Update dump file
           </p>
-          <p className="card-text">
-            Populate the init.sql file at the root of project with changes.
-          </p>
+          <p className="card-text">Populate the strapi.sql file.</p>
           <button
             type="button"
             className="p-2 btn btn-outline-primary"

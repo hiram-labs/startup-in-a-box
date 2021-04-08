@@ -6,7 +6,8 @@
 
 VNC Client
 
-Docker
+Docker 2.5.3 edge (new version seems to have a bug where yarn install inside containers running on mac is slow)
+https://github.com/docker/docker.github.io/blob/master/docker-for-mac/edge-release-notes.md
 
 #### Packages
 

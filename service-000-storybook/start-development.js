@@ -1,27 +1,5 @@
-// const { spawn } = require("child_process");
-
-// const installDependencies = spawn("yarn", ["install"], {
-//   stdio: [process.stdin, process.stdout, process.stderr],
-// });
-
-// installDependencies.on("close", (code) => {
-//   const startDevelopment = spawn("yarn", ["storybook"], {
-//     stdio: [process.stdin, process.stdout, process.stderr],
-//   });
-
-//   startDevelopment.on("close", (code) => {
-//     console.log("Development server exited with code", code);
-//   });
-// });
-
 const { spawn } = require("child_process");
 const path = require("path");
-
-let isComposeUpComplete = false;
-let isContainerRunning = false;
-let startShellAttempts = 0;
-let numAttempts = 25;
-let timeout = 10000;
 const [, , flag] = process.argv;
 
 const dockerComposeFile = path.join(
@@ -43,12 +21,15 @@ installDependencies.on("close", (code) => {
   );
 
   storybookContainer.on("close", (code) => {
-    isComposeUpComplete = true;
-    console.log("🛑 Development server exited with code", code);
+    flag === "--shell" && startShell();
   });
 });
 
 const startShell = () => {
+  let attempts = 0;
+  const numAttempts = 5;
+  const timeout = 1000;
+
   const checkContainerStatus = spawn("docker", [
     `inspect`,
     `--format`,
@@ -56,12 +37,8 @@ const startShell = () => {
     `storybook`,
   ]);
   checkContainerStatus.stdout.on("data", (data) => {
-    isContainerRunning = `${data}`.trim() === "'true'";
-    if (
-      isContainerRunning &&
-      isComposeUpComplete &&
-      startShellAttempts < numAttempts
-    ) {
+    const isContainerRunning = `${data}`.trim() === "'true'";
+    if (isContainerRunning) {
       // start the shell once container is available
       console.log("🚀 Starting shell!");
       const containerShell = spawn(
@@ -77,14 +54,13 @@ const startShell = () => {
         );
         spawn("yarn", [`stop:storybook:container`]);
       });
-    } else if (startShellAttempts < numAttempts) {
+    } else if (attempts < numAttempts) {
       // recursively check for availability of container
+      attempts++;
       console.log("⌛ Waiting for the Container!");
-      startShellAttempts++;
       setTimeout(() => {
         startShell();
       }, timeout);
     }
   });
 };
-flag === "--shell" && startShell();

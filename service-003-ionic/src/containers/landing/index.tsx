@@ -23,7 +23,7 @@ const Landing: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <Welcome
-          header="Startup In A Box"
+          header="Chalk"
           content={
             "Production and Deployment Ready boilerplate ##adjeibohyen@hotmail.co.uk"
           }

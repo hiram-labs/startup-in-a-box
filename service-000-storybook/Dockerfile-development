@@ -3,7 +3,7 @@ ARG node_env
 FROM mhart/alpine-node:12
 
 RUN apk update
-RUN apk add bash git build-base jq curl openssl tree gettext --no-cache 
+RUN apk add bash git alpine-sdk python2 jq tree --no-cache 
 RUN printf "# chalk resources\n" >> /root/.chalkrc
 RUN printf "PATH=/usr/src/storybook/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
 
@@ -15,3 +15,4 @@ COPY . ./
 
 RUN find . -type f -iname "*.sh" -exec chmod +x {} \;
 RUN find . -type f -iname "chalk" -exec chmod +x {} \;
+RUN npm install --global rollup

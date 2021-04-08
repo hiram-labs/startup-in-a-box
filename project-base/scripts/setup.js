@@ -9,7 +9,7 @@ const [, , serviceName] = process.argv;
 
 // initialise mysql_db
 if (serviceName === "strapi" || undefined) {
-  const subprocess = spawn("yarn", [`start:database:container`], {
+  const subprocess = spawn("yarn", [`start:mysql:container`], {
     detached: true,
     stdio: "ignore",
   });

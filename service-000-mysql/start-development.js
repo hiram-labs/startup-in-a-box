@@ -1,16 +1,13 @@
 const { spawn } = require("child_process");
 const path = require("path");
-
-let isComposeUpComplete = false;
-let isContainerRunning = false;
-let startShellAttempts = 0;
-let numAttempts = 25;
-let timeout = 10000;
 const [, , flag] = process.argv;
 
+let attempts = 0;
+const numAttempts = 5;
+const timeout = 1000;
 const dockerComposeFile = path.join(
   __dirname,
-  "../project-base/docker/development/compose-database.yml"
+  "../project-base/docker/development/compose-mysql.yml"
 );
 
 const installDependencies = spawn("yarn", [`install:mysql:dependencies`], {
@@ -27,8 +24,7 @@ installDependencies.on("close", (code) => {
   );
 
   mysqlContainer.on("close", (code) => {
-    isComposeUpComplete = true;
-    console.log("🛑 Development server exited with code", code);
+    flag === "--shell" && startShell();
   });
 });
 
@@ -41,11 +37,7 @@ const startShell = () => {
   ]);
   checkContainerStatus.stdout.on("data", (data) => {
     isContainerRunning = `${data}`.trim() === "'true'";
-    if (
-      isContainerRunning &&
-      isComposeUpComplete &&
-      startShellAttempts < numAttempts
-    ) {
+    if (isContainerRunning) {
       // start the shell once container is available
       console.log("🚀 Starting shell!");
       const containerShell = spawn(
@@ -59,16 +51,15 @@ const startShell = () => {
         console.log(
           `🛑 Shell exited with code: ${code}\n\n🏗️ Taking down containers ...`
         );
-        spawn("yarn", [`stop:database:container`]);
+        spawn("yarn", [`stop:mysql:container`]);
       });
-    } else if (startShellAttempts < numAttempts) {
+    } else if (attempts < numAttempts) {
       // recursively check for availability of container
+      attempts++;
       console.log("⌛ Waiting for the Container!");
-      startShellAttempts++;
       setTimeout(() => {
         startShell();
       }, timeout);
     }
   });
 };
-flag === "--shell" && startShell();

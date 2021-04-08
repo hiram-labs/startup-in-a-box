@@ -1,19 +1,29 @@
 ARG node_env
 
-FROM node:12.18.3
+FROM mhart/alpine-node:12
 
-# Setting working directory. All the path will be relative to WORKDIR
+RUN apk update
+RUN apk add bash git alpine-sdk python2 jq tree --no-cache 
+RUN printf "# chalk resources\n" >> /root/.chalkrc
+RUN printf "PATH=/usr/src/storybook/src/.chalk/bin:$PATH\nchalk" >> /root/.profile
+
+ENV PATH=/usr/src/storybook/src/.chalk/bin:$PATH
+
 WORKDIR /usr/src/storybook
 
-# Set NODE_ENV to the value from host
-ENV NODE_ENV=$node_env
-
-# Copying source files
 COPY . ./
 
-# Installing dependencies
-RUN yarn install --pure-lockfile
-
-
-# Building app
-RUN yarn build-storybook
+RUN find . -type f -iname "*.sh" -exec chmod +x {} \;
+RUN find . -type f -iname "chalk" -exec chmod +x {} \;
+RUN npm install --global --save-dev --unsafe-perm=true --allow-root \
+    node-sass \
+    typescript \
+    tslib \
+    react \
+    @types/react \
+    react-dom \
+    @types/react-dom \
+    rollup \
+    @rollup\/plugin-typescript \
+    rollup-plugin-banner \
+    rollup-plugin-scss

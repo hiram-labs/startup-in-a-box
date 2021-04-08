@@ -1,13 +1,10 @@
 const { spawn } = require("child_process");
 const path = require("path");
-
-let isComposeUpComplete = false;
-let isContainerRunning = false;
-let startShellAttempts = 0;
-let numAttempts = 25;
-let timeout = 10000;
 const [, , flag] = process.argv;
 
+let attempts = 0;
+const numAttempts = 5;
+const timeout = 1000;
 const dockerComposeFile = path.join(
   __dirname,
   "../project-base/docker/development/compose-gcloud.yml"
@@ -27,8 +24,7 @@ installDependencies.on("close", (code) => {
   );
 
   gcloudContainer.on("close", (code) => {
-    isComposeUpComplete = true;
-    console.log("🛑 Development server exited with code", code);
+    flag === "--shell" && startShell();
   });
 });
 
@@ -41,11 +37,7 @@ const startShell = () => {
   ]);
   checkContainerStatus.stdout.on("data", (data) => {
     isContainerRunning = `${data}`.trim() === "'true'";
-    if (
-      isContainerRunning &&
-      isComposeUpComplete &&
-      startShellAttempts < numAttempts
-    ) {
+    if (isContainerRunning) {
       // start the shell once container is available
       console.log("🚀 Starting shell!");
       const containerShell = spawn(
@@ -61,14 +53,13 @@ const startShell = () => {
         );
         spawn("yarn", [`stop:gcloud:container`]);
       });
-    } else if (startShellAttempts < numAttempts) {
+    } else if (attempts < numAttempts) {
       // recursively check for availability of container
+      attempts++;
       console.log("⌛ Waiting for the Container!");
-      startShellAttempts++;
       setTimeout(() => {
         startShell();
       }, timeout);
     }
   });
 };
-flag === "--shell" && startShell();

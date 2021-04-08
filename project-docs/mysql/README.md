@@ -10,10 +10,10 @@ from the root of the project
 
 ```
 [start]
-yarn start:database:container
+yarn start:mysql:container
 
 
 [start interactive shell]
-yarn start:database:container --shell
+yarn start:mysql:container --shell
 
 ```

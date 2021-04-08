@@ -2,6 +2,10 @@ const { spawn } = require("child_process");
 const path = require("path");
 const [, , flag] = process.argv;
 
+let attempts = 0;
+const numAttempts = 5;
+const timeout = 1000;
+
 const dockerComposeFile = path.join(
   __dirname,
   "../project-base/docker/development/compose-storybook.yml"
@@ -26,10 +30,6 @@ installDependencies.on("close", (code) => {
 });
 
 const startShell = () => {
-  let attempts = 0;
-  const numAttempts = 5;
-  const timeout = 1000;
-
   const checkContainerStatus = spawn("docker", [
     `inspect`,
     `--format`,

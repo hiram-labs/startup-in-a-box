@@ -1,3 +1,13 @@
+/**
+ * service-000-storybook
+ * v1.0.0
+ * MIT
+ * by {{maintainerName}} <{{maintainerEmail}}>
+ * contributors 
+ * {{companyDescription}}
+ * 
+ */
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -68,18 +78,5 @@ var Header = function (_a) {
                             jsxRuntime.jsx(Button, { primary: true, size: "small", onClick: onCreateAccount, label: "Sign up" }, void 0)] }, void 0)) }, void 0)] }), void 0) }, void 0));
 };
 
-var Page = function (_a) {
-    var user = _a.user, onLogin = _a.onLogin, onLogout = _a.onLogout, onCreateAccount = _a.onCreateAccount;
-    return (jsxRuntime.jsxs("article", { children: [jsxRuntime.jsx(Header, { user: user, onLogin: onLogin, onLogout: onLogout, onCreateAccount: onCreateAccount }, void 0),
-            jsxRuntime.jsxs("section", { children: [jsxRuntime.jsx("h2", { children: "Pages in Storybook" }, void 0),
-                    jsxRuntime.jsxs("p", { children: ["We recommend building UIs with a", " ", jsxRuntime.jsx("a", __assign({ href: "https://componentdriven.org", target: "_blank", rel: "noopener noreferrer" }, { children: jsxRuntime.jsx("strong", { children: "component-driven" }, void 0) }), void 0), " ", "process starting with atomic components and ending with pages."] }, void 0),
-                    jsxRuntime.jsx("p", { children: "Render pages with mock data. This makes it easy to build and review page states without needing to navigate to them in your app. Here are some handy patterns for managing page data in Storybook:" }, void 0),
-                    jsxRuntime.jsxs("ul", { children: [jsxRuntime.jsx("li", { children: "Use a higher-level connected component. Storybook helps you compose such data from the \"args\" of child component stories" }, void 0),
-                            jsxRuntime.jsx("li", { children: "Assemble data in the page component from your services. You can mock these services out using Storybook." }, void 0)] }, void 0),
-                    jsxRuntime.jsxs("p", { children: ["Get a guided tutorial on component-driven development at", " ", jsxRuntime.jsx("a", __assign({ href: "https://www.learnstorybook.com", target: "_blank", rel: "noopener noreferrer" }, { children: "Learn Storybook" }), void 0), ". Read more in the", " ", jsxRuntime.jsx("a", __assign({ href: "https://storybook.js.org/docs", target: "_blank", rel: "noopener noreferrer" }, { children: "docs" }), void 0), "."] }, void 0),
-                    jsxRuntime.jsxs("div", __assign({ className: "tip-wrapper" }, { children: [jsxRuntime.jsx("span", __assign({ className: "tip" }, { children: "Tip" }), void 0), " Adjust the width of the canvas with the", " ", jsxRuntime.jsx("svg", __assign({ width: "10", height: "10", viewBox: "0 0 12 12", xmlns: "http://www.w3.org/2000/svg" }, { children: jsxRuntime.jsx("g", __assign({ fill: "none", fillRule: "evenodd" }, { children: jsxRuntime.jsx("path", { d: "M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z", id: "a", fill: "#999" }, void 0) }), void 0) }), void 0), "Viewports addon in the toolbar"] }), void 0)] }, void 0)] }, void 0));
-};
-
 exports.Button = Button;
 exports.Header = Header;
-exports.Page = Page;

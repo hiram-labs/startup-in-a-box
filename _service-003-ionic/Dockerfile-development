@@ -1,0 +1,20 @@
+ARG node_env
+
+FROM node:12.18.3
+
+# Setting working directory. All the path will be relative to WORKDIR
+WORKDIR /usr/src/ionic
+
+# Set NODE_ENV to the value from host
+ENV NODE_ENV=$node_env
+
+# Copying source files
+COPY . ./
+
+# Installing dependencies
+RUN npm install -g @ionic/cli
+RUN npm install
+
+
+# Building app
+RUN npm run build

@@ -15,4 +15,15 @@ COPY . ./
 
 RUN find . -type f -iname "*.sh" -exec chmod +x {} \;
 RUN find . -type f -iname "chalk" -exec chmod +x {} \;
-RUN npm install --global rollup
+RUN npm install --global --save-dev --unsafe-perm=true --allow-root \
+    node-sass \
+    typescript \
+    tslib \
+    react \
+    @types/react \
+    react-dom \
+    @types/react-dom \
+    rollup \
+    @rollup\/plugin-typescript \
+    rollup-plugin-banner \
+    rollup-plugin-scss

@@ -1,15 +1,11 @@
 import typescript from "@rollup/plugin-typescript";
+import banner from "rollup-plugin-banner";
 import scss from "rollup-plugin-scss";
 import pkg from "./package.json";
 
 const rollup = {
   input: "src/index.js",
   output: [
-    {
-      name: "Storybook",
-      file: "src/caddy/site/bundle-iife.js",
-      format: "iife",
-    },
     {
       name: "Storybook",
       file: "src/caddy/site/bundle-cjs.js",
@@ -32,3 +28,6 @@ const rollup = {
 };
 
 export default rollup;
+
+// start dev server - yarn storybook
+// build bundle to host on caddy - export NODE_PATH=$(npm root --quiet -g) && rollup -c

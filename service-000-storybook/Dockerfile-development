@@ -24,6 +24,7 @@ RUN npm install --global --save-dev --unsafe-perm=true --allow-root \
     react-dom \
     @types/react-dom \
     rollup \
-    @rollup\/plugin-typescript \
+    rollup-plugin-typescript2 \
     rollup-plugin-banner \
-    rollup-plugin-scss
+    rollup-plugin-scss \
+    @rollup/plugin-node-resolve

@@ -40,51 +40,60 @@ import "./theme/variables.css"
 
 import theme from "./utils/theme"
 
-const App: React.FC = () => (
-  <ThemeProvider theme={theme}>
-    <AnimatePresence exitBeforeEnter>
-      <IonApp>
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/">
-                <Landing />
-              </Route>
-              <Route path="/tab1">
-                <Tab1 />
-              </Route>
-              <Route path="/tab2">
-                <Tab2 />
-              </Route>
-              <Route path="/tab3">
-                <Tab3 />
-              </Route>
-              <Route exact path="/404">
-                <NotFoundPage />
-              </Route>
-              <Route>
-                <Redirect to="/404" />
-              </Route>
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="tab1" href="/tab1">
-                <IonIcon icon={triangle} />
-                <IonLabel>Tab 1</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab2" href="/tab2">
-                <IonIcon icon={ellipse} />
-                <IonLabel>Tab 2</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab3" href="/tab3">
-                <IonIcon icon={square} />
-                <IonLabel>Tab 3</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonReactRouter>
-      </IonApp>
-    </AnimatePresence>
-  </ThemeProvider>
-)
+/* Adds storybook assets */
+import { StoryBookProvider, useStorybookBundleUmd } from "./storybook/index"
+
+const App: React.FC = () => {
+  const components = useStorybookBundleUmd()
+
+  return (
+    <ThemeProvider theme={theme}>
+      <AnimatePresence exitBeforeEnter>
+        <StoryBookProvider components={components}>
+          <IonApp>
+            <IonReactRouter>
+              <IonTabs>
+                <IonRouterOutlet>
+                  <Route exact path="/">
+                    <Landing />
+                  </Route>
+                  <Route path="/tab1">
+                    <Tab1 />
+                  </Route>
+                  <Route path="/tab2">
+                    <Tab2 />
+                  </Route>
+                  <Route path="/tab3">
+                    <Tab3 />
+                  </Route>
+                  <Route exact path="/404">
+                    <NotFoundPage />
+                  </Route>
+                  <Route>
+                    <Redirect to="/404" />
+                  </Route>
+                </IonRouterOutlet>
+                <IonTabBar slot="bottom">
+                  <IonTabButton tab="tab1" href="/tab1">
+                    <IonIcon icon={triangle} />
+                    <IonLabel>Tab 1</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="tab2" href="/tab2">
+                    <IonIcon icon={ellipse} />
+                    <IonLabel>Tab 2</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="tab3" href="/tab3">
+                    <IonIcon icon={square} />
+                    <IonLabel>Tab 3</IonLabel>
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </IonReactRouter>
+          </IonApp>
+        </StoryBookProvider>
+      </AnimatePresence>
+    </ThemeProvider>
+  )
+}
 
 export default App

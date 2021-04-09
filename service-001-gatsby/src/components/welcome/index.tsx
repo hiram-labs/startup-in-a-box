@@ -4,7 +4,6 @@ import Container from "./styled/Container"
 import Card from "./styled/Card"
 import Header from "./styled/Header"
 import Content from "./styled/Content"
-// import Button from "./styled/Button"
 
 interface IProps {
   className?: string
@@ -24,6 +23,7 @@ const Welcome = ({ className, header, content }: IProps) => {
           <div>
             <a href={`mailto:${link}`}>{link}</a>
           </div>
+          {/* story test */}
           {/* <Button
             label="Storybook Example"
             onClick={() => {

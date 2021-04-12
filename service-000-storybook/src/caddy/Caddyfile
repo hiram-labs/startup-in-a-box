@@ -5,3 +5,7 @@ localhost
 
 root * /srv
 file_server
+
+header {
+    Access-Control-Allow-Origin *
+}

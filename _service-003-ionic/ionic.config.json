@@ -1,7 +1,0 @@
-{
-  "name": "service-003-ionic",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
-}
